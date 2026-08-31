@@ -1,65 +1,222 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { Wallet, Gift, Check, ArrowLeft, ScanLine } from 'lucide-react';
 import { api } from '../services/api.js';
 import { getDeviceId } from '../utils/device.js';
+import { useLang } from '../i18n/index.jsx';
 
-// Página de bienvenida al escanear el QR incluido en el material del negocio.
-// Body { loyalty_card_id, device_id, name } crea la tarjeta en la wallet del cliente.
 export default function PrinterWelcome() {
   const { cardId } = useParams();
-  const navigate = useNavigate();
-  const [status, setStatus] = useState('loading'); // loading | ok | error
-  const [info, setInfo] = useState(null);
-  const [error, setError] = useState('');
+  const navigate   = useNavigate();
+  const { lang, setLang, t } = useLang();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await api.welcome({
-          loyalty_card_id: cardId,
-          device_id: getDeviceId(),
-        });
-        setInfo({ card: data.loyalty_card });
-        setStatus('ok');
-        setTimeout(() => navigate('/wallet'), 2500);
-      } catch (e) {
-        if (e.code === 'ALREADY_OWNED') {
-          setStatus('ok');
-          setInfo({ card: null, already: true });
-          setTimeout(() => navigate('/wallet'), 2500);
-        } else {
-          setError(e.message);
-          setStatus('error');
-        }
-      }
-    })();
-  }, [cardId, navigate]);
+  const [card,    setCard]    = useState(null);
+  // loading | ready | adding | done | error
+  const [status,  setStatus]  = useState('loading');
+  const [already, setAlready] = useState(false);
+  const [err,     setErr]     = useState('');
 
+  useEffect(() => { fetchCard(); }, [cardId]);
+
+  async function fetchCard() {
+    try {
+      const data = await api.get('/api/public/card/' + cardId);
+      setCard(data.card || data.loyalty_card || data);
+    } catch {
+      // endpoint no público — avanzamos sin info previa
+    }
+    setStatus('ready');
+  }
+
+  async function addToWallet() {
+    setStatus('adding');
+    try {
+      const data = await api.welcome({ loyalty_card_id: cardId, device_id: getDeviceId() });
+      if (!card) setCard(data.loyalty_card || null);
+      if (data.already_owned) setAlready(true);
+      setStatus('done');
+      setTimeout(() => navigate('/wallet'), data.already_owned ? 1800 : 2200);
+    } catch (e) {
+      setErr(e.message);
+      setStatus('error');
+    }
+  }
+
+  const primary   = card?.primary_color   || '#c67139';
+  const secondary = card?.secondary_color || '#f5ead8';
+  const bizName   = card?.business?.name  || card?.name || 'Negocio';
+  const cardName  = card?.name || t('cardLoyalty');
+  const reward    = card?.reward          || t('rewardDefault');
+  const total     = card?.total_stamps    ?? 6;
+  const initial   = bizName.charAt(0).toUpperCase();
+
+  // ── LOADING ─────────────────────────────────────────────────────────────
+  if (status === 'loading') {
+    return (
+      <div className="min-h-dvh bg-bg flex items-center justify-center">
+        <div className="w-10 h-10 border-4 border-brand border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  // ── ERROR ────────────────────────────────────────────────────────────────
+  if (status === 'error') {
+    return (
+      <div className="min-h-dvh bg-bg flex flex-col items-center justify-center gap-5 px-6 text-center">
+        <div className="text-[15px] text-red-700 bg-red-50 border border-red-200 px-5 py-4 rounded-xl">
+          {err}
+        </div>
+        <button onClick={() => navigate('/')}
+          className="text-brand-700 font-semibold underline text-[14px]">
+          {t('backHome')}
+        </button>
+      </div>
+    );
+  }
+
+  // ── DONE ─────────────────────────────────────────────────────────────────
+  if (status === 'done') {
+    return (
+      <div className="min-h-dvh bg-bg flex flex-col items-center justify-center gap-5 px-6 text-center">
+        <div className="w-20 h-20 rounded-full bg-sage-200 grid place-items-center">
+          <Check size={36} strokeWidth={2.75} className="text-sage-700" />
+        </div>
+        <div>
+          <h2 className="font-display text-[28px] text-ink leading-tight">
+            {already ? t('doneAlready') : t('doneAdded')}
+          </h2>
+          <p className="text-neutral-600 text-[14px] mt-2">
+            {already ? t('doneInWallet') : t('doneGoWallet')}
+          </p>
+        </div>
+        <div className="w-8 h-8 border-4 border-brand border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  // ── READY (pantalla de bienvenida) ───────────────────────────────────────
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-800 to-gray-900 text-white flex items-center justify-center p-6">
-      <div className="text-center">
-        {status === 'loading' && <p className="text-gray-300">Añadiendo tarjeta a tu wallet...</p>}
+    <div className="min-h-dvh bg-bg font-sans flex flex-col relative overflow-hidden">
 
-        {status === 'ok' && (
-          <>
-            <p className="text-6xl mb-4">{info?.already ? '💳' : '🎉'}</p>
-            <h1 className="text-2xl font-bold mb-2">
-              {info?.already ? 'Ya tienes esta tarjeta' : '¡Tarjeta añadida!'}
-            </h1>
-            <p className="text-gray-300">
-              {info?.already
-                ? 'La encontrarás en tu wallet.'
-                : `Tu tarjeta de ${info?.card?.name || 'fidelización'} está en Mi Wallet.`}
-            </p>
-          </>
-        )}
+      {/* círculo decorativo top-right */}
+      <div className="absolute -top-[90px] -right-[70px] w-[280px] h-[280px] rounded-full bg-brand-200 opacity-90 pointer-events-none" />
 
-        {status === 'error' && (
-          <>
-            <p className="text-red-400 mb-4">{error}</p>
-            <Link to="/" className="text-blue-300 underline">Volver al inicio</Link>
-          </>
-        )}
+      <div className="relative flex-1 flex flex-col px-6 pt-safe"
+        style={{
+          paddingTop:    'calc(env(safe-area-inset-top, 0px) + 28px)',
+          paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 28px)',
+          gap: 22,
+        }}>
+
+        {/* fila superior: logo Fidely + flecha atrás */}
+        <div className="flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-brand grid place-items-center">
+              <ScanLine size={15} strokeWidth={2.75} className="text-white" />
+            </div>
+            <span className="font-display text-[19px] text-ink">Fidely</span>
+          </Link>
+          <Link to="/"
+            className="w-10 h-10 rounded-full bg-neutral-200 grid place-items-center text-neutral-700 hover:bg-neutral-300 transition">
+            <ArrowLeft size={18} strokeWidth={2.75} />
+          </Link>
+        </div>
+
+        {/* logo negocio + language switcher */}
+        <div className="flex items-center justify-between">
+          <div className="w-[60px] h-[60px] rounded-[22px] shadow-md grid place-items-center font-display text-[26px]"
+            style={{ background: primary, color: '#fff' }}>
+            {card?.logo_url
+              ? <img src={card.logo_url} className="w-full h-full rounded-[22px] object-cover" alt={bizName} />
+              : initial}
+          </div>
+          <div className="flex gap-1 bg-neutral-200 p-1 rounded-full">
+            {['es', 'en'].map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                className={`text-[12px] font-extrabold px-3 py-[5px] rounded-full transition ${
+                  lang === l ? 'bg-bg shadow-sm' : 'text-neutral-600'
+                }`}
+              >
+                {l === 'es' ? 'ES' : 'EN'}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* texto de bienvenida */}
+        <div className="flex flex-col gap-[10px]">
+          <div className="font-mono text-[11px] uppercase tracking-[.14em] text-brand-700">
+            {t('invites', { biz: bizName })}
+          </div>
+          <h1 className="font-display font-normal text-[34px] sm:text-[36px] leading-[1.05] text-ink m-0">
+            {card ? t('rewardFree', { n: total, reward: reward.toLowerCase() }) : t('earnStamps')}
+          </h1>
+          <p className="text-[14.5px] sm:text-[15px] text-neutral-700 leading-[1.5] m-0">
+            {t('welcomeHelp1')} {t('welcomeHelp2')}
+          </p>
+        </div>
+
+        {/* preview de la tarjeta */}
+        <div className="rounded-xl p-5 relative overflow-hidden shadow-md"
+          style={{ background: primary, color: '#fff' }}>
+          {/* círculo decorativo */}
+          <div className="absolute -top-[46px] -right-[34px] w-[150px] h-[150px] rounded-full opacity-[.28] pointer-events-none"
+            style={{ background: secondary }} />
+
+          {/* cabecera tarjeta */}
+          <div className="relative flex items-center gap-3 mb-4">
+            <div className="w-11 h-11 rounded-[16px] grid place-items-center font-display text-[20px] shrink-0"
+              style={{ background: secondary, color: primary }}>
+              {card?.logo_url
+                ? <img src={card.logo_url} className="w-full h-full rounded-[16px] object-cover" alt={bizName} />
+                : initial}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="font-extrabold text-[17px]">{bizName}</div>
+              <div className="text-[13px] opacity-75">{cardName}</div>
+            </div>
+          </div>
+
+          {/* label recompensa */}
+          <div className="relative text-[11px] uppercase tracking-[.12em] opacity-70 font-bold mb-[10px]">
+            {t('rewardLabel', { reward })}
+          </div>
+
+          {/* dots sellos */}
+          <div className="relative flex gap-2 flex-wrap">
+            {Array.from({ length: Math.min(total, 8) }).map((_, i) => {
+              const isLast = i === total - 1 || i === Math.min(total, 8) - 1;
+              return (
+                <div key={i}
+                  className="w-[30px] h-[30px] rounded-full grid place-items-center text-[12px] font-bold"
+                  style={{
+                    border: '2px solid rgba(245,234,216,.35)',
+                    color: isLast ? undefined : 'rgba(245,234,216,.55)',
+                    background: isLast ? 'rgba(200,230,180,.35)' : undefined,
+                  }}>
+                  {isLast ? <Gift size={15} strokeWidth={2.75} style={{ color: 'rgba(245,234,216,.9)' }} /> : i + 1}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* botón + nota */}
+        <div className="mt-auto flex flex-col gap-3">
+          <button
+            onClick={addToWallet}
+            disabled={status === 'adding'}
+            className="w-full bg-brand hover:bg-brand-600 text-white font-extrabold text-[17px] py-[18px] rounded-full shadow-md flex items-center justify-center gap-[10px] transition disabled:opacity-50">
+            {status === 'adding'
+              ? <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              : <><Wallet size={19} strokeWidth={2.75} />{t('addToWallet')}</>}
+          </button>
+          <p className="text-center text-[13px] text-neutral-600 m-0">
+            {t('saveNote')}
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -57,6 +57,23 @@ const messages = {
     // Empleado
     employeeTitle: 'Acceso empleado',
     employeeSub: 'Inicia sesión para registrar sellos',
+
+    // Bienvenida (QR de impresión)
+    invites: '{biz} te invita',
+    rewardFree: 'Tu {n}ª {reward}, gratis',
+    earnStamps: '¡Suma sellos y gana!',
+    welcomeHelp1: 'Guarda esta tarjeta en Mi Wallet y suma un sello con cada compra.',
+    welcomeHelp2: 'Sin registro y sin instalar nada.',
+    addToWallet: 'Añadir a Mi Wallet',
+    saveNote: 'Se guarda en este dispositivo. Podrás vincularla a un correo después.',
+    rewardLabel: 'Recompensa · {reward}',
+    doneAdded: '¡Tarjeta añadida!',
+    doneAlready: 'Ya tienes esta tarjeta',
+    doneGoWallet: 'Yendo a Mi Wallet…',
+    doneInWallet: 'La encontrarás en tu wallet.',
+    backHome: 'Volver al inicio',
+    cardLoyalty: 'Tarjeta de fidelización',
+    rewardDefault: 'Recompensa',
   },
   en: {
     appName: 'My Wallet',
@@ -104,6 +121,22 @@ const messages = {
 
     employeeTitle: 'Employee access',
     employeeSub: 'Sign in to register stamps',
+
+    invites: '{biz} invites you',
+    rewardFree: 'Your {n}th {reward}, free',
+    earnStamps: 'Collect stamps and win!',
+    welcomeHelp1: 'Save this card to My Wallet and add a stamp with every purchase.',
+    welcomeHelp2: 'No sign-up and nothing to install.',
+    addToWallet: 'Add to My Wallet',
+    saveNote: 'Saved on this device. You can link it to an email later.',
+    rewardLabel: 'Reward · {reward}',
+    doneAdded: 'Card added!',
+    doneAlready: 'You already have this card',
+    doneGoWallet: 'Going to My Wallet…',
+    doneInWallet: "You'll find it in your wallet.",
+    backHome: 'Back to home',
+    cardLoyalty: 'Loyalty card',
+    rewardDefault: 'Reward',
   },
 };
 
@@ -124,7 +157,16 @@ export function LanguageProvider({ children }) {
     } catch {}
   }, [lang]);
 
-  const t = (key) => (messages[lang]?.[key] ?? messages.es[key] ?? key);
+  // t('clave') o t('clave', { nombre: 'Valor' }) para interpolación {nombre}
+  const t = (key, params) => {
+    let str = messages[lang]?.[key] ?? messages.es[key] ?? key;
+    if (params) {
+      for (const [k, v] of Object.entries(params)) {
+        str = str.split(`{${k}}`).join(String(v));
+      }
+    }
+    return str;
+  };
 
   const value = { lang, setLang, t };
 

@@ -1,13 +1,38 @@
 import { Router } from 'express';
+import { randomUUID } from 'crypto';
 import { supabase } from '../config/db.js';
 import { ApiError, asyncHandler } from '../utils/errors.js';
 
 const router = Router();
 
+// GET /api/public/card/:loyaltyCardId
+// Información pública de una tarjeta sin crear entrada en wallet.
+// Permite que la pantalla de bienvenida muestre el preview antes de añadir.
+router.get(
+  '/card/:loyaltyCardId',
+  asyncHandler(async (req, res) => {
+    const { data: card, error } = await supabase
+      .from('loyalty_cards')
+      .select('id, name, total_stamps, reward, logo_url, primary_color, secondary_color, business_id')
+      .eq('id', req.params.loyaltyCardId)
+      .eq('is_active', true)
+      .maybeSingle();
+    if (error) throw error;
+    if (!card) throw new ApiError(404, 'Tarjeta no encontrada o inactiva', 'NOT_FOUND');
+
+    const { data: biz } = await supabase
+      .from('businesses')
+      .select('id, name, logo_url, primary_color, secondary_color')
+      .eq('id', card.business_id)
+      .maybeSingle();
+
+    res.json({ loyalty_card: { ...card, business: biz || null } });
+  })
+);
+
 // POST /api/public/welcome
 // Body: { loyalty_card_id, device_id?, name? }
 // Crea (o reutiliza) un cliente mediante el ID de la tarjeta y le asigna la instancia.
-// Este proceso genera la "customer_card" con su token QR, SIN obligar a crear cuenta.
 router.post(
   '/welcome',
   asyncHandler(async (req, res) => {
@@ -16,7 +41,7 @@ router.post(
 
     const { data: card, error: cardErr } = await supabase
       .from('loyalty_cards')
-      .select('id, business_id, name, total_stamps, is_active')
+      .select('id, business_id, name, total_stamps, reward, logo_url, primary_color, secondary_color, is_active')
       .eq('id', loyalty_card_id)
       .eq('is_active', true)
       .maybeSingle();
@@ -38,45 +63,52 @@ router.post(
     if (!customerId) {
       const { data: cust, error: custErr } = await supabase
         .from('customers')
-        .insert({ device_id, name: name || 'Cliente' })
+        .insert({ device_id: device_id || null, name: name || 'Cliente' })
         .select('id')
         .single();
       if (custErr) throw custErr;
       customerId = cust.id;
     }
 
-    // Evitar tarjetas duplicadas del mismo cliente para la misma planta
+    // Si ya existe, devolver 200 con already_owned=true (no es un error)
     const { data: dup } = await supabase
       .from('customer_cards')
-      .select('id')
+      .select('id, stamps, status, qr_token, created_at, loyalty_card_id')
       .eq('loyalty_card_id', loyalty_card_id)
       .eq('customer_id', customerId)
       .maybeSingle();
     if (dup) {
-      throw new ApiError(409, 'Ya tienes esta tarjeta en tu wallet', 'ALREADY_OWNED');
+      return res.status(200).json({
+        already_owned:  true,
+        customer_card:  dup,
+        loyalty_card:   card,
+        customer_id:    customerId,
+      });
     }
+
+    // Generar token QR único
+    const qr_token = randomUUID();
 
     const { data: cc, error: ccErr } = await supabase
       .from('customer_cards')
-      .insert({ loyalty_card_id, customer_id: customerId })
+      .insert({ loyalty_card_id, customer_id: customerId, qr_token })
       .select('*')
       .single();
     if (ccErr) throw ccErr;
 
-    const { data: walletErr } = await supabase.from('wallet_cards').insert({
+    // wallet_cards es un enlace auxiliar (ignoramos error si falla)
+    await supabase.from('wallet_cards').insert({
       customer_card_id: cc.id,
       customer_id: customerId,
       channel: 'app',
     });
-    // (walletErr) se ignora: el wallet es un vínculo auxiliar.
 
     res.status(201).json({ customer_card: cc, loyalty_card: card, customer_id: customerId });
   })
 );
 
 // GET /api/public/wallet/:deviceId
-// Devuelve todas las tarjetas (con su negocio y planta) del cliente anónimo,
-// listas para mostrarse en "Mi Wallet". Incluye el token QR de cada tarjeta.
+// Devuelve todas las tarjetas del cliente anónimo listas para "Mi Wallet".
 router.get(
   '/wallet/:deviceId',
   asyncHandler(async (req, res) => {
@@ -94,15 +126,17 @@ router.get(
       .order('created_at', { ascending: false });
     if (error) throw error;
 
-    // Cargar planta + negocio de cada tarjeta con consultas por lotes
+    if (!cards || cards.length === 0) return res.json({ wallet: [] });
+
+    // Cargar planta + negocio en lotes
     const cardIds = cards.map((c) => c.loyalty_card_id);
     const { data: loyaltyCards, error: lErr } = await supabase
       .from('loyalty_cards')
       .select('id, name, description, total_stamps, reward, logo_url, primary_color, secondary_color, business_id')
-      .in('id', cardIds.length ? cardIds : ['00000000-0000-0000-0000-000000000000']);
+      .in('id', cardIds);
     if (lErr) throw lErr;
 
-    const bizIds = (loyaltyCards || []).map((l) => l.business_id);
+    const bizIds = [...new Set((loyaltyCards || []).map((l) => l.business_id))];
     const { data: businesses, error: bErr } = await supabase
       .from('businesses')
       .select('id, name, logo_url, primary_color, secondary_color')
@@ -110,28 +144,71 @@ router.get(
     if (bErr) throw bErr;
 
     const cardMap = Object.fromEntries((loyaltyCards || []).map((l) => [l.id, l]));
-    const bizMap = Object.fromEntries((businesses || []).map((b) => [b.id, b]));
+    const bizMap  = Object.fromEntries((businesses  || []).map((b) => [b.id, b]));
 
     const wallet = cards.map((cc) => ({
       ...cc,
       loyalty_card: cardMap[cc.loyalty_card_id] || null,
-      business: cardMap[cc.loyalty_card_id] ? bizMap[cardMap[cc.loyalty_card_id].business_id] : null,
+      business:     cardMap[cc.loyalty_card_id]
+        ? (bizMap[cardMap[cc.loyalty_card_id].business_id] || null)
+        : null,
     }));
 
     res.json({ wallet });
   })
 );
 
+// GET /api/public/card/:cardId
+// Devuelve la plantilla de una tarjeta activa y su negocio (para el QR de bienvenida).
+router.get(
+  '/card/:cardId',
+  asyncHandler(async (req, res) => {
+    const { data: card, error } = await supabase
+      .from('loyalty_cards')
+      .select('id, business_id, name, description, total_stamps, reward, logo_url, primary_color, secondary_color')
+      .eq('id', req.params.cardId)
+      .eq('is_active', true)
+      .maybeSingle();
+    if (error) throw error;
+    if (!card) throw new ApiError(404, 'Tarjeta no encontrada o inactiva', 'NOT_FOUND');
+
+    const { data: business } = await supabase
+      .from('businesses')
+      .select('id, name, logo_url, primary_color, secondary_color')
+      .eq('id', card.business_id)
+      .maybeSingle();
+
+    res.json({ card: { ...card, business } });
+  })
+);
+
 // GET /api/public/footer
-// Devuelve los datos del footer del negocio (redes, email, copyright).
-// Se usa en las páginas públicas (Home, Wallet) sin autenticación.
+// Devuelve los datos del footer (redes, email, copyright) de un negocio.
+// Admite ?businessId=<uuid> o ?slug=<slug> para pedir el de un negocio concreto.
+// Si no se indica negocio, devuelve el más reciente que tenga datos de footer.
 router.get(
   '/footer',
   asyncHandler(async (req, res) => {
-    const { data, error } = await supabase
+    const { businessId, slug } = req.query || {};
+    const base = supabase
       .from('businesses')
-      .select('name, facebook_url, instagram_url, contact_email, footer_text')
-      .order('created_at', { ascending: true })
+      .select('name, facebook_url, instagram_url, contact_email, footer_text');
+
+    if (businessId) {
+      const { data, error } = await base.eq('id', businessId).maybeSingle();
+      if (error) throw error;
+      return res.json({ footer: data || {} });
+    }
+
+    if (slug) {
+      const { data, error } = await base.eq('slug', slug).maybeSingle();
+      if (error) throw error;
+      return res.json({ footer: data || {} });
+    }
+
+    const { data, error } = await base
+      .or('facebook_url.not.is.null,instagram_url.not.is.null,contact_email.not.is.null')
+      .order('created_at', { ascending: false })
       .limit(1)
       .maybeSingle();
     if (error) throw error;

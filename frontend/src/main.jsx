@@ -5,6 +5,12 @@ import App from './App.jsx';
 import { LanguageProvider } from './i18n/index.jsx';
 import './index.css';
 
+// Restaurar tema antes del primer render para evitar flash
+const savedTheme = localStorage.getItem('fidely_theme');
+if (savedTheme === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <LanguageProvider>

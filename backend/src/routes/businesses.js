@@ -72,9 +72,26 @@ router.patch(
   '/:id',
   requireAdmin,
   asyncHandler(async (req, res) => {
+    // Whitelist de campos editables (evita que se alteren owner_id, id, etc.)
+    const allowed = [
+      'name',
+      'description',
+      'logo_url',
+      'primary_color',
+      'secondary_color',
+      'facebook_url',
+      'instagram_url',
+      'contact_email',
+      'footer_text',
+    ];
+    const updates = {};
+    for (const key of allowed) {
+      if (req.body[key] !== undefined) updates[key] = req.body[key];
+    }
+
     const { data, error } = await supabase
       .from('businesses')
-      .update({ ...req.body })
+      .update(updates)
       .eq('id', req.params.id)
       .eq('owner_id', req.user.id)
       .select('*')

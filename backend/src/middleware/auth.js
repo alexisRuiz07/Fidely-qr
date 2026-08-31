@@ -18,6 +18,29 @@ export const requireAuth = asyncHandler(async (req, res, next) => {
     throw new ApiError(401, 'Token inválido o expirado', 'BAD_TOKEN');
   }
 
+  // Re-verificar contra la BD que la cuenta siga existiendo y activa.
+  // Un administrador puede desactivar a un empleado; el token no debe
+  // seguir funcionando después de eso (en vez de esperar a que expire).
+  if (payload.role === 'employee') {
+    const { data: emp } = await supabase
+      .from('employees')
+      .select('id, is_active')
+      .eq('id', payload.sub)
+      .maybeSingle();
+    if (!emp || !emp.is_active) {
+      throw new ApiError(401, 'La sesión ya no está activa', 'BAD_TOKEN');
+    }
+  } else if (payload.role === 'admin') {
+    const { data: usr } = await supabase
+      .from('users')
+      .select('id')
+      .eq('id', payload.sub)
+      .maybeSingle();
+    if (!usr) {
+      throw new ApiError(401, 'La sesión ya no está activa', 'BAD_TOKEN');
+    }
+  }
+
   req.user = {
     id: payload.sub,
     role: payload.role,      // 'admin' | 'employee'

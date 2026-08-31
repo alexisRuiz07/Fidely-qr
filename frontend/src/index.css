@@ -2,13 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body,
-#root {
+/* ── Color tokens (light) ───────────────────────────────────────── */
+:root {
+  --color-bg:           #f5ead8;
+  --color-surface:      #ebddc5;
+  /* ink como canales RGB para soportar bg-ink/50, bg-ink/[.42] etc. */
+  --color-ink-ch:       32 30 29;
+
+  --color-neutral-100:  #f9f4ed;
+  --color-neutral-200:  #eee7db;
+  --color-neutral-300:  #dcd3c4;
+  --color-neutral-400:  #c0b6a5;
+  --color-neutral-500:  #a19786;
+  --color-neutral-600:  #82796a;
+  --color-neutral-700:  #645c50;
+  --color-neutral-800:  #474238;
+  --color-neutral-900:  #2e2b25;
+}
+
+/* ── Color tokens (dark) ────────────────────────────────────────── */
+html[data-theme="dark"] {
+  --color-bg:           #1e1b16;
+  --color-surface:      #272319;
+  --color-ink-ch:       240 235 225;
+
+  --color-neutral-100:  #2e2a22;
+  --color-neutral-200:  #38332a;
+  --color-neutral-300:  #4a4438;
+  --color-neutral-400:  #5e5849;
+  --color-neutral-500:  #7a7468;
+  --color-neutral-600:  #9e9788;
+  --color-neutral-700:  #b5ae9d;
+  --color-neutral-800:  #ccc5b4;
+  --color-neutral-900:  #e0d9cb;
+}
+
+html, body, #root {
   height: 100%;
 }
 
 body {
-  @apply bg-gray-100 text-gray-900 antialiased;
+  background-color: var(--color-bg);
+  color: rgb(var(--color-ink-ch));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overscroll-behavior-y: none;
+  transition: background-color .3s, color .3s;
+}
+
+/* ── safe areas iPhone ──────────────────────────────────────────── */
+@layer utilities {
+  .pt-safe  { padding-top:    env(safe-area-inset-top,    0px); }
+  .pb-safe  { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pl-safe  { padding-left:   env(safe-area-inset-left,   0px); }
+  .pr-safe  { padding-right:  env(safe-area-inset-right,  0px); }
+
+  .min-h-dvh { min-height: 100dvh; }
+  .h-dvh     { height: 100dvh; }
 }

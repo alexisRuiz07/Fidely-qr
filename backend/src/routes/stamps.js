@@ -81,38 +81,28 @@ router.post(
       throw new ApiError(409, 'La tarjeta ya está completa', 'CARD_FULL');
     }
 
-    // TRANSACCIÓN via RPC o secuencia. Aquí: insertar sello + actualizar tarjeta.
-    // La restricción única (customer_card_id, stamp_number) evita duplicados.
-    const { data: tx, error: txErr } = await supabase
-      .from('stamp_transactions')
-      .insert({
-        customer_card_id: card.id,
-        business_id: card.loyalty_card.business_id,
-        employee_id: req.user.employeeId,
-        stamp_number: nextStamp,
-      })
-      .select('id')
-      .single();
+    // Operación atómica vía RPC: inserta el sello y actualiza el contador en
+    // una sola transacción en BD (evita inconsistencias si falla una de las dos).
+    const { data, error: rpcErr } = await supabase.rpc('record_stamp', {
+      p_customer_card_id: card.id,
+      p_business_id: card.loyalty_card.business_id,
+      p_employee_id: req.user.employeeId,
+      p_next_stamp: nextStamp,
+    });
 
-    if (txErr) {
-      if (txErr.code === '23505') {
+    if (rpcErr) {
+      if (String(rpcErr.message || '').includes('duplicate key') || rpcErr.code === '23505') {
         throw new ApiError(409, 'Sello ya registrado (operación duplicada)', 'DUPLICATE_STAMP');
       }
-      throw txErr;
+      throw rpcErr;
     }
 
-    const newStatus = nextStamp >= total ? 'completed' : 'active';
-    await supabase
-      .from('customer_cards')
-      .update({ stamps: nextStamp, status: newStatus, updated_at: new Date().toISOString() })
-      .eq('id', card.id);
-
     res.status(201).json({
-      tx_id: tx.id,
-      stamps: nextStamp,
-      total_stamps: total,
-      completed: nextStamp >= total,
-      status: newStatus,
+      tx_id: data.tx_id,
+      stamps: data.stamps,
+      total_stamps: data.total_stamps,
+      completed: data.stamps >= data.total_stamps,
+      status: data.status,
       reward: card.loyalty_card.reward,
     });
   })

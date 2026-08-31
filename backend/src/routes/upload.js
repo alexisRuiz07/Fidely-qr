@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import multer from 'multer';
+import { fileTypeFromBuffer } from 'file-type';
 import { supabase } from '../config/db.js';
 import { requireAuth, requireAdmin } from '../middleware/auth.js';
 import { ApiError, asyncHandler } from '../utils/errors.js';
@@ -38,14 +39,21 @@ router.post(
   asyncHandler(async (req, res) => {
     if (!req.file) throw new ApiError(400, 'No se recibió ningún archivo', 'NO_FILE');
 
+    // Validar el contenido REAL del archivo (magic bytes), no solo el mimetype enviado.
+    const type = await fileTypeFromBuffer(req.file.buffer);
+    const allowedTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/svg+xml'];
+    if (!type || !allowedTypes.includes(type.mime)) {
+      throw new ApiError(400, 'El archivo debe ser una imagen válida', 'NOT_IMAGE');
+    }
+
     await ensureBucket();
 
-    const ext = req.file.mimetype.split('/')[1] || 'png';
+    const ext = type.ext;
     const filePath = `${req.user.id}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
 
     const { error: upErr } = await supabase.storage
       .from(BUCKET)
-      .upload(filePath, req.file.buffer, { contentType: req.file.mimetype, upsert: false });
+      .upload(filePath, req.file.buffer, { contentType: type.mime, upsert: false });
     if (upErr) throw upErr;
 
     const { data: pubData } = supabase.storage.from(BUCKET).getPublicUrl(filePath);

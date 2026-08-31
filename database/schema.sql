@@ -176,4 +176,51 @@ alter table wallet_cards      enable row level security;
 alter table businesses add column if not exists facebook_url   text;
 alter table businesses add column if not exists instagram_url  text;
 alter table businesses add column if not exists contact_email  text;
-alter table businesses add column if not exists footer_text    text default '© 2025 Todos los derechos reservados';
+alter table businesses add column if not exists footer_text   text default '© 2025 Todos los derechos reservados';
+
+-- ============================================================
+-- SELLOS ATÓMICOS (RPC): inserta el sello y actualiza el contador
+-- de la tarjeta en UNA sola transacción. Evita sellos perdidos
+-- si fallara una de las dos operaciones por separado.
+-- Lanza error 23505 (duplicate key) si el sello ya fue registrado.
+-- ============================================================
+create or replace function record_stamp(
+  p_customer_card_id uuid,
+  p_business_id      uuid,
+  p_employee_id      uuid,
+  p_next_stamp       integer
+) returns json
+language plpgsql
+as $$
+declare
+  v_tx_id    uuid;
+  v_total    integer;
+  v_status   text;
+begin
+  insert into stamp_transactions (customer_card_id, business_id, employee_id, stamp_number)
+  values (p_customer_card_id, p_business_id, p_employee_id, p_next_stamp)
+  returning id into v_tx_id;
+
+  select lc.total_stamps into v_total
+  from loyalty_cards lc
+  join customer_cards cc on cc.loyalty_card_id = lc.id
+  where cc.id = p_customer_card_id;
+
+  v_status := case when p_next_stamp >= v_total then 'completed' else 'active' end;
+
+  update customer_cards
+  set stamps = p_next_stamp,
+      status = v_status,
+      updated_at = now()
+  where id = p_customer_card_id;
+
+  return json_build_object(
+    'tx_id', v_tx_id,
+    'stamps', p_next_stamp,
+    'status', v_status,
+    'total_stamps', v_total
+  );
+end;
+$$;
+
+grant execute on function record_stamp(uuid, uuid, uuid, integer) to service_role;

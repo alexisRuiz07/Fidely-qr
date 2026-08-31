@@ -1,10 +1,23 @@
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
+import rateLimit from 'express-rate-limit';
 import { supabase } from '../config/db.js';
 import { signToken } from '../utils/jwt.js';
 import { ApiError, asyncHandler } from '../utils/errors.js';
 
 const router = Router();
+
+// Limitar intentos de login (protección contra fuerza bruta)
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // ventana de 15 minutos
+  max: 10,                  // máx. 10 intentos por IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    error: 'Demasiados intentos. Intenta de nuevo en unos minutos.',
+    code: 'RATE_LIMITED',
+  },
+});
 
 // POST /api/auth/register-admin
 // Crea una cuenta de administrador (primer paso antes de crear su negocio).
@@ -42,6 +55,7 @@ router.post(
 // POST /api/auth/login-admin
 router.post(
   '/login-admin',
+  loginLimiter,
   asyncHandler(async (req, res) => {
     const { email, password } = req.body || {};
     if (!email || !password) throw new ApiError(400, 'Credenciales requeridas', 'VALIDATION');
@@ -68,6 +82,7 @@ router.post(
 // POST /api/auth/login-employee
 router.post(
   '/login-employee',
+  loginLimiter,
   asyncHandler(async (req, res) => {
     const { email, password } = req.body || {};
     if (!email || !password) throw new ApiError(400, 'Credenciales requeridas', 'VALIDATION');

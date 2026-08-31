@@ -1,4 +1,6 @@
-const API = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+// En producción VITE_API_URL="" (cadena vacía) → rutas relativas, Vercel reescribe /api/* al backend.
+// En desarrollo sin VITE_API_URL → undefined ?? 'http://localhost:3000' → llama directo al backend local.
+const API = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
 function getToken() {
   return localStorage.getItem('token');

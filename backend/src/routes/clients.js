@@ -103,4 +103,37 @@ router.get(
   })
 );
 
+// PATCH /api/clients/:id  -> editar nombre/email de un cliente del negocio
+router.patch(
+  '/:id',
+  asyncHandler(async (req, res) => {
+    const bizId = await getBusinessIdForAdmin(req.user.id);
+    if (!bizId) throw new ApiError(403, 'Sin negocio', 'FORBIDDEN');
+
+    // Verificar que el cliente pertenece a este negocio
+    const { data: exists } = await supabase
+      .from('customer_cards')
+      .select('id')
+      .eq('customer_id', req.params.id)
+      .eq('loyalty_card.business_id', bizId)
+      .limit(1)
+      .maybeSingle();
+    if (!exists) throw new ApiError(404, 'Cliente no encontrado', 'NOT_FOUND');
+
+    const { name, email } = req.body || {};
+    const updates = {};
+    if (name  !== undefined) updates.name  = name;
+    if (email !== undefined) updates.email = email;
+
+    const { data: cust, error } = await supabase
+      .from('customers')
+      .update(updates)
+      .eq('id', req.params.id)
+      .select('id, name, email, phone, created_at')
+      .single();
+    if (error) throw error;
+    res.json({ customer: cust });
+  })
+);
+
 export default router;

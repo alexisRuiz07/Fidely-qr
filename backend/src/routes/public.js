@@ -36,7 +36,7 @@ router.get(
 router.post(
   '/welcome',
   asyncHandler(async (req, res) => {
-    const { loyalty_card_id, device_id, name } = req.body || {};
+    const { loyalty_card_id, device_id, name, email } = req.body || {};
     if (!loyalty_card_id) throw new ApiError(400, 'loyalty_card_id es requerido', 'VALIDATION');
 
     const { data: card, error: cardErr } = await supabase
@@ -63,20 +63,31 @@ router.post(
     if (!customerId) {
       const { data: cust, error: custErr } = await supabase
         .from('customers')
-        .insert({ device_id: device_id || null, name: name || 'Cliente' })
+        .insert({ device_id: device_id || null, name: name || 'Cliente', email: email || null })
         .select('id')
         .single();
       if (custErr) throw custErr;
       customerId = cust.id;
     }
+    console.log('[WELCOME] device_id=%s resolvedCustomerId=%s', device_id, customerId);
+
+    // Si hay datos nuevos, actualizar el perfil del cliente existente
+    if (name || email) {
+      const updates = {};
+      if (name)  updates.name  = name;
+      if (email) updates.email = email;
+      await supabase.from('customers').update(updates).eq('id', customerId);
+    }
 
     // Si ya existe, devolver 200 con already_owned=true (no es un error)
-    const { data: dup } = await supabase
+    const { data: dup, error: dupErr } = await supabase
       .from('customer_cards')
       .select('id, stamps, status, qr_token, created_at, loyalty_card_id')
       .eq('loyalty_card_id', loyalty_card_id)
       .eq('customer_id', customerId)
       .maybeSingle();
+    console.log('[WELCOME] dupCheckError=%j', dupErr?.message || null);
+    console.log('[WELCOME] dupFound=%s customerCardId=%s', !!dup, dup?.id || null);
     if (dup) {
       return res.status(200).json({
         already_owned:  true,
@@ -112,11 +123,13 @@ router.post(
 router.get(
   '/wallet/:deviceId',
   asyncHandler(async (req, res) => {
+    console.log('[WALLET] deviceId=%s', req.params.deviceId);
     const { data: cust } = await supabase
       .from('customers')
       .select('id')
       .eq('device_id', req.params.deviceId)
       .maybeSingle();
+    console.log('[WALLET] resolvedCustomerId=%s', cust?.id || null);
     if (!cust) return res.json({ wallet: [] });
 
     const { data: cards, error } = await supabase
@@ -125,6 +138,7 @@ router.get(
       .eq('customer_id', cust.id)
       .order('created_at', { ascending: false });
     if (error) throw error;
+    console.log('[WALLET] cardCountForCustomer=%s', (cards || []).length);
 
     if (!cards || cards.length === 0) return res.json({ wallet: [] });
 
@@ -215,5 +229,16 @@ router.get(
     res.json({ footer: data || {} });
   })
 );
+
+// ★ TEMPORAL: diagnóstico del bug "already have pero wallet vacío"
+router.get('/_debug', asyncHandler(async (req, res) => {
+  const { data: customers, error: cErr } = await supabase
+    .from('customers').select('id, device_id, name, created_at').order('created_at', { ascending: false }).limit(50);
+  if (cErr) throw cErr;
+  const { data: cards, error: kErr } = await supabase
+    .from('customer_cards').select('id, customer_id, loyalty_card_id, stamps, status, created_at').order('created_at', { ascending: false }).limit(100);
+  if (kErr) throw kErr;
+  res.json({ customers: customers || [], customerCards: cards || [] });
+}));
 
 export default router;

@@ -131,4 +131,5 @@ export const api = {
   getClients: () => request('/api/clients'),
   getStats: () => request('/api/clients/stats'),
   getStampsHistory: () => request('/api/clients/stamps'),
+  updateClient: (id, data) => request(`/api/clients/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
 };

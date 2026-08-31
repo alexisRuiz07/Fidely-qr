@@ -11,10 +11,14 @@ export default function PrinterWelcome() {
   const { lang, setLang, t } = useLang();
 
   const [card,    setCard]    = useState(null);
-  // loading | ready | adding | done | error
+  // loading | ready | collecting | adding | done | error
   const [status,  setStatus]  = useState('loading');
   const [already, setAlready] = useState(false);
   const [err,     setErr]     = useState('');
+
+  const [collectName,  setCollectName]  = useState('');
+  const [collectEmail, setCollectEmail] = useState('');
+  const [emailErr,     setEmailErr]     = useState('');
 
   useEffect(() => { fetchCard(); }, [cardId]);
 
@@ -28,10 +32,26 @@ export default function PrinterWelcome() {
     setStatus('ready');
   }
 
-  async function addToWallet() {
+  function startCollecting() {
+    setEmailErr('');
+    setStatus('collecting');
+  }
+
+  async function addToWallet(skipData = false) {
+    if (!skipData && collectEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(collectEmail)) {
+      setEmailErr('Ingresa un correo válido o déjalo vacío.');
+      return;
+    }
+    setEmailErr('');
     setStatus('adding');
     try {
-      const data = await api.welcome({ loyalty_card_id: cardId, device_id: getDeviceId() });
+      const payload = {
+        loyalty_card_id: cardId,
+        device_id: getDeviceId(),
+        ...((!skipData && collectName.trim())  ? { name:  collectName.trim()  } : {}),
+        ...((!skipData && collectEmail.trim()) ? { email: collectEmail.trim() } : {}),
+      };
+      const data = await api.welcome(payload);
       if (!card) setCard(data.loyalty_card || null);
       if (data.already_owned) setAlready(true);
       setStatus('done');
@@ -70,6 +90,71 @@ export default function PrinterWelcome() {
           className="text-brand-700 font-semibold underline text-[14px]">
           {t('backHome')}
         </button>
+      </div>
+    );
+  }
+
+  // ── COLLECTING (formulario nombre / correo) ──────────────────────────────
+  if (status === 'collecting') {
+    return (
+      <div className="min-h-dvh bg-bg font-sans flex flex-col"
+        style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 24px)', paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 28px)' }}>
+
+        <div className="px-6 flex items-center gap-3 mb-6">
+          <button onClick={() => setStatus('ready')}
+            className="w-10 h-10 rounded-full bg-neutral-200 grid place-items-center text-neutral-700 hover:bg-neutral-300 transition shrink-0">
+            <ArrowLeft size={18} strokeWidth={2.75} />
+          </button>
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[.14em] text-brand-700">Paso 2 de 2</p>
+            <h2 className="font-display text-[26px] leading-tight text-ink">Cuéntanos quién eres</h2>
+          </div>
+        </div>
+
+        <div className="flex-1 px-6 flex flex-col gap-4">
+          <p className="text-[14px] text-neutral-600 leading-[1.5]">
+            Opcional, pero si lo rellenas el negocio podrá contactarte y tú recibirás avisos de tus recompensas.
+          </p>
+
+          {/* nombre */}
+          <div className="flex flex-col gap-[6px]">
+            <label className="text-[13px] font-bold text-ink">Nombre</label>
+            <input
+              type="text"
+              value={collectName}
+              onChange={e => setCollectName(e.target.value)}
+              placeholder="Tu nombre"
+              className="w-full bg-neutral-200 rounded-full py-[13px] px-[18px] text-[15px] text-ink placeholder:text-neutral-500 outline-none focus:ring-2 focus:ring-brand/40 transition"
+            />
+          </div>
+
+          {/* correo */}
+          <div className="flex flex-col gap-[6px]">
+            <label className="text-[13px] font-bold text-ink">Correo electrónico</label>
+            <input
+              type="email"
+              value={collectEmail}
+              onChange={e => { setCollectEmail(e.target.value); setEmailErr(''); }}
+              placeholder="tu@correo.com"
+              className="w-full bg-neutral-200 rounded-full py-[13px] px-[18px] text-[15px] text-ink placeholder:text-neutral-500 outline-none focus:ring-2 focus:ring-brand/40 transition"
+            />
+            {emailErr && <p className="text-red-600 text-[13px] px-1">{emailErr}</p>}
+          </div>
+
+          <div className="mt-auto flex flex-col gap-3 pt-4">
+            <button
+              onClick={() => addToWallet(false)}
+              className="w-full bg-brand hover:bg-brand-600 text-white font-extrabold text-[17px] py-[18px] rounded-full shadow-md flex items-center justify-center gap-[10px] transition">
+              <Wallet size={19} strokeWidth={2.75} />
+              Guardar y añadir
+            </button>
+            <button
+              onClick={() => addToWallet(true)}
+              className="text-center text-[14px] text-neutral-500 hover:text-neutral-700 transition py-1">
+              Continuar sin datos
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -206,12 +291,9 @@ export default function PrinterWelcome() {
         {/* botón + nota */}
         <div className="mt-auto flex flex-col gap-3">
           <button
-            onClick={addToWallet}
-            disabled={status === 'adding'}
-            className="w-full bg-brand hover:bg-brand-600 text-white font-extrabold text-[17px] py-[18px] rounded-full shadow-md flex items-center justify-center gap-[10px] transition disabled:opacity-50">
-            {status === 'adding'
-              ? <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              : <><Wallet size={19} strokeWidth={2.75} />{t('addToWallet')}</>}
+            onClick={startCollecting}
+            className="w-full bg-brand hover:bg-brand-600 text-white font-extrabold text-[17px] py-[18px] rounded-full shadow-md flex items-center justify-center gap-[10px] transition">
+            <Wallet size={19} strokeWidth={2.75} />{t('addToWallet')}
           </button>
           <p className="text-center text-[13px] text-neutral-600 m-0">
             {t('saveNote')}

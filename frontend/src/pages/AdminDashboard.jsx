@@ -4,6 +4,7 @@ import {
   QrCode, LayoutDashboard, CreditCard, Users, IdCard, Store,
   Stamp, Gift, TrendingUp, Plus, Pencil, Trash2, Eye,
   LogOut, X, Download, Menu, UserPlus, ShieldCheck, Power, Share2,
+  Mail, Search, Phone,
 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import LogoUploader from '../components/LogoUploader.jsx';
@@ -202,6 +203,12 @@ export default function AdminDashboard() {
   const [empBranch,     setEmpBranch]     = useState('Centro');
   const [empTempPw,     setEmpTempPw]     = useState('');
 
+  // clientes
+  const [clientSearch,   setClientSearch]   = useState('');
+  const [editingClient,  setEditingClient]  = useState(null); // { id, name, email }
+  const [clientForm,     setClientForm]     = useState({ name: '', email: '' });
+  const [savingClient,   setSavingClient]   = useState(false);
+
   function notify(msg, type = 'success') {
     setToast({ msg, type });
     setTimeout(() => setToast(null), 3000);
@@ -235,6 +242,21 @@ export default function AdminDashboard() {
       setStats(st);
       setHistory(hi.history || []);
     } catch (e) { notify('Error cargando datos: ' + e.message, 'error'); }
+  }
+
+  async function saveClient(e) {
+    e.preventDefault();
+    setSavingClient(true);
+    try {
+      const r = await api.updateClient(editingClient.id, clientForm);
+      setClients(prev => prev.map(c => c.id === editingClient.id ? { ...c, ...r.customer } : c));
+      setEditingClient(null);
+      notify('Cliente actualizado');
+    } catch (err) {
+      notify('Error: ' + err.message, 'error');
+    } finally {
+      setSavingClient(false);
+    }
   }
 
   function handleNav(key) {
@@ -569,40 +591,168 @@ export default function AdminDashboard() {
 
           {/* ── CLIENTES ── */}
           {tab === 'clients' && (
-            <>
-              {clients.length === 0 ? (
-                <div className="bg-neutral-100 rounded-lg p-8 md:p-12 text-center shadow-sm">
-                  <p className="text-[40px] mb-3">👥</p>
-                  <p className="font-semibold text-ink">Aún no hay clientes</p>
-                  <p className="text-sm text-neutral-600 mt-1">Los clientes aparecerán aquí cuando escaneen el QR de bienvenida.</p>
-                </div>
-              ) : (
-                <div className="overflow-x-auto rounded-lg shadow-sm">
-                  <div className="bg-neutral-100 min-w-[520px]">
-                    <div className="grid grid-cols-[2fr_1.5fr_1fr] gap-4 px-5 py-[14px] bg-surface text-[12px] font-black uppercase tracking-wide text-neutral-700 border-b border-neutral-300">
-                      <span>Cliente</span><span>Tarjeta</span><span>Sellos</span>
+            <div className="flex flex-col gap-4">
+
+              {/* modal de edición */}
+              {editingClient && (
+                <div className="fixed inset-0 bg-ink/50 z-50 flex items-center justify-center p-4">
+                  <div className="bg-bg rounded-2xl shadow-xl w-full max-w-sm p-6">
+                    <div className="flex items-center justify-between mb-5">
+                      <h3 className="font-display text-[22px] text-ink">Editar cliente</h3>
+                      <button onClick={() => setEditingClient(null)}
+                        className="w-9 h-9 rounded-full bg-neutral-200 grid place-items-center hover:bg-neutral-300 transition">
+                        <X size={16} strokeWidth={2.75} className="text-neutral-700" />
+                      </button>
                     </div>
-                    {clients.flatMap(cl =>
-                      (cl.cards?.length ? cl.cards : [{ card_name: '—', stamps: 0, total_stamps: 0, status: '' }]).map((cc, i) => (
-                        <div key={`${cl.id}-${i}`}
-                          className="grid grid-cols-[2fr_1.5fr_1fr] gap-4 px-5 py-[14px] border-b border-neutral-300 last:border-0 items-center">
-                          <div>
-                            <div className="text-[14px] font-bold text-ink">{cl.name || `Cliente #${String(cl.id).slice(0, 6)}`}</div>
-                            {cl.email && <div className="text-[12px] text-neutral-500">{cl.email}</div>}
-                          </div>
-                          <span className="text-[13px] text-neutral-700 truncate">{cc.card_name}</span>
-                          <span className="text-[14px] font-bold text-ink">
-                            {cc.stamps}/{cc.total_stamps}
-                            {cc.status === 'reward_claimed' && <span className="ml-1 text-xs text-sage-600"> ✓</span>}
-                            {cc.status === 'completed'      && <span className="ml-1"> 🎉</span>}
-                          </span>
-                        </div>
-                      ))
-                    )}
+                    <form onSubmit={saveClient} className="flex flex-col gap-4">
+                      <label className="block">
+                        <span className="text-[13px] font-bold text-ink block mb-[6px]">Nombre</span>
+                        <input type="text" value={clientForm.name}
+                          onChange={e => setClientForm(f => ({ ...f, name: e.target.value }))}
+                          placeholder="Nombre del cliente"
+                          className={INP} />
+                      </label>
+                      <label className="block">
+                        <span className="text-[13px] font-bold text-ink block mb-[6px]">Correo electrónico</span>
+                        <input type="email" value={clientForm.email}
+                          onChange={e => setClientForm(f => ({ ...f, email: e.target.value }))}
+                          placeholder="correo@ejemplo.com"
+                          className={INP} />
+                      </label>
+                      <div className="flex gap-2 pt-1">
+                        <button type="button" onClick={() => setEditingClient(null)}
+                          className="flex-1 border border-neutral-300 text-neutral-700 font-semibold rounded-full py-[11px] text-sm hover:bg-neutral-100 transition">
+                          Cancelar
+                        </button>
+                        <button type="submit" disabled={savingClient}
+                          className="flex-1 bg-brand text-white font-bold rounded-full py-[11px] text-sm disabled:opacity-45 hover:bg-brand-600 transition">
+                          {savingClient ? 'Guardando…' : 'Guardar'}
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               )}
-            </>
+
+              {/* buscador */}
+              <div className="relative">
+                <Search size={15} strokeWidth={2.75}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none" />
+                <input
+                  value={clientSearch}
+                  onChange={e => setClientSearch(e.target.value)}
+                  placeholder="Buscar por nombre o correo…"
+                  className="w-full bg-neutral-100 border border-neutral-300 rounded-full py-[11px] pl-10 pr-4 text-sm text-ink placeholder:text-neutral-500 outline-none focus:ring-2 focus:ring-brand/40 transition"
+                />
+              </div>
+
+              {/* stats rápidas */}
+              {clients.length > 0 && (
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { label: 'Total clientes', value: clients.length },
+                    { label: 'Con correo',     value: clients.filter(c => c.email).length },
+                    { label: 'Tarjetas activas', value: clients.reduce((s, c) => s + (c.cards?.filter(cc => cc.status === 'active').length || 0), 0) },
+                  ].map(({ label, value }) => (
+                    <div key={label} className="bg-neutral-100 rounded-xl p-3 text-center shadow-sm">
+                      <div className="font-display text-[26px] text-ink">{value}</div>
+                      <div className="text-[11px] text-neutral-600 font-semibold mt-[2px]">{label}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* lista */}
+              {clients.length === 0 ? (
+                <div className="bg-neutral-100 rounded-xl p-8 md:p-12 text-center shadow-sm">
+                  <Users size={40} strokeWidth={2} className="mx-auto mb-3 text-neutral-300" />
+                  <p className="font-semibold text-ink">Aún no hay clientes</p>
+                  <p className="text-sm text-neutral-600 mt-1">Aparecerán aquí cuando escaneen el QR de bienvenida.</p>
+                </div>
+              ) : (() => {
+                const q = clientSearch.toLowerCase().trim();
+                const visible = q
+                  ? clients.filter(c =>
+                      (c.name || '').toLowerCase().includes(q) ||
+                      (c.email || '').toLowerCase().includes(q))
+                  : clients;
+
+                return visible.length === 0 ? (
+                  <div className="bg-neutral-100 rounded-xl p-6 text-center text-neutral-600 text-sm shadow-sm">
+                    Sin resultados para "<span className="font-semibold">{clientSearch}</span>"
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-3">
+                    {visible.map(cl => {
+                      const initials = (cl.name || 'C').slice(0, 2).toUpperCase();
+                      const totalStamps = (cl.cards || []).reduce((s, c) => s + c.stamps, 0);
+                      const hasReward   = (cl.cards || []).some(c => c.status === 'completed' || c.status === 'reward_claimed');
+                      return (
+                        <div key={cl.id} className="bg-neutral-100 rounded-xl shadow-sm overflow-hidden">
+                          {/* cabecera cliente */}
+                          <div className="flex items-center gap-3 px-4 py-4">
+                            <div className="w-11 h-11 rounded-full bg-brand-200 grid place-items-center font-bold text-[15px] text-brand-800 shrink-0">
+                              {initials}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="font-bold text-[15px] text-ink">
+                                  {cl.name || `Cliente #${String(cl.id).slice(0, 6)}`}
+                                </span>
+                                {hasReward && (
+                                  <span className="text-[11px] font-bold px-2 py-[2px] rounded-full bg-sage-200 text-sage-800">🎉 Recompensa</span>
+                                )}
+                              </div>
+                              <div className="flex items-center gap-3 mt-[2px] flex-wrap">
+                                {cl.email ? (
+                                  <span className="flex items-center gap-1 text-[12px] text-neutral-500">
+                                    <Mail size={11} strokeWidth={2.75} />{cl.email}
+                                  </span>
+                                ) : (
+                                  <span className="text-[12px] text-neutral-400 italic">Sin correo</span>
+                                )}
+                              </div>
+                            </div>
+                            <button
+                              onClick={() => { setEditingClient(cl); setClientForm({ name: cl.name || '', email: cl.email || '' }); }}
+                              className="w-9 h-9 rounded-full bg-neutral-200 grid place-items-center text-neutral-600 hover:bg-neutral-300 transition shrink-0">
+                              <Pencil size={14} strokeWidth={2.75} />
+                            </button>
+                          </div>
+
+                          {/* tarjetas del cliente */}
+                          {cl.cards?.length > 0 && (
+                            <div className="border-t border-neutral-200 px-4 py-3 flex flex-col gap-2">
+                              {cl.cards.map((cc, i) => (
+                                <div key={i} className="flex items-center justify-between text-[13px]">
+                                  <span className="text-neutral-700 truncate flex-1">{cc.card_name}</span>
+                                  <div className="flex items-center gap-2 shrink-0 ml-3">
+                                    <span className="font-bold text-ink">{cc.stamps}/{cc.total_stamps}</span>
+                                    {cc.status === 'reward_claimed' && <span className="text-[11px] font-bold px-2 py-[1px] rounded-full bg-neutral-300 text-neutral-600">Canjeada</span>}
+                                    {cc.status === 'completed'      && <span className="text-[11px] font-bold px-2 py-[1px] rounded-full bg-sage-200 text-sage-800">Lista</span>}
+                                    {cc.status === 'active'         && <span className="text-[11px] font-bold px-2 py-[1px] rounded-full bg-brand-200 text-brand-800">Activa</span>}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* pie con fecha */}
+                          <div className="border-t border-neutral-200 px-4 py-[8px] flex items-center justify-between">
+                            <span className="text-[11.5px] text-neutral-500">
+                              Desde {new Date(cl.created_at).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}
+                            </span>
+                            <span className="text-[11.5px] text-neutral-500 font-semibold">
+                              {cl.cards?.length || 0} tarjeta{cl.cards?.length !== 1 ? 's' : ''}
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
+            </div>
           )}
 
           {/* ── EMPLEADOS ── */}

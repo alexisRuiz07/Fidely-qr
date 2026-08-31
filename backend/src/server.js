@@ -16,9 +16,14 @@ import uploadRoutes from './routes/upload.js';
 
 const app = express();
 
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(',').map((s) => s.trim()).filter(Boolean)
+  : null;
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL?.split(',').map((s) => s.trim()) || true,
+    origin: allowedOrigins && allowedOrigins.length > 0 ? allowedOrigins : true,
+    credentials: true,
   })
 );
 app.use(express.json());

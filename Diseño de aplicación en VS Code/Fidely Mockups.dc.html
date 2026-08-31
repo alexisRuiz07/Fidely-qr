@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/organic-61d7dc55-d581-4290-9ac6-5f0e55ae5eec/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+  body { margin:0; background:#e6dbc6; font-family:"Figtree",system-ui,sans-serif; color:#201e1d; }
+  a { color: var(--color-accent-700); text-decoration: none; font-weight: 600; }
+  a:hover { color: var(--color-accent-600); text-decoration: underline; }
+  [data-lucide] { stroke-width: 2.75; }
+</style>
+</helmet>
+
+<section style="padding:56px 48px 96px;display:flex;flex-direction:column;gap:44px">
+
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:760px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Turno 1 · Fidely QR · Organic</div>
+    <h1 style="font-family:var(--font-heading);font-weight:400;font-size:52px;line-height:1.02;margin:0;color:var(--color-text)">Mockups hi-fi para Claude&nbsp;Code</h1>
+    <p style="margin:0;font-size:17px;line-height:1.55;color:var(--color-neutral-700);text-wrap:pretty">Tres perfiles, diecisiete pantallas. Cliente y empleado a 390×844 (mobile-first, PWA); administrador a 1280×800. Colores, radios y tipografía salen del sistema Organic — los mismos tokens que debe usar la implementación en Tailwind.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start">
+
+    <!-- ============ 1a CLIENTE ============ -->
+    <div id="1a" style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;background:var(--color-accent-600);color:#fff;padding:5px 11px;border-radius:999px">1a</span>
+        <h2 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0">Cliente · sin cuenta</h2>
+        <span style="font-size:13px;color:var(--color-neutral-600)">/welcome/:cardId · /wallet · /card/:id</span>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:28px">
+
+        <!-- A. Bienvenida -->
+        <div id="s01" data-screen-label="Cliente · Bienvenida" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:390px;height:844px;background:var(--color-bg);border-radius:44px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;flex:none;position:relative">
+            <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:13px;font-weight:700;color:var(--color-neutral-700);flex:none">
+              <span>9:41</span>
+              <span style="display:flex;gap:5px;align-items:center"><i data-lucide="signal" style="width:14px;height:14px"></i><i data-lucide="wifi" style="width:14px;height:14px"></i><i data-lucide="battery-full" style="width:18px;height:18px"></i></span>
+            </div>
+            <div style="position:absolute;top:-90px;right:-70px;width:280px;height:280px;border-radius:999px;background:var(--color-accent-200);opacity:.9"></div>
+            <div style="position:relative;flex:1;display:flex;flex-direction:column;padding:24px 24px 30px;gap:22px;overflow:hidden">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="width:60px;height:60px;border-radius:22px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff;font-family:var(--font-heading);font-size:26px;box-shadow:var(--shadow-md)">A</div>
+                <div style="display:flex;gap:4px;background:var(--color-neutral-200);padding:4px;border-radius:999px">
+                  <span style="font-size:12px;font-weight:800;padding:5px 12px;border-radius:999px;background:var(--color-bg);box-shadow:var(--shadow-sm)">ES</span>
+                  <span style="font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;color:var(--color-neutral-600)">EN</span>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">Café Aurora te invita</div>
+                <h3 style="font-family:var(--font-heading);font-weight:400;font-size:36px;line-height:1.05;margin:0">Tu 6ª bebida, gratis</h3>
+                <p style="margin:0;font-size:15px;line-height:1.5;color:var(--color-neutral-700);text-wrap:pretty">Guarda esta tarjeta en Mi Wallet y suma un sello con cada compra. Sin registro y sin instalar nada.</p>
+              </div>
+
+              <div style="background:var(--color-accent-600);border-radius:var(--radius-lg);padding:20px;color:var(--color-accent-100);box-shadow:var(--shadow-md);position:relative;overflow:hidden">
+                <div style="position:absolute;top:-46px;right:-34px;width:150px;height:150px;border-radius:999px;background:var(--color-accent-400);opacity:.28"></div>
+                <div style="position:relative;display:flex;align-items:center;gap:12px;margin-bottom:16px">
+                  <div style="width:44px;height:44px;border-radius:16px;background:var(--color-bg);display:grid;place-items:center;font-family:var(--font-heading);font-size:20px;color:var(--color-accent-700)">A</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-weight:800;font-size:17px;color:#fff">Café Aurora</div>
+                    <div style="font-size:13px;opacity:.75">Tarjeta de bebidas</div>
+                  </div>
+                </div>
+                <div style="position:relative;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:10px;font-weight:700">Recompensa · Bebida gratis</div>
+                <div style="position:relative;display:flex;gap:8px;flex-wrap:wrap">
+                  <div style="width:30px;height:30px;border-radius:999px;border:2px solid rgba(245,234,216,.35);display:grid;place-items:center;font-size:12px;font-weight:700;color:rgba(245,234,216,.55)">1</div>
+                  <div style="width:30px;height:30px;border-radius:999px;border:2px solid rgba(245,234,216,.35);display:grid;place-items:center;font-size:12px;font-weight:700;color:rgba(245,234,216,.55)">2</div>
+                  <div style="width:30px;height:30px;border-radius:999px;border:2px solid rgba(245,234,216,.35);display:grid;place-items:center;font-size:12px;font-weight:700;color:rgba(245,234,216,.55)">3</div>
+                  <div style="width:30px;height:30px;border-radius:999px;border:2px solid rgba(245,234,216,.35);display:grid;place-items:center;font-size:12px;font-weight:700;color:rgba(245,234,216,.55)">4</div>
+                  <div style="width:30px;height:30px;border-radius:999px;border:2px solid rgba(245,234,216,.35);display:grid;place-items:center;font-size:12px;font-weight:700;color:rgba(245,234,216,.55)">5</div>
+                  <div style="width:30px;height:30px;border-radius:999px;background:var(--color-accent-2-300);display:grid;place-items:center;color:var(--color-accent-2-800)"><i data-lucide="gift" style="width:15px;height:15px"></i></div>
+                </div>
+              </div>
+
+              <div style="margin-top:auto;display:flex;flex-direction:column;gap:12px">
+                <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:17px;font-weight:800;padding:18px;border-radius:999px;box-shadow:var(--shadow-md);display:flex;align-items:center;justify-content:center;gap:10px" style-hover="background:var(--color-accent-600)"><i data-lucide="wallet" style="width:19px;height:19px"></i>Añadir a Mi Wallet</button>
+                <p style="margin:0;text-align:center;font-size:13px;color:var(--color-neutral-600)">Se guarda en este dispositivo. Podrás vincularla a un correo después.</p>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">01 · Bienvenida desde QR impreso</div>
+        </div>
+
+        <!-- B. Mi Wallet -->
+        <div id="s02" data-screen-label="Cliente · Mi Wallet" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:390px;height:844px;background:var(--color-bg);border-radius:44px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;flex:none">
+            <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:13px;font-weight:700;color:var(--color-neutral-700);flex:none">
+              <span>9:41</span>
+              <span style="display:flex;gap:5px;align-items:center"><i data-lucide="signal" style="width:14px;height:14px"></i><i data-lucide="wifi" style="width:14px;height:14px"></i><i data-lucide="battery-full" style="width:18px;height:18px"></i></span>
+            </div>
+            <div style="padding:10px 22px 16px;display:flex;flex-direction:column;gap:14px;flex:none">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between">
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Mi Wallet</div>
+                  <h3 style="font-family:var(--font-heading);font-weight:400;font-size:34px;line-height:1.05;margin:4px 0 0">Mis tarjetas</h3>
+                  <div style="font-size:14px;color:var(--color-neutral-600);margin-top:4px">3 tarjetas · 1 recompensa lista</div>
+                </div>
+                <button style="border:none;cursor:pointer;width:42px;height:42px;border-radius:999px;background:var(--color-neutral-200);display:grid;place-items:center;color:var(--color-neutral-800);position:relative" style-hover="background:var(--color-neutral-300)">
+                  <i data-lucide="bell" style="width:19px;height:19px"></i>
+                  <span style="position:absolute;top:8px;right:9px;width:9px;height:9px;border-radius:999px;background:var(--color-accent);border:2px solid var(--color-bg)"></span>
+                </button>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;background:var(--color-neutral-200);border-radius:999px;padding:12px 18px;color:var(--color-neutral-600)">
+                <i data-lucide="search" style="width:17px;height:17px"></i>
+                <span style="font-size:15px">Buscar negocio o recompensa</span>
+              </div>
+              <div style="display:flex;gap:8px">
+                <span style="font-size:13px;font-weight:800;padding:8px 16px;border-radius:999px;background:var(--color-accent-600);color:#fff">Todas</span>
+                <span style="font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px;background:transparent;border:1.5px solid var(--color-neutral-400);color:var(--color-neutral-700)">Activas</span>
+                <span style="font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px;background:transparent;border:1.5px solid var(--color-neutral-400);color:var(--color-neutral-700)">Canjeadas</span>
+              </div>
+            </div>
+
+            <div style="flex:1;overflow:hidden;padding:2px 22px 20px;display:flex;flex-direction:column;gap:14px">
+              <div style="background:var(--color-accent-2-600);border-radius:var(--radius-lg);padding:18px;color:#fff;box-shadow:var(--shadow-md);position:relative;overflow:hidden">
+                <div style="position:absolute;top:-50px;right:-40px;width:160px;height:160px;border-radius:999px;background:var(--color-accent-2-400);opacity:.35"></div>
+                <div style="position:relative;display:flex;align-items:center;gap:12px;margin-bottom:14px">
+                  <div style="width:42px;height:42px;border-radius:15px;background:var(--color-bg);display:grid;place-items:center;font-family:var(--font-heading);font-size:19px;color:var(--color-accent-2-700)">V</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-weight:800;font-size:16px">Verde Bowl</div>
+                    <div style="font-size:12.5px;opacity:.75">Almuerzo saludable</div>
+                  </div>
+                  <span style="font-size:11.5px;font-weight:800;padding:6px 11px;border-radius:999px;background:var(--color-accent-300);color:var(--color-accent-900)">¡Listo!</span>
+                </div>
+                <div style="position:relative;display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
+                  <div style="width:27px;height:27px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+                  <div style="width:27px;height:27px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+                  <div style="width:27px;height:27px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+                  <div style="width:27px;height:27px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+                  <div style="width:27px;height:27px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+                  <div style="width:27px;height:27px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+                  <div style="width:27px;height:27px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+                  <div style="width:27px;height:27px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+                </div>
+                <div style="position:relative;display:flex;align-items:center;justify-content:space-between;font-size:12.5px;opacity:.85;font-weight:700"><span>8 de 8 sellos</span><span>Canjea tu bowl</span></div>
+              </div>
+
+              <div style="background:var(--color-accent-600);border-radius:var(--radius-lg);padding:18px;color:var(--color-accent-100);box-shadow:var(--shadow-md);position:relative;overflow:hidden">
+                <div style="position:absolute;top:-50px;right:-40px;width:160px;height:160px;border-radius:999px;background:var(--color-accent-400);opacity:.28"></div>
+                <div style="position:relative;display:flex;align-items:center;gap:12px;margin-bottom:14px">
+                  <div style="width:42px;height:42px;border-radius:15px;background:var(--color-bg);display:grid;place-items:center;font-family:var(--font-heading);font-size:19px;color:var(--color-accent-700)">A</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-weight:800;font-size:16px;color:#fff">Café Aurora</div>
+                    <div style="font-size:12.5px;opacity:.75">Tarjeta de bebidas</div>
+                  </div>
+                  <i data-lucide="chevron-right" style="width:18px;height:18px;opacity:.6"></i>
+                </div>
+                <div style="position:relative;display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
+                  <div style="width:27px;height:27px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+                  <div style="width:27px;height:27px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+                  <div style="width:27px;height:27px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="check" style="width:14px;height:14px"></i></div>
+                  <div style="width:27px;height:27px;border-radius:999px;border:2px solid rgba(245,234,216,.35);display:grid;place-items:center;font-size:11px;font-weight:700;color:rgba(245,234,216,.55)">4</div>
+                  <div style="width:27px;height:27px;border-radius:999px;border:2px solid rgba(245,234,216,.35);display:grid;place-items:center;font-size:11px;font-weight:700;color:rgba(245,234,216,.55)">5</div>
+                  <div style="width:27px;height:27px;border-radius:999px;border:2px solid rgba(245,234,216,.35);display:grid;place-items:center;font-size:11px;font-weight:700;color:rgba(245,234,216,.55)">6</div>
+                </div>
+                <div style="position:relative;height:6px;border-radius:999px;background:rgba(245,234,216,.25);overflow:hidden;margin-bottom:8px"><div style="width:50%;height:100%;border-radius:999px;background:var(--color-accent-200)"></div></div>
+                <div style="position:relative;display:flex;align-items:center;justify-content:space-between;font-size:12.5px;opacity:.85;font-weight:700"><span>3 de 6 sellos</span><span>50%</span></div>
+              </div>
+
+              <div style="background:var(--color-neutral-200);border-radius:var(--radius-lg);padding:16px 18px;display:flex;align-items:center;gap:12px;opacity:.7">
+                <div style="width:38px;height:38px;border-radius:14px;background:var(--color-neutral-400);display:grid;place-items:center;font-family:var(--font-heading);font-size:17px;color:var(--color-neutral-100)">L</div>
+                <div style="flex:1">
+                  <div style="font-weight:800;font-size:15px">Librería Ola</div>
+                  <div style="font-size:12.5px;color:var(--color-neutral-700)">Canjeada · 12 ago 2026</div>
+                </div>
+                <i data-lucide="check-check" style="width:18px;height:18px;color:var(--color-neutral-700)"></i>
+              </div>
+            </div>
+
+            <div style="flex:none;background:var(--color-surface);border-top:1px solid var(--color-divider);padding:12px 30px 26px;display:flex;justify-content:space-between;align-items:center">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--color-accent-700)"><i data-lucide="wallet" style="width:22px;height:22px"></i><span style="font-size:11px;font-weight:800">Wallet</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--color-neutral-600)"><i data-lucide="qr-code" style="width:22px;height:22px"></i><span style="font-size:11px;font-weight:700">Mi QR</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--color-neutral-600)"><i data-lucide="user" style="width:22px;height:22px"></i><span style="font-size:11px;font-weight:700">Perfil</span></div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">02 · Mi Wallet · listado + filtros</div>
+        </div>
+
+        <!-- C. Detalle + QR -->
+        <div id="s03" data-screen-label="Cliente · Detalle y QR" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:390px;height:844px;background:var(--color-bg);border-radius:44px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;flex:none">
+            <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:13px;font-weight:700;color:var(--color-neutral-700);flex:none">
+              <span>9:41</span>
+              <span style="display:flex;gap:5px;align-items:center"><i data-lucide="signal" style="width:14px;height:14px"></i><i data-lucide="wifi" style="width:14px;height:14px"></i><i data-lucide="battery-full" style="width:18px;height:18px"></i></span>
+            </div>
+            <div style="padding:6px 22px 14px;display:flex;align-items:center;justify-content:space-between;flex:none">
+              <button style="border:none;cursor:pointer;width:40px;height:40px;border-radius:999px;background:var(--color-neutral-200);display:grid;place-items:center;color:var(--color-neutral-800)" style-hover="background:var(--color-neutral-300)"><i data-lucide="arrow-left" style="width:19px;height:19px"></i></button>
+              <span style="font-weight:800;font-size:15px">Café Aurora</span>
+              <button style="border:none;cursor:pointer;width:40px;height:40px;border-radius:999px;background:var(--color-neutral-200);display:grid;place-items:center;color:var(--color-neutral-800)" style-hover="background:var(--color-neutral-300)"><i data-lucide="ellipsis" style="width:19px;height:19px"></i></button>
+            </div>
+
+            <div style="flex:1;overflow:hidden;padding:0 22px 20px;display:flex;flex-direction:column;gap:16px">
+              <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;align-items:center;gap:14px;box-shadow:var(--shadow-md)">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Muestra este código</div>
+                <div style="width:210px;height:210px;background:#fff;border-radius:20px;padding:12px;display:grid;grid-template-columns:repeat(21,1fr);gap:1px">
+                  <sc-for list="{{ qrCells }}" as="cell" hint-placeholder-count="441"><div style="border-radius:1px;background:{{ cell.bg }}"></div></sc-for>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--color-neutral-600);letter-spacing:.06em">7c1f · a904 · e2bd</div>
+                <div style="display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--color-accent-2-700);font-weight:700"><i data-lucide="shield-check" style="width:15px;height:15px"></i>Token único, sin datos personales</div>
+              </div>
+
+              <div style="background:var(--color-surface);border-radius:var(--radius-lg);padding:18px;display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <span style="font-weight:800;font-size:15px">Tu progreso</span>
+                  <span style="font-size:13px;font-weight:800;color:var(--color-accent-700)">3 / 6</span>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <div style="width:36px;height:36px;border-radius:999px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff"><i data-lucide="check" style="width:17px;height:17px"></i></div>
+                  <div style="width:36px;height:36px;border-radius:999px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff"><i data-lucide="check" style="width:17px;height:17px"></i></div>
+                  <div style="width:36px;height:36px;border-radius:999px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff"><i data-lucide="check" style="width:17px;height:17px"></i></div>
+                  <div style="width:36px;height:36px;border-radius:999px;border:2px dashed var(--color-neutral-400);display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--color-neutral-600)">4</div>
+                  <div style="width:36px;height:36px;border-radius:999px;border:2px dashed var(--color-neutral-400);display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--color-neutral-600)">5</div>
+                  <div style="width:36px;height:36px;border-radius:999px;border:2px dashed var(--color-accent-400);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="gift" style="width:17px;height:17px"></i></div>
+                </div>
+                <p style="margin:0;font-size:13.5px;color:var(--color-neutral-700);line-height:1.45">Faltan 3 sellos para tu bebida gratis.</p>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Historial</div>
+                <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--color-neutral-100);border-radius:var(--radius-md)">
+                  <div style="width:32px;height:32px;border-radius:999px;background:var(--color-accent-200);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="stamp" style="width:16px;height:16px"></i></div>
+                  <div style="flex:1"><div style="font-size:14px;font-weight:700">Sello 3 registrado</div><div style="font-size:12.5px;color:var(--color-neutral-600)">Hoy · 09:12 · Sucursal Centro</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--color-neutral-100);border-radius:var(--radius-md)">
+                  <div style="width:32px;height:32px;border-radius:999px;background:var(--color-accent-200);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="stamp" style="width:16px;height:16px"></i></div>
+                  <div style="flex:1"><div style="font-size:14px;font-weight:700">Sello 2 registrado</div><div style="font-size:12.5px;color:var(--color-neutral-600)">26 ago · 18:40</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">03 · Detalle de tarjeta + QR</div>
+        </div>
+
+        <!-- D. Recompensa -->
+        <div id="s04" data-screen-label="Cliente · Recompensa lista" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:390px;height:844px;background:var(--color-accent-2-700);border-radius:44px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;flex:none;position:relative">
+            <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:13px;font-weight:700;color:rgba(255,255,255,.8);flex:none">
+              <span>9:41</span>
+              <span style="display:flex;gap:5px;align-items:center"><i data-lucide="signal" style="width:14px;height:14px"></i><i data-lucide="wifi" style="width:14px;height:14px"></i><i data-lucide="battery-full" style="width:18px;height:18px"></i></span>
+            </div>
+            <div style="position:absolute;top:120px;left:-90px;width:300px;height:300px;border-radius:999px;background:var(--color-accent-2-600);opacity:.6"></div>
+            <div style="position:absolute;bottom:-60px;right:-70px;width:260px;height:260px;border-radius:999px;background:var(--color-accent-2-600);opacity:.5"></div>
+
+            <div style="position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;gap:22px;text-align:center;color:#fff">
+              <div style="width:104px;height:104px;border-radius:999px;background:var(--color-accent-300);display:grid;place-items:center;color:var(--color-accent-900);box-shadow:var(--shadow-lg)"><i data-lucide="gift" style="width:46px;height:46px"></i></div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <h3 style="font-family:var(--font-heading);font-weight:400;font-size:38px;line-height:1.05;margin:0">¡Recompensa lista!</h3>
+                <p style="margin:0;font-size:16px;line-height:1.5;opacity:.85;max-width:280px;text-wrap:pretty">Completaste los 8 sellos de <strong>Verde Bowl</strong>. Muestra este código en caja para canjear tu bowl gratis.</p>
+              </div>
+              <div style="background:var(--color-bg);border-radius:var(--radius-lg);padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:var(--shadow-lg)">
+                <div style="width:170px;height:170px;background:#fff;border-radius:16px;padding:10px;display:grid;grid-template-columns:repeat(21,1fr);gap:1px">
+                  <sc-for list="{{ qrCells }}" as="cell" hint-placeholder-count="441"><div style="border-radius:1px;background:{{ cell.bg }}"></div></sc-for>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--color-neutral-700)">Válido hoy · un solo uso</div>
+              </div>
+            </div>
+
+            <div style="position:relative;padding:0 28px 34px;display:flex;flex-direction:column;gap:12px;flex:none">
+              <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:17px;font-weight:800;padding:17px;border-radius:999px;box-shadow:var(--shadow-md)" style-hover="background:var(--color-accent-600)">Ver mis tarjetas</button>
+              <button style="border:1.5px solid rgba(255,255,255,.4);cursor:pointer;font-family:inherit;background:transparent;color:#fff;font-size:15px;font-weight:700;padding:14px;border-radius:999px" style-hover="background:rgba(255,255,255,.12)">Recordármelo después</button>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">04 · Notificación de recompensa</div>
+        </div>
+
+        <!-- E. Perfil -->
+        <div id="s05" data-screen-label="Cliente · Perfil y ajustes" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:390px;height:844px;background:var(--color-bg);border-radius:44px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;flex:none">
+            <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:13px;font-weight:700;color:var(--color-neutral-700);flex:none">
+              <span>9:41</span>
+              <span style="display:flex;gap:5px;align-items:center"><i data-lucide="signal" style="width:14px;height:14px"></i><i data-lucide="wifi" style="width:14px;height:14px"></i><i data-lucide="battery-full" style="width:18px;height:18px"></i></span>
+            </div>
+            <div style="flex:1;overflow:hidden;padding:10px 22px 20px;display:flex;flex-direction:column;gap:18px">
+              <h3 style="font-family:var(--font-heading);font-weight:400;font-size:34px;line-height:1.05;margin:0">Perfil</h3>
+
+              <div style="background:var(--color-accent-200);border-radius:var(--radius-lg);padding:18px;display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="width:46px;height:46px;border-radius:999px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff"><i data-lucide="smartphone" style="width:21px;height:21px"></i></div>
+                  <div style="flex:1"><div style="font-weight:800;font-size:15px">Invitado en este dispositivo</div><div style="font-size:13px;color:var(--color-accent-800)">Tus tarjetas viven solo aquí</div></div>
+                </div>
+                <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:15px;font-weight:800;padding:13px;border-radius:999px" style-hover="background:var(--color-accent-600)">Vincular un correo para no perderlas</button>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Preferencias</div>
+                <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);overflow:hidden">
+                  <div style="display:flex;align-items:center;gap:12px;padding:15px 16px;border-bottom:1px solid var(--color-divider)">
+                    <i data-lucide="languages" style="width:19px;height:19px;color:var(--color-neutral-700)"></i>
+                    <span style="flex:1;font-size:15px;font-weight:600">Idioma</span>
+                    <div style="display:flex;gap:4px;background:var(--color-neutral-200);padding:3px;border-radius:999px">
+                      <span style="font-size:12px;font-weight:800;padding:5px 12px;border-radius:999px;background:var(--color-bg)">ES</span>
+                      <span style="font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;color:var(--color-neutral-600)">EN</span>
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:12px;padding:15px 16px;border-bottom:1px solid var(--color-divider)">
+                    <i data-lucide="bell" style="width:19px;height:19px;color:var(--color-neutral-700)"></i>
+                    <span style="flex:1;font-size:15px;font-weight:600">Avisos de recompensa</span>
+                    <div style="width:48px;height:28px;border-radius:999px;background:var(--color-accent-2-500);display:flex;align-items:center;justify-content:flex-end;padding:3px"><div style="width:22px;height:22px;border-radius:999px;background:#fff;box-shadow:var(--shadow-sm)"></div></div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:12px;padding:15px 16px">
+                    <i data-lucide="moon" style="width:19px;height:19px;color:var(--color-neutral-700)"></i>
+                    <span style="flex:1;font-size:15px;font-weight:600">Tema oscuro</span>
+                    <div style="width:48px;height:28px;border-radius:999px;background:var(--color-neutral-300);display:flex;align-items:center;padding:3px"><div style="width:22px;height:22px;border-radius:999px;background:#fff;box-shadow:var(--shadow-sm)"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Wallet del sistema</div>
+                <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:16px;display:flex;align-items:center;gap:12px">
+                  <i data-lucide="credit-card" style="width:19px;height:19px;color:var(--color-neutral-700)"></i>
+                  <div style="flex:1"><div style="font-size:15px;font-weight:700">Apple / Google Wallet</div><div style="font-size:12.5px;color:var(--color-neutral-600)">Exportar pases nativos</div></div>
+                  <span style="font-size:11.5px;font-weight:800;padding:6px 11px;border-radius:999px;background:var(--color-accent-2-200);color:var(--color-accent-2-800)">Pronto</span>
+                </div>
+              </div>
+
+              <div style="margin-top:auto;text-align:center;font-size:12.5px;color:var(--color-neutral-600)">Fidely QR · v0.4 · <a href="#1a">Términos</a></div>
+            </div>
+
+            <div style="flex:none;background:var(--color-surface);border-top:1px solid var(--color-divider);padding:12px 30px 26px;display:flex;justify-content:space-between;align-items:center">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--color-neutral-600)"><i data-lucide="wallet" style="width:22px;height:22px"></i><span style="font-size:11px;font-weight:700">Wallet</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--color-neutral-600)"><i data-lucide="qr-code" style="width:22px;height:22px"></i><span style="font-size:11px;font-weight:700">Mi QR</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--color-accent-700)"><i data-lucide="user" style="width:22px;height:22px"></i><span style="font-size:11px;font-weight:800">Perfil</span></div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">05 · Perfil y ajustes</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============ 1b EMPLEADO ============ -->
+    <div id="1b" style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;background:var(--color-accent-2-600);color:#fff;padding:5px 11px;border-radius:999px">1b</span>
+        <h2 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0">Empleado · caja</h2>
+        <span style="font-size:13px;color:var(--color-neutral-600)">/employee/login · /employee/scan</span>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:28px">
+
+        <!-- F. Login empleado -->
+        <div id="s06" data-screen-label="Empleado · Login" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:390px;height:844px;background:var(--color-bg);border-radius:44px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;flex:none;position:relative">
+            <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:13px;font-weight:700;color:var(--color-neutral-700);flex:none">
+              <span>9:41</span>
+              <span style="display:flex;gap:5px;align-items:center"><i data-lucide="signal" style="width:14px;height:14px"></i><i data-lucide="wifi" style="width:14px;height:14px"></i><i data-lucide="battery-full" style="width:18px;height:18px"></i></span>
+            </div>
+            <div style="position:absolute;bottom:-110px;left:-80px;width:320px;height:320px;border-radius:999px;background:var(--color-accent-2-200)"></div>
+            <div style="position:relative;flex:1;display:flex;flex-direction:column;padding:32px 26px 34px;gap:26px">
+              <div style="width:62px;height:62px;border-radius:22px;background:var(--color-accent-2-600);display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-md)"><i data-lucide="scan-line" style="width:28px;height:28px"></i></div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <h3 style="font-family:var(--font-heading);font-weight:400;font-size:36px;line-height:1.05;margin:0">Acceso empleado</h3>
+                <p style="margin:0;font-size:15px;color:var(--color-neutral-700);line-height:1.5">Inicia sesión para registrar sellos y canjear recompensas de tu negocio.</p>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div style="display:flex;flex-direction:column;gap:7px">
+                  <label style="font-size:13px;font-weight:800;color:var(--color-neutral-800)">Correo electrónico</label>
+                  <div style="background:var(--color-neutral-100);border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:15px 20px;font-size:15px;color:var(--color-text)">ana@cafeaurora.com</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:7px">
+                  <label style="font-size:13px;font-weight:800;color:var(--color-neutral-800)">Contraseña</label>
+                  <div style="background:var(--color-neutral-100);border:2px solid var(--color-accent);border-radius:999px;padding:15px 20px;font-size:15px;display:flex;align-items:center;justify-content:space-between;color:var(--color-neutral-700)"><span style="letter-spacing:.2em">••••••••</span><i data-lucide="eye" style="width:18px;height:18px"></i></div>
+                </div>
+              </div>
+              <div style="margin-top:auto;display:flex;flex-direction:column;gap:14px">
+                <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:17px;font-weight:800;padding:18px;border-radius:999px;box-shadow:var(--shadow-md)" style-hover="background:var(--color-accent-600)">Ingresar</button>
+                <p style="margin:0;text-align:center;font-size:13px;color:var(--color-neutral-600)">Tu administrador crea las cuentas de empleado.</p>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">06 · Login empleado</div>
+        </div>
+
+        <!-- G. Escáner -->
+        <div id="s07" data-screen-label="Empleado · Escáner" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:390px;height:844px;background:#1b1a17;border-radius:44px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;flex:none">
+            <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:13px;font-weight:700;color:rgba(255,255,255,.75);flex:none">
+              <span>9:41</span>
+              <span style="display:flex;gap:5px;align-items:center"><i data-lucide="signal" style="width:14px;height:14px"></i><i data-lucide="wifi" style="width:14px;height:14px"></i><i data-lucide="battery-full" style="width:18px;height:18px"></i></span>
+            </div>
+            <div style="padding:4px 22px 16px;display:flex;align-items:center;justify-content:space-between;color:#fff;flex:none">
+              <div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.55;font-family:'JetBrains Mono',monospace">Café Aurora · Centro</div><div style="font-weight:800;font-size:17px">Escanear tarjeta</div></div>
+              <button style="border:none;cursor:pointer;width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,.12);display:grid;place-items:center;color:#fff" style-hover="background:rgba(255,255,255,.2)"><i data-lucide="log-out" style="width:18px;height:18px"></i></button>
+            </div>
+
+            <div style="flex:1;position:relative;margin:0 22px;border-radius:var(--radius-lg);overflow:hidden;background:repeating-linear-gradient(135deg,#2c2a25 0 14px,#252420 14px 28px);display:grid;place-items:center">
+              <div style="position:absolute;inset:0;display:grid;place-items:center">
+                <div style="width:230px;height:230px;position:relative">
+                  <div style="position:absolute;top:0;left:0;width:52px;height:52px;border-top:5px solid var(--color-accent-300);border-left:5px solid var(--color-accent-300);border-top-left-radius:20px"></div>
+                  <div style="position:absolute;top:0;right:0;width:52px;height:52px;border-top:5px solid var(--color-accent-300);border-right:5px solid var(--color-accent-300);border-top-right-radius:20px"></div>
+                  <div style="position:absolute;bottom:0;left:0;width:52px;height:52px;border-bottom:5px solid var(--color-accent-300);border-left:5px solid var(--color-accent-300);border-bottom-left-radius:20px"></div>
+                  <div style="position:absolute;bottom:0;right:0;width:52px;height:52px;border-bottom:5px solid var(--color-accent-300);border-right:5px solid var(--color-accent-300);border-bottom-right-radius:20px"></div>
+                  <div style="position:absolute;left:14px;right:14px;top:50%;height:3px;border-radius:999px;background:var(--color-accent);box-shadow:0 0 18px var(--color-accent)"></div>
+                </div>
+              </div>
+              <div style="position:absolute;bottom:20px;left:20px;right:20px;text-align:center;color:rgba(255,255,255,.7);font-size:13.5px">Apunta al QR del cliente</div>
+            </div>
+
+            <div style="flex:none;padding:18px 22px 30px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border-radius:999px;padding:14px 18px;color:rgba(255,255,255,.55);font-family:'JetBrains Mono',monospace;font-size:13px"><i data-lucide="keyboard" style="width:17px;height:17px"></i>o pega el token manualmente</div>
+              <div style="display:flex;gap:10px">
+                <button style="flex:1;border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:16px;font-weight:800;padding:17px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:9px" style-hover="background:var(--color-accent-600)"><i data-lucide="camera" style="width:19px;height:19px"></i>Escanear</button>
+                <button style="border:1.5px solid rgba(255,255,255,.28);cursor:pointer;background:transparent;color:#fff;width:58px;border-radius:999px;display:grid;place-items:center" style-hover="background:rgba(255,255,255,.12)"><i data-lucide="zap" style="width:19px;height:19px"></i></button>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">07 · Escáner QR (cámara)</div>
+        </div>
+
+        <!-- H. Resultado -->
+        <div id="s08" data-screen-label="Empleado · Registrar sello" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:390px;height:844px;background:var(--color-bg);border-radius:44px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;flex:none">
+            <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:13px;font-weight:700;color:var(--color-neutral-700);flex:none">
+              <span>9:41</span>
+              <span style="display:flex;gap:5px;align-items:center"><i data-lucide="signal" style="width:14px;height:14px"></i><i data-lucide="wifi" style="width:14px;height:14px"></i><i data-lucide="battery-full" style="width:18px;height:18px"></i></span>
+            </div>
+            <div style="flex:1;overflow:hidden;padding:8px 22px 22px;display:flex;flex-direction:column;gap:18px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <button style="border:none;cursor:pointer;width:40px;height:40px;border-radius:999px;background:var(--color-neutral-200);display:grid;place-items:center;color:var(--color-neutral-800)" style-hover="background:var(--color-neutral-300)"><i data-lucide="arrow-left" style="width:19px;height:19px"></i></button>
+                <span style="font-weight:800;font-size:15px">Tarjeta encontrada</span>
+              </div>
+
+              <div style="background:var(--color-accent-2-200);border-radius:var(--radius-lg);padding:16px;display:flex;align-items:center;gap:12px">
+                <div style="width:42px;height:42px;border-radius:999px;background:var(--color-accent-2-600);display:grid;place-items:center;color:#fff"><i data-lucide="check" style="width:21px;height:21px"></i></div>
+                <div><div style="font-weight:800;font-size:15px;color:var(--color-accent-2-900)">Token válido</div><div style="font-size:13px;color:var(--color-accent-2-800)">Café Aurora · cliente #2481</div></div>
+              </div>
+
+              <div style="background:var(--color-accent-600);border-radius:var(--radius-lg);padding:22px;color:var(--color-accent-100);box-shadow:var(--shadow-md);position:relative;overflow:hidden">
+                <div style="position:absolute;top:-56px;right:-40px;width:180px;height:180px;border-radius:999px;background:var(--color-accent-400);opacity:.28"></div>
+                <div style="position:relative;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;font-weight:800;margin-bottom:8px">Progreso actual</div>
+                <div style="position:relative;font-family:var(--font-heading);font-size:46px;line-height:1;color:#fff;margin-bottom:16px">3 <span style="font-size:24px;opacity:.6">/ 6</span></div>
+                <div style="position:relative;display:flex;gap:9px;flex-wrap:wrap">
+                  <div style="width:38px;height:38px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="check" style="width:18px;height:18px"></i></div>
+                  <div style="width:38px;height:38px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="check" style="width:18px;height:18px"></i></div>
+                  <div style="width:38px;height:38px;border-radius:999px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="check" style="width:18px;height:18px"></i></div>
+                  <div style="width:38px;height:38px;border-radius:999px;border:2px dashed var(--color-accent-300);display:grid;place-items:center;font-size:14px;font-weight:800;color:var(--color-accent-200)">4</div>
+                  <div style="width:38px;height:38px;border-radius:999px;border:2px solid rgba(245,234,216,.3);display:grid;place-items:center;font-size:14px;font-weight:800;color:rgba(245,234,216,.5)">5</div>
+                  <div style="width:38px;height:38px;border-radius:999px;border:2px solid rgba(245,234,216,.3);display:grid;place-items:center;color:rgba(245,234,216,.5)"><i data-lucide="gift" style="width:18px;height:18px"></i></div>
+                </div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;background:var(--color-neutral-100);border-radius:var(--radius-md)">
+                  <span style="font-size:14px;color:var(--color-neutral-700)">Último sello</span><span style="font-size:14px;font-weight:700">26 ago · 18:40</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;background:var(--color-neutral-100);border-radius:var(--radius-md)">
+                  <span style="font-size:14px;color:var(--color-neutral-700)">Recompensa</span><span style="font-size:14px;font-weight:700">Bebida gratis</span>
+                </div>
+              </div>
+
+              <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+                <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:18px;font-weight:800;padding:20px;border-radius:999px;box-shadow:var(--shadow-md);display:flex;align-items:center;justify-content:center;gap:10px" style-hover="background:var(--color-accent-600)"><i data-lucide="stamp" style="width:21px;height:21px"></i>Registrar sello</button>
+                <button style="border:1.5px solid var(--color-neutral-400);cursor:pointer;font-family:inherit;background:transparent;color:var(--color-neutral-700);font-size:15px;font-weight:700;padding:15px;border-radius:999px" style-hover="background:var(--color-neutral-200)">Canjear recompensa</button>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">08 · Resultado del escaneo</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============ 1c ADMIN ============ -->
+    <div id="1c" style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;background:var(--color-neutral-800);color:#fff;padding:5px 11px;border-radius:999px">1c</span>
+        <h2 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0">Administrador · escritorio</h2>
+        <span style="font-size:13px;color:var(--color-neutral-600)">/admin · 1280×800</span>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:32px">
+
+        <!-- I. Dashboard -->
+        <div id="s09" data-screen-label="Admin · Dashboard" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:1280px;height:800px;background:var(--color-bg);border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex:none">
+            <div style="width:246px;flex:none;background:var(--color-neutral-900);color:var(--color-neutral-200);padding:26px 18px;display:flex;flex-direction:column;gap:26px">
+              <div style="display:flex;align-items:center;gap:11px;padding:0 8px">
+                <div style="width:38px;height:38px;border-radius:14px;background:var(--color-accent);display:grid;place-items:center;color:#fff"><i data-lucide="qr-code" style="width:20px;height:20px"></i></div>
+                <div><div style="font-family:var(--font-heading);font-size:19px;color:#fff;line-height:1">Fidely</div><div style="font-size:11px;opacity:.55">Café Aurora</div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;background:var(--color-accent);color:#fff;font-weight:800;font-size:14.5px"><i data-lucide="layout-dashboard" style="width:18px;height:18px"></i>Resumen</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="credit-card" style="width:18px;height:18px"></i>Tarjetas</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="users" style="width:18px;height:18px"></i>Clientes</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="id-card" style="width:18px;height:18px"></i>Empleados</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="store" style="width:18px;height:18px"></i>Negocio</div>
+              </div>
+              <div style="margin-top:auto;background:rgba(255,255,255,.07);border-radius:var(--radius-md);padding:15px;display:flex;flex-direction:column;gap:9px">
+                <div style="font-size:13px;font-weight:800;color:#fff">Material impreso</div>
+                <div style="font-size:12.5px;line-height:1.45;color:var(--color-neutral-400)">Descarga el QR de bienvenida para tu mostrador.</div>
+                <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent-2-500);color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:999px" style-hover="background:var(--color-accent-2-600)">Descargar QR</button>
+              </div>
+            </div>
+
+            <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+              <div style="flex:none;padding:22px 32px;border-bottom:1px solid var(--color-divider);display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <h3 style="font-family:var(--font-heading);font-weight:400;font-size:30px;margin:0;line-height:1.05">Resumen</h3>
+                  <div style="font-size:13.5px;color:var(--color-neutral-600);margin-top:3px">Últimos 30 días · 2 sucursales</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="display:flex;align-items:center;gap:9px;background:var(--color-neutral-200);border-radius:999px;padding:10px 16px;color:var(--color-neutral-700);font-size:14px"><i data-lucide="search" style="width:16px;height:16px"></i>Buscar cliente o tarjeta</div>
+                  <div style="display:flex;gap:3px;background:var(--color-neutral-200);padding:3px;border-radius:999px">
+                    <span style="font-size:12.5px;font-weight:800;padding:7px 14px;border-radius:999px;background:var(--color-bg);box-shadow:var(--shadow-sm)">30d</span>
+                    <span style="font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:999px;color:var(--color-neutral-600)">90d</span>
+                    <span style="font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:999px;color:var(--color-neutral-600)">Año</span>
+                  </div>
+                  <div style="width:40px;height:40px;border-radius:999px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px">AR</div>
+                </div>
+              </div>
+
+              <div style="flex:1;overflow:hidden;padding:24px 32px;display:flex;flex-direction:column;gap:20px">
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:20px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-sm)">
+                    <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px;font-weight:700;color:var(--color-neutral-600)">Sellos registrados</span><i data-lucide="stamp" style="width:17px;height:17px;color:var(--color-accent-600)"></i></div>
+                    <div style="font-family:var(--font-heading);font-size:34px;line-height:1">1.284</div>
+                    <div style="font-size:12.5px;font-weight:700;color:var(--color-accent-2-700)">+18% vs. mes anterior</div>
+                  </div>
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:20px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-sm)">
+                    <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px;font-weight:700;color:var(--color-neutral-600)">Tarjetas activas</span><i data-lucide="credit-card" style="width:17px;height:17px;color:var(--color-accent-600)"></i></div>
+                    <div style="font-family:var(--font-heading);font-size:34px;line-height:1">342</div>
+                    <div style="font-size:12.5px;font-weight:700;color:var(--color-accent-2-700)">+24 esta semana</div>
+                  </div>
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:20px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-sm)">
+                    <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px;font-weight:700;color:var(--color-neutral-600)">Recompensas canjeadas</span><i data-lucide="gift" style="width:17px;height:17px;color:var(--color-accent-600)"></i></div>
+                    <div style="font-family:var(--font-heading);font-size:34px;line-height:1">86</div>
+                    <div style="font-size:12.5px;font-weight:700;color:var(--color-neutral-600)">25% de las completadas</div>
+                  </div>
+                  <div style="background:var(--color-accent-200);border-radius:var(--radius-lg);padding:20px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-sm)">
+                    <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px;font-weight:700;color:var(--color-accent-800)">Retorno de clientes</span><i data-lucide="trending-up" style="width:17px;height:17px;color:var(--color-accent-700)"></i></div>
+                    <div style="font-family:var(--font-heading);font-size:34px;line-height:1;color:var(--color-accent-900)">61%</div>
+                    <div style="font-size:12.5px;font-weight:700;color:var(--color-accent-800)">vuelven en menos de 14 días</div>
+                  </div>
+                </div>
+
+                <div style="flex:1;display:grid;grid-template-columns:1.5fr 1fr;gap:20px;min-height:0">
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:18px;box-shadow:var(--shadow-sm)">
+                    <div style="display:flex;align-items:center;justify-content:space-between">
+                      <div><div style="font-weight:800;font-size:16px">Sellos por día</div><div style="font-size:12.5px;color:var(--color-neutral-600)">Promedio 43/día</div></div>
+                      <div style="display:flex;gap:14px;font-size:12px;font-weight:700;color:var(--color-neutral-600)">
+                        <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:999px;background:var(--color-accent)"></span>Sellos</span>
+                        <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:999px;background:var(--color-accent-2-500)"></span>Canjes</span>
+                      </div>
+                    </div>
+                    <div style="flex:1;display:flex;align-items:flex-end;gap:14px;min-height:0">
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end"><div style="width:100%;display:flex;gap:4px;align-items:flex-end;height:62%"><div style="flex:2;height:100%;border-radius:10px 10px 4px 4px;background:var(--color-accent-400)"></div><div style="flex:1;height:34%;border-radius:10px 10px 4px 4px;background:var(--color-accent-2-400)"></div></div><span style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Lun</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end"><div style="width:100%;display:flex;gap:4px;align-items:flex-end;height:48%"><div style="flex:2;height:100%;border-radius:10px 10px 4px 4px;background:var(--color-accent-400)"></div><div style="flex:1;height:28%;border-radius:10px 10px 4px 4px;background:var(--color-accent-2-400)"></div></div><span style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Mar</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end"><div style="width:100%;display:flex;gap:4px;align-items:flex-end;height:71%"><div style="flex:2;height:100%;border-radius:10px 10px 4px 4px;background:var(--color-accent-400)"></div><div style="flex:1;height:40%;border-radius:10px 10px 4px 4px;background:var(--color-accent-2-400)"></div></div><span style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Mié</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end"><div style="width:100%;display:flex;gap:4px;align-items:flex-end;height:59%"><div style="flex:2;height:100%;border-radius:10px 10px 4px 4px;background:var(--color-accent-400)"></div><div style="flex:1;height:30%;border-radius:10px 10px 4px 4px;background:var(--color-accent-2-400)"></div></div><span style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Jue</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end"><div style="width:100%;display:flex;gap:4px;align-items:flex-end;height:92%"><div style="flex:2;height:100%;border-radius:10px 10px 4px 4px;background:var(--color-accent)"></div><div style="flex:1;height:52%;border-radius:10px 10px 4px 4px;background:var(--color-accent-2-500)"></div></div><span style="font-size:11.5px;color:var(--color-text);font-weight:800">Vie</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end"><div style="width:100%;display:flex;gap:4px;align-items:flex-end;height:84%"><div style="flex:2;height:100%;border-radius:10px 10px 4px 4px;background:var(--color-accent-400)"></div><div style="flex:1;height:47%;border-radius:10px 10px 4px 4px;background:var(--color-accent-2-400)"></div></div><span style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Sáb</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end"><div style="width:100%;display:flex;gap:4px;align-items:flex-end;height:37%"><div style="flex:2;height:100%;border-radius:10px 10px 4px 4px;background:var(--color-accent-400)"></div><div style="flex:1;height:20%;border-radius:10px 10px 4px 4px;background:var(--color-accent-2-400)"></div></div><span style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Dom</span></div>
+                    </div>
+                  </div>
+
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow-sm);overflow:hidden">
+                    <div style="display:flex;align-items:center;justify-content:space-between">
+                      <div style="font-weight:800;font-size:16px">Actividad reciente</div>
+                      <a href="#1c" style="font-size:13px">Ver todo</a>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:2px;overflow:hidden">
+                      <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--color-divider)"><div style="width:34px;height:34px;border-radius:999px;background:var(--color-accent-200);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="stamp" style="width:16px;height:16px"></i></div><div style="flex:1"><div style="font-size:14px;font-weight:700">Sello · cliente #2481</div><div style="font-size:12px;color:var(--color-neutral-600)">Ana R. · hace 3 min</div></div></div>
+                      <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--color-divider)"><div style="width:34px;height:34px;border-radius:999px;background:var(--color-accent-2-200);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="gift" style="width:16px;height:16px"></i></div><div style="flex:1"><div style="font-size:14px;font-weight:700">Canje · Bebida gratis</div><div style="font-size:12px;color:var(--color-neutral-600)">Luis M. · hace 21 min</div></div></div>
+                      <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--color-divider)"><div style="width:34px;height:34px;border-radius:999px;background:var(--color-neutral-200);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="user-plus" style="width:16px;height:16px"></i></div><div style="flex:1"><div style="font-size:14px;font-weight:700">Nueva tarjeta añadida</div><div style="font-size:12px;color:var(--color-neutral-600)">cliente #2503 · hace 1 h</div></div></div>
+                      <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--color-divider)"><div style="width:34px;height:34px;border-radius:999px;background:var(--color-accent-200);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="stamp" style="width:16px;height:16px"></i></div><div style="flex:1"><div style="font-size:14px;font-weight:700">Sello · cliente #2199</div><div style="font-size:12px;color:var(--color-neutral-600)">Ana R. · hace 2 h</div></div></div>
+                      <div style="display:flex;align-items:center;gap:12px;padding:11px 0"><div style="width:34px;height:34px;border-radius:999px;background:var(--color-neutral-200);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="user-plus" style="width:16px;height:16px"></i></div><div style="flex:1"><div style="font-size:14px;font-weight:700">Nueva tarjeta añadida</div><div style="font-size:12px;color:var(--color-neutral-600)">cliente #2502 · hace 3 h</div></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">09 · Panel admin · resumen y reportes</div>
+        </div>
+
+        <!-- J. Tarjetas + formulario -->
+        <div id="s10" data-screen-label="Admin · Tarjetas" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:1280px;height:800px;background:var(--color-bg);border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex:none;position:relative">
+            <div style="width:246px;flex:none;background:var(--color-neutral-900);color:var(--color-neutral-200);padding:26px 18px;display:flex;flex-direction:column;gap:26px">
+              <div style="display:flex;align-items:center;gap:11px;padding:0 8px">
+                <div style="width:38px;height:38px;border-radius:14px;background:var(--color-accent);display:grid;place-items:center;color:#fff"><i data-lucide="qr-code" style="width:20px;height:20px"></i></div>
+                <div><div style="font-family:var(--font-heading);font-size:19px;color:#fff;line-height:1">Fidely</div><div style="font-size:11px;opacity:.55">Café Aurora</div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="layout-dashboard" style="width:18px;height:18px"></i>Resumen</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;background:var(--color-accent);color:#fff;font-weight:800;font-size:14.5px"><i data-lucide="credit-card" style="width:18px;height:18px"></i>Tarjetas</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="users" style="width:18px;height:18px"></i>Clientes</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="id-card" style="width:18px;height:18px"></i>Empleados</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="store" style="width:18px;height:18px"></i>Negocio</div>
+              </div>
+            </div>
+
+            <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+              <div style="flex:none;padding:22px 32px;border-bottom:1px solid var(--color-divider);display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <h3 style="font-family:var(--font-heading);font-weight:400;font-size:30px;margin:0;line-height:1.05">Tarjetas</h3>
+                  <div style="font-size:13.5px;color:var(--color-neutral-600);margin-top:3px">4 plantillas · 342 tarjetas de clientes</div>
+                </div>
+                <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:14.5px;font-weight:800;padding:13px 22px;border-radius:999px;display:flex;align-items:center;gap:9px;box-shadow:var(--shadow-sm)" style-hover="background:var(--color-accent-600)"><i data-lucide="plus" style="width:18px;height:18px"></i>Nueva tarjeta</button>
+              </div>
+
+              <div style="flex:1;overflow:hidden;padding:22px 32px;display:flex;flex-direction:column;gap:16px">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="flex:1;display:flex;align-items:center;gap:9px;background:var(--color-neutral-200);border-radius:999px;padding:11px 18px;color:var(--color-neutral-600);font-size:14px"><i data-lucide="search" style="width:16px;height:16px"></i>Buscar por nombre o recompensa</div>
+                  <span style="font-size:13px;font-weight:800;padding:9px 17px;border-radius:999px;background:var(--color-accent-600);color:#fff">Todas</span>
+                  <span style="font-size:13px;font-weight:700;padding:9px 17px;border-radius:999px;border:1.5px solid var(--color-neutral-400);color:var(--color-neutral-700)">Activas</span>
+                  <span style="font-size:13px;font-weight:700;padding:9px 17px;border-radius:999px;border:1.5px solid var(--color-neutral-400);color:var(--color-neutral-700)">Pausadas</span>
+                  <span style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;padding:9px 17px;border-radius:999px;border:1.5px solid var(--color-neutral-400);color:var(--color-neutral-700)"><i data-lucide="sliders-horizontal" style="width:15px;height:15px"></i>Filtros</span>
+                </div>
+
+                <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)">
+                  <div style="display:grid;grid-template-columns:2.4fr 1fr 1fr 1.1fr 0.7fr;gap:16px;padding:14px 22px;background:var(--color-surface);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700)">
+                    <span>Tarjeta</span><span>Sellos</span><span>Activas</span><span>Canjes (30d)</span><span>Estado</span>
+                  </div>
+                  <div style="display:grid;grid-template-columns:2.4fr 1fr 1fr 1.1fr 0.7fr;gap:16px;padding:16px 22px;border-bottom:1px solid var(--color-divider);align-items:center">
+                    <div style="display:flex;align-items:center;gap:12px"><div style="width:36px;height:36px;border-radius:13px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff;font-family:var(--font-heading);font-size:16px">A</div><div><div style="font-size:14.5px;font-weight:800">Tarjeta de bebidas</div><div style="font-size:12.5px;color:var(--color-neutral-600)">Bebida gratis</div></div></div>
+                    <span style="font-size:14px;font-weight:700">6</span><span style="font-size:14px;font-weight:700">186</span><span style="font-size:14px;font-weight:700">42</span>
+                    <span style="justify-self:start;font-size:12px;font-weight:800;padding:6px 13px;border-radius:999px;background:var(--color-accent-2-200);color:var(--color-accent-2-800)">Activa</span>
+                  </div>
+                  <div style="display:grid;grid-template-columns:2.4fr 1fr 1fr 1.1fr 0.7fr;gap:16px;padding:16px 22px;border-bottom:1px solid var(--color-divider);align-items:center">
+                    <div style="display:flex;align-items:center;gap:12px"><div style="width:36px;height:36px;border-radius:13px;background:var(--color-accent-2-600);display:grid;place-items:center;color:#fff;font-family:var(--font-heading);font-size:16px">D</div><div><div style="font-size:14.5px;font-weight:800">Desayunos</div><div style="font-size:12.5px;color:var(--color-neutral-600)">Croissant gratis</div></div></div>
+                    <span style="font-size:14px;font-weight:700">8</span><span style="font-size:14px;font-weight:700">98</span><span style="font-size:14px;font-weight:700">27</span>
+                    <span style="justify-self:start;font-size:12px;font-weight:800;padding:6px 13px;border-radius:999px;background:var(--color-accent-2-200);color:var(--color-accent-2-800)">Activa</span>
+                  </div>
+                  <div style="display:grid;grid-template-columns:2.4fr 1fr 1fr 1.1fr 0.7fr;gap:16px;padding:16px 22px;border-bottom:1px solid var(--color-divider);align-items:center">
+                    <div style="display:flex;align-items:center;gap:12px"><div style="width:36px;height:36px;border-radius:13px;background:var(--color-neutral-700);display:grid;place-items:center;color:#fff;font-family:var(--font-heading);font-size:16px">T</div><div><div style="font-size:14.5px;font-weight:800">Tarde de té</div><div style="font-size:12.5px;color:var(--color-neutral-600)">2x1 en infusiones</div></div></div>
+                    <span style="font-size:14px;font-weight:700">5</span><span style="font-size:14px;font-weight:700">58</span><span style="font-size:14px;font-weight:700">11</span>
+                    <span style="justify-self:start;font-size:12px;font-weight:800;padding:6px 13px;border-radius:999px;background:var(--color-neutral-300);color:var(--color-neutral-800)">Pausada</span>
+                  </div>
+                  <div style="display:grid;grid-template-columns:2.4fr 1fr 1fr 1.1fr 0.7fr;gap:16px;padding:16px 22px;align-items:center">
+                    <div style="display:flex;align-items:center;gap:12px"><div style="width:36px;height:36px;border-radius:13px;background:var(--color-accent-400);display:grid;place-items:center;color:#fff;font-family:var(--font-heading);font-size:16px">V</div><div><div style="font-size:14.5px;font-weight:800">Verano 2026</div><div style="font-size:12.5px;color:var(--color-neutral-600)">Helado gratis</div></div></div>
+                    <span style="font-size:14px;font-weight:700">4</span><span style="font-size:14px;font-weight:700">0</span><span style="font-size:14px;font-weight:700">0</span>
+                    <span style="justify-self:start;font-size:12px;font-weight:800;padding:6px 13px;border-radius:999px;background:var(--color-accent-200);color:var(--color-accent-800)">Borrador</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="position:absolute;inset:0;background:rgba(46,43,37,.42)"></div>
+            <div style="position:absolute;top:0;right:0;bottom:0;width:466px;background:var(--color-bg);box-shadow:var(--shadow-lg);border-radius:28px 0 0 28px;display:flex;flex-direction:column">
+              <div style="flex:none;padding:26px 30px 18px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid var(--color-divider)">
+                <div>
+                  <h4 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0;line-height:1.05">Nueva tarjeta</h4>
+                  <div style="font-size:13px;color:var(--color-neutral-600);margin-top:4px">Se genera su QR de bienvenida al guardar</div>
+                </div>
+                <button style="border:none;cursor:pointer;width:38px;height:38px;border-radius:999px;background:var(--color-neutral-200);display:grid;place-items:center;color:var(--color-neutral-800)" style-hover="background:var(--color-neutral-300)"><i data-lucide="x" style="width:18px;height:18px"></i></button>
+              </div>
+              <div style="flex:1;overflow:hidden;padding:22px 30px;display:flex;flex-direction:column;gap:18px">
+                <div style="display:flex;flex-direction:column;gap:7px">
+                  <label style="font-size:13px;font-weight:800">Nombre de la tarjeta</label>
+                  <div style="background:var(--color-neutral-100);border:2px solid var(--color-accent);border-radius:999px;padding:13px 20px;font-size:14.5px">Tarjeta de bebidas</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:7px">
+                  <label style="font-size:13px;font-weight:800">Recompensa</label>
+                  <div style="background:var(--color-neutral-100);border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:13px 20px;font-size:14.5px">Bebida gratis a elegir</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:9px">
+                  <label style="font-size:13px;font-weight:800">Sellos necesarios</label>
+                  <div style="display:flex;gap:8px">
+                    <span style="flex:1;text-align:center;font-size:14px;font-weight:700;padding:11px 0;border-radius:999px;border:1.5px solid var(--color-neutral-300);color:var(--color-neutral-700)">4</span>
+                    <span style="flex:1;text-align:center;font-size:14px;font-weight:700;padding:11px 0;border-radius:999px;border:1.5px solid var(--color-neutral-300);color:var(--color-neutral-700)">5</span>
+                    <span style="flex:1;text-align:center;font-size:14px;font-weight:800;padding:11px 0;border-radius:999px;background:var(--color-accent-600);color:#fff">6</span>
+                    <span style="flex:1;text-align:center;font-size:14px;font-weight:700;padding:11px 0;border-radius:999px;border:1.5px solid var(--color-neutral-300);color:var(--color-neutral-700)">8</span>
+                    <span style="flex:1;text-align:center;font-size:14px;font-weight:700;padding:11px 0;border-radius:999px;border:1.5px solid var(--color-neutral-300);color:var(--color-neutral-700)">10</span>
+                    <span style="flex:1;text-align:center;font-size:14px;font-weight:700;padding:11px 0;border-radius:999px;border:1.5px solid var(--color-neutral-300);color:var(--color-neutral-700)">12</span>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:9px">
+                  <label style="font-size:13px;font-weight:800">Color de la tarjeta</label>
+                  <div style="display:flex;gap:10px">
+                    <div style="width:40px;height:40px;border-radius:999px;background:var(--color-accent-600);box-shadow:0 0 0 3px var(--color-bg),0 0 0 5px var(--color-accent)"></div>
+                    <div style="width:40px;height:40px;border-radius:999px;background:var(--color-accent-2-600)"></div>
+                    <div style="width:40px;height:40px;border-radius:999px;background:var(--color-neutral-800)"></div>
+                    <div style="width:40px;height:40px;border-radius:999px;background:var(--color-accent-400)"></div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:9px">
+                  <label style="font-size:13px;font-weight:800">Logo</label>
+                  <div style="border:2px dashed var(--color-neutral-400);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;align-items:center;gap:7px;color:var(--color-neutral-600)">
+                    <i data-lucide="image-up" style="width:24px;height:24px"></i>
+                    <span style="font-size:13.5px;font-weight:700">Arrastra un PNG o SVG</span>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:11.5px">recomendado 512×512</span>
+                  </div>
+                </div>
+              </div>
+              <div style="flex:none;padding:18px 30px 26px;border-top:1px solid var(--color-divider);display:flex;gap:12px">
+                <button style="flex:1;border:1.5px solid var(--color-neutral-400);cursor:pointer;font-family:inherit;background:transparent;color:var(--color-neutral-800);font-size:15px;font-weight:700;padding:14px;border-radius:999px" style-hover="background:var(--color-neutral-200)">Cancelar</button>
+                <button style="flex:2;border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:15px;font-weight:800;padding:14px;border-radius:999px;box-shadow:var(--shadow-sm)" style-hover="background:var(--color-accent-600)">Crear tarjeta</button>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">10 · Tarjetas · listado, filtros y formulario</div>
+        </div>
+
+        <!-- K. Login admin -->
+        <div id="s11" data-screen-label="Admin · Login" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:1280px;height:800px;background:var(--color-bg);border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex:none">
+            <div style="width:520px;flex:none;background:var(--color-accent-700);color:var(--color-accent-100);padding:56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+              <div style="position:absolute;top:-120px;right:-140px;width:420px;height:420px;border-radius:999px;background:var(--color-accent-600)"></div>
+              <div style="position:absolute;bottom:-160px;left:-120px;width:340px;height:340px;border-radius:999px;background:var(--color-accent-800)"></div>
+              <div style="position:relative;display:flex;align-items:center;gap:12px">
+                <div style="width:44px;height:44px;border-radius:16px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="qr-code" style="width:23px;height:23px"></i></div>
+                <div style="font-family:var(--font-heading);font-size:24px;color:#fff">Fidely</div>
+              </div>
+              <div style="position:relative;display:flex;flex-direction:column;gap:18px">
+                <h3 style="font-family:var(--font-heading);font-weight:400;font-size:48px;line-height:1.04;margin:0;color:#fff;max-width:360px">Tus clientes vuelven cuando los reconoces</h3>
+                <p style="margin:0;font-size:16.5px;line-height:1.55;opacity:.8;max-width:360px;text-wrap:pretty">Crea tarjetas, imprime un QR y empieza a sellar. Sin apps que instalar, sin plásticos que se pierden.</p>
+              </div>
+              <div style="position:relative;display:flex;gap:32px">
+                <div><div style="font-family:var(--font-heading);font-size:28px;color:#fff;line-height:1">1.284</div><div style="font-size:12.5px;opacity:.7;margin-top:3px">sellos este mes</div></div>
+                <div><div style="font-family:var(--font-heading);font-size:28px;color:#fff;line-height:1">61%</div><div style="font-size:12.5px;opacity:.7;margin-top:3px">clientes que vuelven</div></div>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:56px">
+              <div style="width:400px;display:flex;flex-direction:column;gap:26px">
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Acceso administrador</div>
+                  <h4 style="font-family:var(--font-heading);font-weight:400;font-size:38px;line-height:1.05;margin:0">Bienvenido de vuelta</h4>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:16px">
+                  <div style="display:flex;flex-direction:column;gap:7px">
+                    <label style="font-size:13px;font-weight:800;color:var(--color-neutral-800)">Correo electrónico</label>
+                    <div style="background:var(--color-neutral-100);border:2px solid var(--color-accent);border-radius:999px;padding:15px 22px;font-size:15px">alexis@cafeaurora.com</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:7px">
+                    <label style="font-size:13px;font-weight:800;color:var(--color-neutral-800)">Contraseña</label>
+                    <div style="background:var(--color-neutral-100);border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:15px 22px;font-size:15px;display:flex;align-items:center;justify-content:space-between;color:var(--color-neutral-700)"><span style="letter-spacing:.2em">••••••••••</span><i data-lucide="eye" style="width:18px;height:18px"></i></div>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between">
+                    <span style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--color-neutral-700)"><span style="width:20px;height:20px;border-radius:7px;background:var(--color-accent);display:grid;place-items:center;color:#fff"><i data-lucide="check" style="width:13px;height:13px"></i></span>Mantener sesión</span>
+                    <a href="#1c" style="font-size:14px">¿Olvidaste tu contraseña?</a>
+                  </div>
+                </div>
+                <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:16.5px;font-weight:800;padding:17px;border-radius:999px;box-shadow:var(--shadow-md)" style-hover="background:var(--color-accent-600)">Ingresar</button>
+                <div style="text-align:center;font-size:14.5px;color:var(--color-neutral-700)">¿No tienes cuenta? <a href="#1c">Registra tu negocio</a></div>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">11 · Login administrador</div>
+        </div>
+
+        <!-- L. Registro admin -->
+        <div id="s12" data-screen-label="Admin · Registro" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:1280px;height:800px;background:var(--color-bg);border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex:none">
+            <div style="width:520px;flex:none;background:var(--color-accent-2-700);color:#fff;padding:56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+              <div style="position:absolute;top:-140px;left:-120px;width:400px;height:400px;border-radius:999px;background:var(--color-accent-2-600)"></div>
+              <div style="position:absolute;bottom:-130px;right:-110px;width:320px;height:320px;border-radius:999px;background:var(--color-accent-2-800)"></div>
+              <div style="position:relative;display:flex;align-items:center;gap:12px">
+                <div style="width:44px;height:44px;border-radius:16px;background:var(--color-bg);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="qr-code" style="width:23px;height:23px"></i></div>
+                <div style="font-family:var(--font-heading);font-size:24px;color:#fff">Fidely</div>
+              </div>
+              <div style="position:relative;display:flex;flex-direction:column;gap:22px">
+                <h3 style="font-family:var(--font-heading);font-weight:400;font-size:44px;line-height:1.04;margin:0;max-width:360px">Listo en tres pasos</h3>
+                <div style="display:flex;flex-direction:column;gap:16px;max-width:340px">
+                  <div style="display:flex;align-items:flex-start;gap:14px"><div style="width:34px;height:34px;flex:none;border-radius:999px;background:var(--color-accent-300);color:var(--color-accent-900);display:grid;place-items:center;font-weight:800;font-size:15px">1</div><div><div style="font-weight:800;font-size:15.5px">Crea tu cuenta</div><div style="font-size:14px;opacity:.8;line-height:1.45">Datos del negocio y del administrador.</div></div></div>
+                  <div style="display:flex;align-items:flex-start;gap:14px"><div style="width:34px;height:34px;flex:none;border-radius:999px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-weight:800;font-size:15px">2</div><div><div style="font-weight:800;font-size:15.5px">Diseña tu tarjeta</div><div style="font-size:14px;opacity:.8;line-height:1.45">Sellos, recompensa, color y logo.</div></div></div>
+                  <div style="display:flex;align-items:flex-start;gap:14px"><div style="width:34px;height:34px;flex:none;border-radius:999px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-weight:800;font-size:15px">3</div><div><div style="font-weight:800;font-size:15.5px">Imprime el QR</div><div style="font-size:14px;opacity:.8;line-height:1.45">Ponlo en el mostrador y empieza a sellar.</div></div></div>
+                </div>
+              </div>
+              <div style="position:relative;font-size:13.5px;opacity:.7">Gratis hasta 200 tarjetas activas.</div>
+            </div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:48px 56px">
+              <div style="width:420px;display:flex;flex-direction:column;gap:22px">
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Paso 1 de 3</div>
+                  <h4 style="font-family:var(--font-heading);font-weight:400;font-size:36px;line-height:1.05;margin:0">Crear cuenta</h4>
+                </div>
+                <div style="display:flex;gap:6px">
+                  <div style="flex:1;height:6px;border-radius:999px;background:var(--color-accent)"></div>
+                  <div style="flex:1;height:6px;border-radius:999px;background:var(--color-neutral-300)"></div>
+                  <div style="flex:1;height:6px;border-radius:999px;background:var(--color-neutral-300)"></div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:14px">
+                  <div style="display:flex;flex-direction:column;gap:7px">
+                    <label style="font-size:13px;font-weight:800;color:var(--color-neutral-800)">Nombre del negocio</label>
+                    <div style="background:var(--color-neutral-100);border:2px solid var(--color-accent);border-radius:999px;padding:14px 22px;font-size:15px">Café Aurora</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:7px">
+                    <label style="font-size:13px;font-weight:800;color:var(--color-neutral-800)">Tu nombre completo</label>
+                    <div style="background:var(--color-neutral-100);border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:14px 22px;font-size:15px">Alexis Ruiz</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:7px">
+                    <label style="font-size:13px;font-weight:800;color:var(--color-neutral-800)">Correo electrónico</label>
+                    <div style="background:var(--color-neutral-100);border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:14px 22px;font-size:15px">alexis@cafeaurora.com</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:7px">
+                    <label style="font-size:13px;font-weight:800;color:var(--color-neutral-800)">Contraseña</label>
+                    <div style="background:var(--color-neutral-100);border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:14px 22px;font-size:15px;color:var(--color-neutral-700);letter-spacing:.2em">••••••••••</div>
+                    <div style="display:flex;align-items:center;gap:9px;padding-left:6px"><div style="flex:1;height:5px;border-radius:999px;background:var(--color-neutral-300);overflow:hidden;max-width:150px"><div style="width:72%;height:100%;background:var(--color-accent-2-500)"></div></div><span style="font-size:12.5px;font-weight:700;color:var(--color-accent-2-700)">Segura</span></div>
+                  </div>
+                </div>
+                <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:16px;font-weight:800;padding:16px;border-radius:999px;box-shadow:var(--shadow-md);display:flex;align-items:center;justify-content:center;gap:10px" style-hover="background:var(--color-accent-600)">Continuar<i data-lucide="arrow-right" style="width:18px;height:18px"></i></button>
+                <div style="text-align:center;font-size:14px;color:var(--color-neutral-700)">¿Ya tienes cuenta? <a href="#1c">Inicia sesión</a></div>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">12 · Registro de negocio</div>
+        </div>
+
+        <!-- M. Clientes -->
+        <div id="s13" data-screen-label="Admin · Clientes" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:1280px;height:800px;background:var(--color-bg);border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex:none">
+            <div style="width:246px;flex:none;background:var(--color-neutral-900);color:var(--color-neutral-200);padding:26px 18px;display:flex;flex-direction:column;gap:26px">
+              <div style="display:flex;align-items:center;gap:11px;padding:0 8px">
+                <div style="width:38px;height:38px;border-radius:14px;background:var(--color-accent);display:grid;place-items:center;color:#fff"><i data-lucide="qr-code" style="width:20px;height:20px"></i></div>
+                <div><div style="font-family:var(--font-heading);font-size:19px;color:#fff;line-height:1">Fidely</div><div style="font-size:11px;opacity:.55">Café Aurora</div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="layout-dashboard" style="width:18px;height:18px"></i>Resumen</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="credit-card" style="width:18px;height:18px"></i>Tarjetas</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;background:var(--color-accent);color:#fff;font-weight:800;font-size:14.5px"><i data-lucide="users" style="width:18px;height:18px"></i>Clientes</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="id-card" style="width:18px;height:18px"></i>Empleados</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="store" style="width:18px;height:18px"></i>Negocio</div>
+              </div>
+            </div>
+
+            <div style="flex:1;display:flex;overflow:hidden">
+              <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+                <div style="flex:none;padding:22px 30px;border-bottom:1px solid var(--color-divider);display:flex;align-items:center;justify-content:space-between">
+                  <div>
+                    <h3 style="font-family:var(--font-heading);font-weight:400;font-size:30px;margin:0;line-height:1.05">Clientes</h3>
+                    <div style="font-size:13.5px;color:var(--color-neutral-600);margin-top:3px">342 con tarjeta activa · 86 con recompensa canjeada</div>
+                  </div>
+                  <button style="border:1.5px solid var(--color-neutral-400);cursor:pointer;font-family:inherit;background:transparent;color:var(--color-neutral-800);font-size:14px;font-weight:700;padding:11px 19px;border-radius:999px;display:flex;align-items:center;gap:9px" style-hover="background:var(--color-neutral-200)"><i data-lucide="download" style="width:17px;height:17px"></i>Exportar CSV</button>
+                </div>
+                <div style="flex:1;overflow:hidden;padding:20px 30px;display:flex;flex-direction:column;gap:15px">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="flex:1;display:flex;align-items:center;gap:9px;background:var(--color-neutral-200);border-radius:999px;padding:11px 18px;color:var(--color-neutral-600);font-size:14px"><i data-lucide="search" style="width:16px;height:16px"></i>Buscar por id, correo o tarjeta</div>
+                    <span style="font-size:13px;font-weight:800;padding:9px 16px;border-radius:999px;background:var(--color-accent-600);color:#fff">Todos</span>
+                    <span style="font-size:13px;font-weight:700;padding:9px 16px;border-radius:999px;border:1.5px solid var(--color-neutral-400);color:var(--color-neutral-700)">Cerca del premio</span>
+                    <span style="font-size:13px;font-weight:700;padding:9px 16px;border-radius:999px;border:1.5px solid var(--color-neutral-400);color:var(--color-neutral-700)">Inactivos</span>
+                  </div>
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)">
+                    <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 1fr 0.9fr;gap:14px;padding:13px 20px;background:var(--color-surface);font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700)">
+                      <span>Cliente</span><span>Tarjeta</span><span>Progreso</span><span>Última visita</span><span>Estado</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 1fr 0.9fr;gap:14px;padding:14px 20px;border-bottom:1px solid var(--color-divider);align-items:center;background:var(--color-accent-100)">
+                      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;border-radius:999px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800">24</div><div><div style="font-size:14px;font-weight:800">cliente #2481</div><div style="font-size:12px;color:var(--color-neutral-600)">luis.m@correo.com</div></div></div>
+                      <span style="font-size:13.5px">Tarjeta de bebidas</span>
+                      <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;max-width:70px;height:6px;border-radius:999px;background:var(--color-neutral-300);overflow:hidden"><div style="width:83%;height:100%;background:var(--color-accent)"></div></div><span style="font-size:12.5px;font-weight:700">5/6</span></div>
+                      <span style="font-size:13.5px;color:var(--color-neutral-700)">Hoy</span>
+                      <span style="justify-self:start;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:999px;background:var(--color-accent-200);color:var(--color-accent-800)">Cerca</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 1fr 0.9fr;gap:14px;padding:14px 20px;border-bottom:1px solid var(--color-divider);align-items:center">
+                      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;border-radius:999px;background:var(--color-accent-2-600);display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800">19</div><div><div style="font-size:14px;font-weight:800">cliente #2199</div><div style="font-size:12px;color:var(--color-neutral-600)">sin correo vinculado</div></div></div>
+                      <span style="font-size:13.5px">Desayunos</span>
+                      <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;max-width:70px;height:6px;border-radius:999px;background:var(--color-neutral-300);overflow:hidden"><div style="width:100%;height:100%;background:var(--color-accent-2-500)"></div></div><span style="font-size:12.5px;font-weight:700">8/8</span></div>
+                      <span style="font-size:13.5px;color:var(--color-neutral-700)">Ayer</span>
+                      <span style="justify-self:start;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:999px;background:var(--color-accent-2-200);color:var(--color-accent-2-800)">Premio</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 1fr 0.9fr;gap:14px;padding:14px 20px;border-bottom:1px solid var(--color-divider);align-items:center">
+                      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;border-radius:999px;background:var(--color-neutral-700);display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800">25</div><div><div style="font-size:14px;font-weight:800">cliente #2503</div><div style="font-size:12px;color:var(--color-neutral-600)">ana.p@correo.com</div></div></div>
+                      <span style="font-size:13.5px">Tarjeta de bebidas</span>
+                      <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;max-width:70px;height:6px;border-radius:999px;background:var(--color-neutral-300);overflow:hidden"><div style="width:17%;height:100%;background:var(--color-accent)"></div></div><span style="font-size:12.5px;font-weight:700">1/6</span></div>
+                      <span style="font-size:13.5px;color:var(--color-neutral-700)">Hace 3 h</span>
+                      <span style="justify-self:start;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:999px;background:var(--color-neutral-200);color:var(--color-neutral-800)">Nuevo</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 1fr 0.9fr;gap:14px;padding:14px 20px;border-bottom:1px solid var(--color-divider);align-items:center">
+                      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;border-radius:999px;background:var(--color-neutral-400);display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800">18</div><div><div style="font-size:14px;font-weight:800">cliente #1877</div><div style="font-size:12px;color:var(--color-neutral-600)">sin correo vinculado</div></div></div>
+                      <span style="font-size:13.5px">Tarde de té</span>
+                      <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;max-width:70px;height:6px;border-radius:999px;background:var(--color-neutral-300);overflow:hidden"><div style="width:40%;height:100%;background:var(--color-neutral-500)"></div></div><span style="font-size:12.5px;font-weight:700">2/5</span></div>
+                      <span style="font-size:13.5px;color:var(--color-neutral-700)">Hace 41 días</span>
+                      <span style="justify-self:start;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:999px;background:var(--color-neutral-200);color:var(--color-neutral-700)">Inactivo</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 1fr 0.9fr;gap:14px;padding:14px 20px;align-items:center">
+                      <div style="display:flex;align-items:center;gap:11px"><div style="width:32px;height:32px;border-radius:999px;background:var(--color-accent-400);display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800">23</div><div><div style="font-size:14px;font-weight:800">cliente #2312</div><div style="font-size:12px;color:var(--color-neutral-600)">jorge@correo.com</div></div></div>
+                      <span style="font-size:13.5px">Desayunos</span>
+                      <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;max-width:70px;height:6px;border-radius:999px;background:var(--color-neutral-300);overflow:hidden"><div style="width:62%;height:100%;background:var(--color-accent)"></div></div><span style="font-size:12.5px;font-weight:700">5/8</span></div>
+                      <span style="font-size:13.5px;color:var(--color-neutral-700)">Hace 6 días</span>
+                      <span style="justify-self:start;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:999px;background:var(--color-neutral-200);color:var(--color-neutral-800)">Activo</span>
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--color-neutral-700)">
+                    <span>Mostrando 1–5 de 342</span>
+                    <div style="display:flex;gap:6px;align-items:center">
+                      <span style="width:32px;height:32px;border-radius:999px;border:1.5px solid var(--color-neutral-300);display:grid;place-items:center;color:var(--color-neutral-600)"><i data-lucide="chevron-left" style="width:15px;height:15px"></i></span>
+                      <span style="width:32px;height:32px;border-radius:999px;background:var(--color-accent-600);color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px">1</span>
+                      <span style="width:32px;height:32px;border-radius:999px;display:grid;place-items:center;font-weight:700;font-size:13px">2</span>
+                      <span style="width:32px;height:32px;border-radius:999px;display:grid;place-items:center;font-weight:700;font-size:13px">3</span>
+                      <span style="width:32px;height:32px;border-radius:999px;border:1.5px solid var(--color-neutral-300);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="chevron-right" style="width:15px;height:15px"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="width:340px;flex:none;border-left:1px solid var(--color-divider);background:var(--color-neutral-100);padding:24px;display:flex;flex-direction:column;gap:18px;overflow:hidden">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <div style="width:46px;height:46px;border-radius:999px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px">24</div>
+                    <div><div style="font-weight:800;font-size:16px">cliente #2481</div><div style="font-size:12.5px;color:var(--color-neutral-600)">luis.m@correo.com</div></div>
+                  </div>
+                  <i data-lucide="x" style="width:18px;height:18px;color:var(--color-neutral-600)"></i>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                  <div style="background:var(--color-bg);border-radius:var(--radius-md);padding:13px"><div style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Sellos totales</div><div style="font-family:var(--font-heading);font-size:24px;line-height:1.1">23</div></div>
+                  <div style="background:var(--color-bg);border-radius:var(--radius-md);padding:13px"><div style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Canjes</div><div style="font-family:var(--font-heading);font-size:24px;line-height:1.1">3</div></div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:9px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Tarjetas</div>
+                  <div style="background:var(--color-accent-600);border-radius:var(--radius-md);padding:14px;color:#fff">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px"><span style="font-weight:800;font-size:14px">Tarjeta de bebidas</span><span style="font-size:12px;opacity:.8">5/6</span></div>
+                    <div style="height:6px;border-radius:999px;background:rgba(245,234,216,.25);overflow:hidden"><div style="width:83%;height:100%;background:var(--color-accent-200)"></div></div>
+                  </div>
+                  <div style="background:var(--color-neutral-200);border-radius:var(--radius-md);padding:14px">
+                    <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-weight:800;font-size:14px">Desayunos</span><span style="font-size:12px;color:var(--color-neutral-700)">Canjeada</span></div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:9px;overflow:hidden">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Historial</div>
+                  <div style="display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--color-divider)"><div style="width:30px;height:30px;border-radius:999px;background:var(--color-accent-200);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="stamp" style="width:15px;height:15px"></i></div><div style="flex:1"><div style="font-size:13.5px;font-weight:700">Sello 5</div><div style="font-size:12px;color:var(--color-neutral-600)">Hoy · Ana R.</div></div></div>
+                  <div style="display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--color-divider)"><div style="width:30px;height:30px;border-radius:999px;background:var(--color-accent-200);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="stamp" style="width:15px;height:15px"></i></div><div style="flex:1"><div style="font-size:13.5px;font-weight:700">Sello 4</div><div style="font-size:12px;color:var(--color-neutral-600)">24 ago · Ana R.</div></div></div>
+                  <div style="display:flex;align-items:center;gap:11px;padding:9px 0"><div style="width:30px;height:30px;border-radius:999px;background:var(--color-accent-2-200);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="gift" style="width:15px;height:15px"></i></div><div style="flex:1"><div style="font-size:13.5px;font-weight:700">Canje · Croissant</div><div style="font-size:12px;color:var(--color-neutral-600)">11 ago · Ana R.</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">13 · Clientes · tabla y ficha lateral</div>
+        </div>
+
+        <!-- N. Empleados -->
+        <div id="s14" data-screen-label="Admin · Empleados" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:1280px;height:800px;background:var(--color-bg);border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex:none;position:relative">
+            <div style="width:246px;flex:none;background:var(--color-neutral-900);color:var(--color-neutral-200);padding:26px 18px;display:flex;flex-direction:column;gap:26px">
+              <div style="display:flex;align-items:center;gap:11px;padding:0 8px">
+                <div style="width:38px;height:38px;border-radius:14px;background:var(--color-accent);display:grid;place-items:center;color:#fff"><i data-lucide="qr-code" style="width:20px;height:20px"></i></div>
+                <div><div style="font-family:var(--font-heading);font-size:19px;color:#fff;line-height:1">Fidely</div><div style="font-size:11px;opacity:.55">Café Aurora</div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="layout-dashboard" style="width:18px;height:18px"></i>Resumen</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="credit-card" style="width:18px;height:18px"></i>Tarjetas</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="users" style="width:18px;height:18px"></i>Clientes</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;background:var(--color-accent);color:#fff;font-weight:800;font-size:14.5px"><i data-lucide="id-card" style="width:18px;height:18px"></i>Empleados</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="store" style="width:18px;height:18px"></i>Negocio</div>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+              <div style="flex:none;padding:22px 32px;border-bottom:1px solid var(--color-divider);display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <h3 style="font-family:var(--font-heading);font-weight:400;font-size:30px;margin:0;line-height:1.05">Empleados</h3>
+                  <div style="font-size:13.5px;color:var(--color-neutral-600);margin-top:3px">4 cuentas · 2 sucursales</div>
+                </div>
+                <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:14.5px;font-weight:800;padding:13px 22px;border-radius:999px;display:flex;align-items:center;gap:9px;box-shadow:var(--shadow-sm)" style-hover="background:var(--color-accent-600)"><i data-lucide="user-plus" style="width:18px;height:18px"></i>Nuevo empleado</button>
+              </div>
+              <div style="flex:1;overflow:hidden;padding:24px 32px;display:flex;flex-direction:column;gap:18px">
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow-sm)">
+                    <div style="display:flex;align-items:center;gap:12px">
+                      <div style="width:48px;height:48px;border-radius:999px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px">AR</div>
+                      <div style="flex:1"><div style="font-weight:800;font-size:16px">Ana Rivas</div><div style="font-size:12.5px;color:var(--color-neutral-600)">ana@cafeaurora.com</div></div>
+                      <span style="font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:999px;background:var(--color-accent-2-200);color:var(--color-accent-2-800)">Activa</span>
+                    </div>
+                    <div style="display:flex;gap:20px">
+                      <div><div style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Sellos (30d)</div><div style="font-family:var(--font-heading);font-size:22px;line-height:1.15">612</div></div>
+                      <div><div style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Canjes</div><div style="font-family:var(--font-heading);font-size:22px;line-height:1.15">41</div></div>
+                    </div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--color-divider)">
+                      <span style="font-size:12.5px;color:var(--color-neutral-700)">Sucursal Centro</span>
+                      <span style="display:flex;gap:7px"><span style="width:30px;height:30px;border-radius:999px;border:1.5px solid var(--color-neutral-300);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="pencil" style="width:14px;height:14px"></i></span><span style="width:30px;height:30px;border-radius:999px;border:1.5px solid var(--color-neutral-300);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="power" style="width:14px;height:14px"></i></span></span>
+                    </div>
+                  </div>
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow-sm)">
+                    <div style="display:flex;align-items:center;gap:12px">
+                      <div style="width:48px;height:48px;border-radius:999px;background:var(--color-accent-2-600);display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px">DM</div>
+                      <div style="flex:1"><div style="font-weight:800;font-size:16px">Diego Marín</div><div style="font-size:12.5px;color:var(--color-neutral-600)">diego@cafeaurora.com</div></div>
+                      <span style="font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:999px;background:var(--color-accent-2-200);color:var(--color-accent-2-800)">Activa</span>
+                    </div>
+                    <div style="display:flex;gap:20px">
+                      <div><div style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Sellos (30d)</div><div style="font-family:var(--font-heading);font-size:22px;line-height:1.15">438</div></div>
+                      <div><div style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Canjes</div><div style="font-family:var(--font-heading);font-size:22px;line-height:1.15">29</div></div>
+                    </div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--color-divider)">
+                      <span style="font-size:12.5px;color:var(--color-neutral-700)">Sucursal Norte</span>
+                      <span style="display:flex;gap:7px"><span style="width:30px;height:30px;border-radius:999px;border:1.5px solid var(--color-neutral-300);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="pencil" style="width:14px;height:14px"></i></span><span style="width:30px;height:30px;border-radius:999px;border:1.5px solid var(--color-neutral-300);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="power" style="width:14px;height:14px"></i></span></span>
+                    </div>
+                  </div>
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow-sm);opacity:.62">
+                    <div style="display:flex;align-items:center;gap:12px">
+                      <div style="width:48px;height:48px;border-radius:999px;background:var(--color-neutral-500);display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px">SC</div>
+                      <div style="flex:1"><div style="font-weight:800;font-size:16px">Sofía Cano</div><div style="font-size:12.5px;color:var(--color-neutral-600)">sofia@cafeaurora.com</div></div>
+                      <span style="font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:999px;background:var(--color-neutral-300);color:var(--color-neutral-800)">Pausada</span>
+                    </div>
+                    <div style="display:flex;gap:20px">
+                      <div><div style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Sellos (30d)</div><div style="font-family:var(--font-heading);font-size:22px;line-height:1.15">0</div></div>
+                      <div><div style="font-size:11.5px;color:var(--color-neutral-600);font-weight:700">Canjes</div><div style="font-family:var(--font-heading);font-size:22px;line-height:1.15">0</div></div>
+                    </div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--color-divider)">
+                      <span style="font-size:12.5px;color:var(--color-neutral-700)">Sucursal Centro</span>
+                      <span style="display:flex;gap:7px"><span style="width:30px;height:30px;border-radius:999px;border:1.5px solid var(--color-neutral-300);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="pencil" style="width:14px;height:14px"></i></span><span style="width:30px;height:30px;border-radius:999px;border:1.5px solid var(--color-neutral-300);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="power" style="width:14px;height:14px"></i></span></span>
+                    </div>
+                  </div>
+                </div>
+                <div style="background:var(--color-accent-100);border:2px dashed var(--color-accent-300);border-radius:var(--radius-lg);padding:22px;display:flex;align-items:center;gap:16px">
+                  <div style="width:44px;height:44px;border-radius:999px;background:var(--color-accent-200);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="shield-check" style="width:21px;height:21px"></i></div>
+                  <div style="flex:1"><div style="font-weight:800;font-size:15px;color:var(--color-accent-900)">Los empleados solo operan tarjetas de tu negocio</div><div style="font-size:13.5px;color:var(--color-accent-800);line-height:1.45;margin-top:2px">No pueden crear tarjetas, ver datos de otros negocios ni borrar sellos ya registrados.</div></div>
+                </div>
+              </div>
+            </div>
+
+            <div style="position:absolute;inset:0;background:rgba(46,43,37,.42);display:grid;place-items:center">
+              <div style="width:480px;background:var(--color-bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden">
+                <div style="padding:26px 30px 16px;display:flex;align-items:flex-start;justify-content:space-between">
+                  <div>
+                    <h4 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0;line-height:1.05">Nuevo empleado</h4>
+                    <div style="font-size:13px;color:var(--color-neutral-600);margin-top:4px">Recibirá un correo para fijar su contraseña</div>
+                  </div>
+                  <span style="width:36px;height:36px;border-radius:999px;background:var(--color-neutral-200);display:grid;place-items:center;color:var(--color-neutral-800)"><i data-lucide="x" style="width:17px;height:17px"></i></span>
+                </div>
+                <div style="padding:6px 30px 22px;display:flex;flex-direction:column;gap:15px">
+                  <div style="display:flex;flex-direction:column;gap:7px">
+                    <label style="font-size:13px;font-weight:800">Nombre completo</label>
+                    <div style="background:var(--color-neutral-100);border:2px solid var(--color-accent);border-radius:999px;padding:13px 20px;font-size:14.5px">Marta Solís</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:7px">
+                    <label style="font-size:13px;font-weight:800">Correo electrónico</label>
+                    <div style="background:var(--color-neutral-100);border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:13px 20px;font-size:14.5px">marta@cafeaurora.com</div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:9px">
+                    <label style="font-size:13px;font-weight:800">Sucursal</label>
+                    <div style="display:flex;gap:8px">
+                      <span style="flex:1;text-align:center;font-size:14px;font-weight:800;padding:12px 0;border-radius:999px;background:var(--color-accent-600);color:#fff">Centro</span>
+                      <span style="flex:1;text-align:center;font-size:14px;font-weight:700;padding:12px 0;border-radius:999px;border:1.5px solid var(--color-neutral-300);color:var(--color-neutral-700)">Norte</span>
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;background:var(--color-neutral-100);border-radius:var(--radius-md);padding:14px 18px">
+                    <div><div style="font-size:14px;font-weight:700">Puede canjear recompensas</div><div style="font-size:12.5px;color:var(--color-neutral-600)">Además de registrar sellos</div></div>
+                    <div style="width:48px;height:28px;border-radius:999px;background:var(--color-accent-2-500);display:flex;align-items:center;justify-content:flex-end;padding:3px"><div style="width:22px;height:22px;border-radius:999px;background:#fff;box-shadow:var(--shadow-sm)"></div></div>
+                  </div>
+                </div>
+                <div style="padding:16px 30px 26px;border-top:1px solid var(--color-divider);display:flex;gap:12px">
+                  <button style="flex:1;border:1.5px solid var(--color-neutral-400);cursor:pointer;font-family:inherit;background:transparent;color:var(--color-neutral-800);font-size:15px;font-weight:700;padding:14px;border-radius:999px" style-hover="background:var(--color-neutral-200)">Cancelar</button>
+                  <button style="flex:2;border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:15px;font-weight:800;padding:14px;border-radius:999px;box-shadow:var(--shadow-sm)" style-hover="background:var(--color-accent-600)">Crear empleado</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">14 · Empleados · cuentas y alta</div>
+        </div>
+
+        <!-- O. Negocio -->
+        <div id="s15" data-screen-label="Admin · Negocio" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:1280px;height:800px;background:var(--color-bg);border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex:none">
+            <div style="width:246px;flex:none;background:var(--color-neutral-900);color:var(--color-neutral-200);padding:26px 18px;display:flex;flex-direction:column;gap:26px">
+              <div style="display:flex;align-items:center;gap:11px;padding:0 8px">
+                <div style="width:38px;height:38px;border-radius:14px;background:var(--color-accent);display:grid;place-items:center;color:#fff"><i data-lucide="qr-code" style="width:20px;height:20px"></i></div>
+                <div><div style="font-family:var(--font-heading);font-size:19px;color:#fff;line-height:1">Fidely</div><div style="font-size:11px;opacity:.55">Café Aurora</div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="layout-dashboard" style="width:18px;height:18px"></i>Resumen</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="credit-card" style="width:18px;height:18px"></i>Tarjetas</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="users" style="width:18px;height:18px"></i>Clientes</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="id-card" style="width:18px;height:18px"></i>Empleados</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;background:var(--color-accent);color:#fff;font-weight:800;font-size:14.5px"><i data-lucide="store" style="width:18px;height:18px"></i>Negocio</div>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+              <div style="flex:none;padding:22px 32px;border-bottom:1px solid var(--color-divider);display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <h3 style="font-family:var(--font-heading);font-weight:400;font-size:30px;margin:0;line-height:1.05">Negocio</h3>
+                  <div style="font-size:13.5px;color:var(--color-neutral-600);margin-top:3px">Identidad, sucursales y material impreso</div>
+                </div>
+                <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:14.5px;font-weight:800;padding:13px 24px;border-radius:999px;box-shadow:var(--shadow-sm)" style-hover="background:var(--color-accent-600)">Guardar cambios</button>
+              </div>
+              <div style="flex:1;overflow:hidden;padding:24px 32px;display:grid;grid-template-columns:1.35fr 1fr;gap:22px">
+                <div style="display:flex;flex-direction:column;gap:18px;overflow:hidden">
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column;gap:18px;box-shadow:var(--shadow-sm)">
+                    <div style="font-weight:800;font-size:16px">Identidad</div>
+                    <div style="display:flex;align-items:center;gap:18px">
+                      <div style="width:84px;height:84px;border-radius:28px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff;font-family:var(--font-heading);font-size:36px;box-shadow:var(--shadow-md)">A</div>
+                      <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+                        <div style="font-size:13.5px;color:var(--color-neutral-700);line-height:1.45">PNG o SVG cuadrado, mínimo 512×512. Se usa en las tarjetas y en el QR impreso.</div>
+                        <div style="display:flex;gap:10px">
+                          <span style="font-size:13px;font-weight:800;padding:9px 18px;border-radius:999px;background:var(--color-accent-200);color:var(--color-accent-800)">Cambiar logo</span>
+                          <span style="font-size:13px;font-weight:700;padding:9px 18px;border-radius:999px;border:1.5px solid var(--color-neutral-300);color:var(--color-neutral-700)">Quitar</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                      <div style="display:flex;flex-direction:column;gap:7px">
+                        <label style="font-size:13px;font-weight:800">Nombre del negocio</label>
+                        <div style="background:var(--color-bg);border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:13px 20px;font-size:14.5px">Café Aurora</div>
+                      </div>
+                      <div style="display:flex;flex-direction:column;gap:7px">
+                        <label style="font-size:13px;font-weight:800">Categoría</label>
+                        <div style="background:var(--color-bg);border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:13px 20px;font-size:14.5px;display:flex;align-items:center;justify-content:space-between">Cafetería<i data-lucide="chevron-down" style="width:16px;height:16px;color:var(--color-neutral-600)"></i></div>
+                      </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:9px">
+                      <label style="font-size:13px;font-weight:800">Colores de marca</label>
+                      <div style="display:flex;gap:12px;align-items:center">
+                        <div style="display:flex;align-items:center;gap:9px;background:var(--color-bg);border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:8px 16px 8px 8px"><span style="width:28px;height:28px;border-radius:999px;background:var(--color-accent-600)"></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px">#b2622d</span></div>
+                        <div style="display:flex;align-items:center;gap:9px;background:var(--color-bg);border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:8px 16px 8px 8px"><span style="width:28px;height:28px;border-radius:999px;background:var(--color-accent-2-500)"></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px">#8fa073</span></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow-sm)">
+                    <div style="display:flex;align-items:center;justify-content:space-between">
+                      <div style="font-weight:800;font-size:16px">Sucursales</div>
+                      <span style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;color:var(--color-accent-700)"><i data-lucide="plus" style="width:15px;height:15px"></i>Añadir</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:14px;padding:13px 16px;background:var(--color-bg);border-radius:var(--radius-md)">
+                      <div style="width:36px;height:36px;border-radius:999px;background:var(--color-accent-200);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="map-pin" style="width:17px;height:17px"></i></div>
+                      <div style="flex:1"><div style="font-size:14.5px;font-weight:800">Sucursal Centro</div><div style="font-size:12.5px;color:var(--color-neutral-600)">Av. Reforma 214 · 2 empleados</div></div>
+                      <i data-lucide="chevron-right" style="width:17px;height:17px;color:var(--color-neutral-600)"></i>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:14px;padding:13px 16px;background:var(--color-bg);border-radius:var(--radius-md)">
+                      <div style="width:36px;height:36px;border-radius:999px;background:var(--color-accent-2-200);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="map-pin" style="width:17px;height:17px"></i></div>
+                      <div style="flex:1"><div style="font-size:14.5px;font-weight:800">Sucursal Norte</div><div style="font-size:12.5px;color:var(--color-neutral-600)">Calle Olmo 8 · 1 empleado</div></div>
+                      <i data-lucide="chevron-right" style="width:17px;height:17px;color:var(--color-neutral-600)"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:18px;overflow:hidden">
+                  <div style="background:var(--color-accent-700);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column;align-items:center;gap:16px;color:var(--color-accent-100);position:relative;overflow:hidden">
+                    <div style="position:absolute;top:-70px;right:-60px;width:200px;height:200px;border-radius:999px;background:var(--color-accent-600)"></div>
+                    <div style="position:relative;text-align:center">
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7">Material impreso</div>
+                      <div style="font-family:var(--font-heading);font-size:24px;color:#fff;margin-top:6px;line-height:1.1">QR de bienvenida</div>
+                    </div>
+                    <div style="position:relative;width:180px;height:180px;background:#fff;border-radius:20px;padding:11px;display:grid;grid-template-columns:repeat(21,1fr);gap:1px">
+                      <sc-for list="{{ qrCells }}" as="cell" hint-placeholder-count="441"><div style="border-radius:1px;background:{{ cell.bg }}"></div></sc-for>
+                    </div>
+                    <div style="position:relative;font-family:'JetBrains Mono',monospace;font-size:12px;opacity:.75">fidely.app/welcome/aurora-bebidas</div>
+                    <div style="position:relative;display:flex;gap:10px;width:100%">
+                      <button style="flex:1;border:none;cursor:pointer;font-family:inherit;background:var(--color-accent-200);color:var(--color-accent-900);font-size:14px;font-weight:800;padding:12px;border-radius:999px" style-hover="background:var(--color-accent-300)">Descargar PDF</button>
+                      <button style="border:1.5px solid rgba(255,255,255,.35);cursor:pointer;background:transparent;color:#fff;width:48px;border-radius:999px;display:grid;place-items:center" style-hover="background:rgba(255,255,255,.14)"><i data-lucide="copy" style="width:17px;height:17px"></i></button>
+                    </div>
+                  </div>
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:13px;box-shadow:var(--shadow-sm)">
+                    <div style="font-weight:800;font-size:16px">Zona sensible</div>
+                    <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:14px;font-weight:700">Pausar todas las tarjetas</div><div style="font-size:12.5px;color:var(--color-neutral-600)">Los empleados no podrán sellar</div></div><div style="width:48px;height:28px;border-radius:999px;background:var(--color-neutral-300);display:flex;align-items:center;padding:3px"><div style="width:22px;height:22px;border-radius:999px;background:#fff;box-shadow:var(--shadow-sm)"></div></div></div>
+                    <button style="border:1.5px solid var(--color-accent-400);cursor:pointer;font-family:inherit;background:transparent;color:var(--color-accent-700);font-size:14px;font-weight:800;padding:12px;border-radius:999px" style-hover="background:var(--color-accent-100)">Eliminar negocio</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">15 · Negocio · identidad, sucursales y QR</div>
+        </div>
+
+        <!-- P. Reportes -->
+        <div id="s16" data-screen-label="Admin · Reportes" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:1280px;height:800px;background:var(--color-bg);border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex:none">
+            <div style="width:246px;flex:none;background:var(--color-neutral-900);color:var(--color-neutral-200);padding:26px 18px;display:flex;flex-direction:column;gap:26px">
+              <div style="display:flex;align-items:center;gap:11px;padding:0 8px">
+                <div style="width:38px;height:38px;border-radius:14px;background:var(--color-accent);display:grid;place-items:center;color:#fff"><i data-lucide="qr-code" style="width:20px;height:20px"></i></div>
+                <div><div style="font-family:var(--font-heading);font-size:19px;color:#fff;line-height:1">Fidely</div><div style="font-size:11px;opacity:.55">Café Aurora</div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;background:var(--color-accent);color:#fff;font-weight:800;font-size:14.5px"><i data-lucide="layout-dashboard" style="width:18px;height:18px"></i>Resumen</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px 12px 42px;border-radius:999px;font-size:14px;font-weight:800;color:#fff;background:rgba(255,255,255,.08)">Reportes</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="credit-card" style="width:18px;height:18px"></i>Tarjetas</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="users" style="width:18px;height:18px"></i>Clientes</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="id-card" style="width:18px;height:18px"></i>Empleados</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="store" style="width:18px;height:18px"></i>Negocio</div>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+              <div style="flex:none;padding:22px 32px;border-bottom:1px solid var(--color-divider);display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <h3 style="font-family:var(--font-heading);font-weight:400;font-size:30px;margin:0;line-height:1.05">Reportes</h3>
+                  <div style="font-size:13.5px;color:var(--color-neutral-600);margin-top:3px">1 jul – 31 ago 2026 · todas las sucursales</div>
+                </div>
+                <div style="display:flex;gap:12px;align-items:center">
+                  <div style="display:flex;align-items:center;gap:9px;border:1.5px solid var(--color-neutral-300);border-radius:999px;padding:10px 18px;font-size:14px;font-weight:700"><i data-lucide="calendar" style="width:16px;height:16px;color:var(--color-neutral-600)"></i>Jul – Ago 2026</div>
+                  <button style="border:none;cursor:pointer;font-family:inherit;background:var(--color-accent);color:#fff;font-size:14px;font-weight:800;padding:12px 20px;border-radius:999px;display:flex;align-items:center;gap:9px" style-hover="background:var(--color-accent-600)"><i data-lucide="download" style="width:17px;height:17px"></i>Exportar</button>
+                </div>
+              </div>
+              <div style="flex:1;overflow:hidden;padding:24px 32px;display:flex;flex-direction:column;gap:20px">
+                <div style="display:grid;grid-template-columns:1.45fr 1fr;gap:20px;height:300px">
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow-sm)">
+                    <div style="display:flex;align-items:flex-start;justify-content:space-between">
+                      <div><div style="font-weight:800;font-size:16px">Sellos por semana</div><div style="font-size:12.5px;color:var(--color-neutral-600)">Total 1.284 · pico en la semana 7</div></div>
+                      <span style="font-size:12.5px;font-weight:800;padding:6px 13px;border-radius:999px;background:var(--color-accent-2-200);color:var(--color-accent-2-800)">+18%</span>
+                    </div>
+                    <div style="flex:1;display:flex;align-items:flex-end;gap:10px">
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end"><div style="width:100%;height:44%;border-radius:12px 12px 5px 5px;background:var(--color-accent-300)"></div><span style="font-size:11px;color:var(--color-neutral-600);font-weight:700">S1</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end"><div style="width:100%;height:52%;border-radius:12px 12px 5px 5px;background:var(--color-accent-300)"></div><span style="font-size:11px;color:var(--color-neutral-600);font-weight:700">S2</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end"><div style="width:100%;height:47%;border-radius:12px 12px 5px 5px;background:var(--color-accent-300)"></div><span style="font-size:11px;color:var(--color-neutral-600);font-weight:700">S3</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end"><div style="width:100%;height:63%;border-radius:12px 12px 5px 5px;background:var(--color-accent-400)"></div><span style="font-size:11px;color:var(--color-neutral-600);font-weight:700">S4</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end"><div style="width:100%;height:58%;border-radius:12px 12px 5px 5px;background:var(--color-accent-400)"></div><span style="font-size:11px;color:var(--color-neutral-600);font-weight:700">S5</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end"><div style="width:100%;height:74%;border-radius:12px 12px 5px 5px;background:var(--color-accent-400)"></div><span style="font-size:11px;color:var(--color-neutral-600);font-weight:700">S6</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end"><div style="width:100%;height:96%;border-radius:12px 12px 5px 5px;background:var(--color-accent)"></div><span style="font-size:11px;color:var(--color-text);font-weight:800">S7</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end"><div style="width:100%;height:81%;border-radius:12px 12px 5px 5px;background:var(--color-accent-400)"></div><span style="font-size:11px;color:var(--color-neutral-600);font-weight:700">S8</span></div>
+                    </div>
+                  </div>
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow-sm)">
+                    <div><div style="font-weight:800;font-size:16px">Embudo de fidelización</div><div style="font-size:12.5px;color:var(--color-neutral-600)">De la primera tarjeta al canje</div></div>
+                    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px">
+                      <div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700"><span>Tarjetas creadas</span><span>428</span></div><div style="height:26px;border-radius:999px;background:var(--color-accent-600);width:100%"></div></div>
+                      <div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700"><span>Con 1+ sello</span><span>342</span></div><div style="height:26px;border-radius:999px;background:var(--color-accent-500);width:80%"></div></div>
+                      <div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700"><span>Completadas</span><span>147</span></div><div style="height:26px;border-radius:999px;background:var(--color-accent-2-500);width:34%"></div></div>
+                      <div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700"><span>Canjeadas</span><span>86</span></div><div style="height:26px;border-radius:999px;background:var(--color-accent-2-700);width:20%"></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:20px;min-height:0">
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:13px;box-shadow:var(--shadow-sm);overflow:hidden">
+                    <div style="font-weight:800;font-size:16px">Clientes más fieles</div>
+                    <div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--color-divider)"><span style="width:26px;font-family:var(--font-heading);font-size:16px;color:var(--color-accent-700)">1</span><div style="flex:1;font-size:14px;font-weight:700">cliente #2199</div><span style="font-size:13px;color:var(--color-neutral-700)">31 sellos · 4 canjes</span></div>
+                    <div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--color-divider)"><span style="width:26px;font-family:var(--font-heading);font-size:16px;color:var(--color-accent-700)">2</span><div style="flex:1;font-size:14px;font-weight:700">cliente #2481</div><span style="font-size:13px;color:var(--color-neutral-700)">23 sellos · 3 canjes</span></div>
+                    <div style="display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--color-divider)"><span style="width:26px;font-family:var(--font-heading);font-size:16px;color:var(--color-accent-700)">3</span><div style="flex:1;font-size:14px;font-weight:700">cliente #2312</div><span style="font-size:13px;color:var(--color-neutral-700)">19 sellos · 2 canjes</span></div>
+                    <div style="display:flex;align-items:center;gap:12px;padding:9px 0"><span style="width:26px;font-family:var(--font-heading);font-size:16px;color:var(--color-neutral-500)">4</span><div style="flex:1;font-size:14px;font-weight:700">cliente #2044</div><span style="font-size:13px;color:var(--color-neutral-700)">16 sellos · 2 canjes</span></div>
+                  </div>
+                  <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow-sm);overflow:hidden">
+                    <div style="font-weight:800;font-size:16px">Horas con más actividad</div>
+                    <div style="flex:1;display:flex;align-items:flex-end;gap:6px">
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end"><div style="width:100%;height:22%;border-radius:8px;background:var(--color-accent-2-300)"></div><span style="font-size:10.5px;color:var(--color-neutral-600)">8</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end"><div style="width:100%;height:58%;border-radius:8px;background:var(--color-accent-2-400)"></div><span style="font-size:10.5px;color:var(--color-neutral-600)">9</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end"><div style="width:100%;height:90%;border-radius:8px;background:var(--color-accent-2-600)"></div><span style="font-size:10.5px;color:var(--color-text);font-weight:800">10</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end"><div style="width:100%;height:64%;border-radius:8px;background:var(--color-accent-2-400)"></div><span style="font-size:10.5px;color:var(--color-neutral-600)">11</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end"><div style="width:100%;height:41%;border-radius:8px;background:var(--color-accent-2-300)"></div><span style="font-size:10.5px;color:var(--color-neutral-600)">12</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end"><div style="width:100%;height:35%;border-radius:8px;background:var(--color-accent-2-300)"></div><span style="font-size:10.5px;color:var(--color-neutral-600)">13</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end"><div style="width:100%;height:29%;border-radius:8px;background:var(--color-accent-2-300)"></div><span style="font-size:10.5px;color:var(--color-neutral-600)">14</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end"><div style="width:100%;height:47%;border-radius:8px;background:var(--color-accent-2-400)"></div><span style="font-size:10.5px;color:var(--color-neutral-600)">17</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end"><div style="width:100%;height:73%;border-radius:8px;background:var(--color-accent-2-500)"></div><span style="font-size:10.5px;color:var(--color-neutral-600)">18</span></div>
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end"><div style="width:100%;height:52%;border-radius:8px;background:var(--color-accent-2-400)"></div><span style="font-size:10.5px;color:var(--color-neutral-600)">19</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">16 · Reportes · embudo, ranking y horas pico</div>
+        </div>
+
+        <!-- Q. Notificaciones -->
+        <div id="s17" data-screen-label="Admin · Notificaciones" style="display:flex;flex-direction:column;gap:10px;scroll-margin:60px">
+          <div style="width:1280px;height:800px;background:var(--color-bg);border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex:none;position:relative">
+            <div style="width:246px;flex:none;background:var(--color-neutral-900);color:var(--color-neutral-200);padding:26px 18px;display:flex;flex-direction:column;gap:26px">
+              <div style="display:flex;align-items:center;gap:11px;padding:0 8px">
+                <div style="width:38px;height:38px;border-radius:14px;background:var(--color-accent);display:grid;place-items:center;color:#fff"><i data-lucide="qr-code" style="width:20px;height:20px"></i></div>
+                <div><div style="font-family:var(--font-heading);font-size:19px;color:#fff;line-height:1">Fidely</div><div style="font-size:11px;opacity:.55">Café Aurora</div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;background:var(--color-accent);color:#fff;font-weight:800;font-size:14.5px"><i data-lucide="layout-dashboard" style="width:18px;height:18px"></i>Resumen</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="credit-card" style="width:18px;height:18px"></i>Tarjetas</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="users" style="width:18px;height:18px"></i>Clientes</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="id-card" style="width:18px;height:18px"></i>Empleados</div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:999px;font-size:14.5px;font-weight:600;color:var(--color-neutral-300)"><i data-lucide="store" style="width:18px;height:18px"></i>Negocio</div>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+              <div style="flex:none;padding:22px 32px;border-bottom:1px solid var(--color-divider);display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <h3 style="font-family:var(--font-heading);font-weight:400;font-size:30px;margin:0;line-height:1.05">Resumen</h3>
+                  <div style="font-size:13.5px;color:var(--color-neutral-600);margin-top:3px">Últimos 30 días · 2 sucursales</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="width:42px;height:42px;border-radius:999px;background:var(--color-accent-200);display:grid;place-items:center;color:var(--color-accent-700);position:relative;box-shadow:0 0 0 2px var(--color-accent)">
+                    <i data-lucide="bell" style="width:20px;height:20px"></i>
+                    <span style="position:absolute;top:6px;right:7px;width:10px;height:10px;border-radius:999px;background:var(--color-accent);border:2px solid var(--color-accent-200)"></span>
+                  </div>
+                  <div style="width:40px;height:40px;border-radius:999px;background:var(--color-accent-600);display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px">AR</div>
+                </div>
+              </div>
+              <div style="flex:1;padding:24px 32px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-content:start;opacity:.45">
+                <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);height:118px"></div>
+                <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);height:118px"></div>
+                <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);height:118px"></div>
+                <div style="background:var(--color-neutral-100);border-radius:var(--radius-lg);height:118px"></div>
+                <div style="grid-column:span 4;background:var(--color-neutral-100);border-radius:var(--radius-lg);height:330px"></div>
+              </div>
+            </div>
+
+            <div style="position:absolute;top:78px;right:28px;width:404px;background:var(--color-bg);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column">
+              <div style="padding:20px 22px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--color-divider)">
+                <div style="font-family:var(--font-heading);font-weight:400;font-size:22px">Notificaciones</div>
+                <span style="font-size:13px;font-weight:800;color:var(--color-accent-700)">Marcar todas leídas</span>
+              </div>
+              <div style="padding:12px 14px 8px;display:flex;gap:7px">
+                <span style="font-size:12.5px;font-weight:800;padding:7px 14px;border-radius:999px;background:var(--color-accent-600);color:#fff">Todas</span>
+                <span style="font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:999px;border:1.5px solid var(--color-neutral-300);color:var(--color-neutral-700)">Sin leer · 3</span>
+                <span style="font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:999px;border:1.5px solid var(--color-neutral-300);color:var(--color-neutral-700)">Sistema</span>
+              </div>
+              <div style="padding:6px 14px 16px;display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;gap:13px;padding:14px;border-radius:var(--radius-md);background:var(--color-accent-100)">
+                  <div style="width:38px;height:38px;flex:none;border-radius:999px;background:var(--color-accent-200);display:grid;place-items:center;color:var(--color-accent-700)"><i data-lucide="gift" style="width:18px;height:18px"></i></div>
+                  <div style="flex:1"><div style="font-size:14px;font-weight:800">12 recompensas pendientes de canje</div><div style="font-size:13px;color:var(--color-neutral-700);line-height:1.45;margin-top:2px">Clientes con la tarjeta completa que aún no han vuelto.</div><div style="font-size:12px;color:var(--color-neutral-600);margin-top:5px">Hace 20 min</div></div>
+                  <span style="width:8px;height:8px;border-radius:999px;background:var(--color-accent);margin-top:6px;flex:none"></span>
+                </div>
+                <div style="display:flex;gap:13px;padding:14px;border-radius:var(--radius-md);background:var(--color-accent-100)">
+                  <div style="width:38px;height:38px;flex:none;border-radius:999px;background:var(--color-accent-2-200);display:grid;place-items:center;color:var(--color-accent-2-700)"><i data-lucide="trending-up" style="width:18px;height:18px"></i></div>
+                  <div style="flex:1"><div style="font-size:14px;font-weight:800">Semana récord en Sucursal Centro</div><div style="font-size:13px;color:var(--color-neutral-700);line-height:1.45;margin-top:2px">312 sellos, un 24% más que la semana anterior.</div><div style="font-size:12px;color:var(--color-neutral-600);margin-top:5px">Hace 3 h</div></div>
+                  <span style="width:8px;height:8px;border-radius:999px;background:var(--color-accent);margin-top:6px;flex:none"></span>
+                </div>
+                <div style="display:flex;gap:13px;padding:14px;border-radius:var(--radius-md);background:var(--color-accent-100)">
+                  <div style="width:38px;height:38px;flex:none;border-radius:999px;background:var(--color-neutral-200);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="user-plus" style="width:18px;height:18px"></i></div>
+                  <div style="flex:1"><div style="font-size:14px;font-weight:800">Marta Solís aceptó su invitación</div><div style="font-size:13px;color:var(--color-neutral-700);line-height:1.45;margin-top:2px">Ya puede registrar sellos en Sucursal Centro.</div><div style="font-size:12px;color:var(--color-neutral-600);margin-top:5px">Ayer</div></div>
+                  <span style="width:8px;height:8px;border-radius:999px;background:var(--color-accent);margin-top:6px;flex:none"></span>
+                </div>
+                <div style="display:flex;gap:13px;padding:14px;border-radius:var(--radius-md)">
+                  <div style="width:38px;height:38px;flex:none;border-radius:999px;background:var(--color-neutral-200);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="credit-card" style="width:18px;height:18px"></i></div>
+                  <div style="flex:1"><div style="font-size:14px;font-weight:700">La tarjeta “Tarde de té” lleva 14 días pausada</div><div style="font-size:12px;color:var(--color-neutral-600);margin-top:5px">28 ago</div></div>
+                </div>
+                <div style="display:flex;gap:13px;padding:14px;border-radius:var(--radius-md)">
+                  <div style="width:38px;height:38px;flex:none;border-radius:999px;background:var(--color-neutral-200);display:grid;place-items:center;color:var(--color-neutral-700)"><i data-lucide="shield-check" style="width:18px;height:18px"></i></div>
+                  <div style="flex:1"><div style="font-size:14px;font-weight:700">Copia de seguridad completada</div><div style="font-size:12px;color:var(--color-neutral-600);margin-top:5px">27 ago</div></div>
+                </div>
+              </div>
+              <div style="padding:14px 22px 20px;border-top:1px solid var(--color-divider);text-align:center"><a href="#1c" style="font-size:13.5px">Ver todo el historial</a></div>
+            </div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--color-neutral-600);text-align:center">17 · Centro de notificaciones</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  buildQr() {
+    const N = 21, on = [];
+    let seed = 20260831;
+    const rnd = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+      const finder = (fx, fy) => {
+        const dx = x - fx, dy = y - fy;
+        if (dx < 0 || dy < 0 || dx > 6 || dy > 6) return null;
+        const r = Math.max(Math.abs(dx - 3), Math.abs(dy - 3));
+        return r === 1 ? false : r <= 3;
+      };
+      let v = finder(0, 0);
+      if (v === null) v = finder(N - 7, 0);
+      if (v === null) v = finder(0, N - 7);
+      if (v === null) v = rnd() > 0.5;
+      on.push({ bg: v ? '#201e1d' : '#ffffff' });
+    }
+    return on;
+  }
+  componentDidMount() { this.icons(); }
+  componentDidUpdate() { this.icons(); }
+  icons() {
+    clearTimeout(this._t);
+    this._t = setTimeout(() => { try { window.lucide && window.lucide.createIcons(); } catch (e) {} }, 60);
+  }
+  renderVals() { return { qrCells: this._qr || (this._qr = this.buildQr()) }; }
+}
+</script>
+</body>
+</html>

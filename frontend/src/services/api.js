@@ -134,4 +134,12 @@ export const api = {
   getStats: () => request('/api/clients/stats'),
   getStampsHistory: () => request('/api/clients/stamps'),
   updateClient: (id, data) => request(`/api/clients/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+  createClient: (data) => request('/api/clients', { method: 'POST', body: JSON.stringify(data) }),
+  deleteClient: (id) => request(`/api/clients/${id}`, { method: 'DELETE' }),
+
+  // Público — correo y recuperación
+  linkEmail: (deviceId, email) =>
+    request('/api/public/link-email', { method: 'POST', body: JSON.stringify({ device_id: deviceId, email }) }),
+  recoverWallet: (email, deviceId) =>
+    request('/api/public/recover', { method: 'POST', body: JSON.stringify({ email, device_id: deviceId }) }),
 };

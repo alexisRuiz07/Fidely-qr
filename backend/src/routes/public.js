@@ -184,6 +184,59 @@ router.get(
   })
 );
 
+// POST /api/public/link-email
+// Body: { device_id, email }
+// Vincula un correo al cliente anónimo del dispositivo para recuperación futura.
+router.post(
+  '/link-email',
+  asyncHandler(async (req, res) => {
+    const { device_id, email } = req.body || {};
+    if (!device_id || !email) throw new ApiError(400, 'device_id y email requeridos', 'VALIDATION');
+
+    const { data: cust } = await supabase
+      .from('customers').select('id, email')
+      .eq('device_id', device_id).limit(1).maybeSingle();
+
+    if (cust) {
+      const { data, error } = await supabase
+        .from('customers').update({ email })
+        .eq('id', cust.id).select('id, name, email').single();
+      if (error) throw error;
+      return res.json({ customer: data, linked: true });
+    }
+
+    // Sin cliente aún: crear registro mínimo para guardar el correo
+    const { data, error } = await supabase
+      .from('customers')
+      .insert({ device_id, email, name: 'Cliente' })
+      .select('id, name, email').single();
+    if (error) throw error;
+    res.status(201).json({ customer: data, linked: true });
+  })
+);
+
+// POST /api/public/recover
+// Body: { email, device_id }
+// Recupera el wallet de un dispositivo anterior buscando por correo y vincula el nuevo device_id.
+router.post(
+  '/recover',
+  asyncHandler(async (req, res) => {
+    const { email, device_id } = req.body || {};
+    if (!email || !device_id) throw new ApiError(400, 'email y device_id requeridos', 'VALIDATION');
+
+    const { data: cust } = await supabase
+      .from('customers').select('id, name, email, device_id')
+      .eq('email', email).limit(1).maybeSingle();
+    if (!cust) throw new ApiError(404, 'No se encontró ninguna cuenta con ese correo', 'NOT_FOUND');
+
+    const { data, error } = await supabase
+      .from('customers').update({ device_id })
+      .eq('id', cust.id).select('id, name, email').single();
+    if (error) throw error;
+    res.json({ customer: data, recovered: true });
+  })
+);
+
 // GET /api/public/card/:cardId
 // Devuelve la plantilla de una tarjeta activa y su negocio (para el QR de bienvenida).
 router.get(

@@ -205,10 +205,13 @@ export default function AdminDashboard() {
   const [showEmpPw,     setShowEmpPw]     = useState(false);
 
   // clientes
-  const [clientSearch,   setClientSearch]   = useState('');
-  const [editingClient,  setEditingClient]  = useState(null); // { id, name, email }
-  const [clientForm,     setClientForm]     = useState({ name: '', email: '' });
-  const [savingClient,   setSavingClient]   = useState(false);
+  const [clientSearch,      setClientSearch]      = useState('');
+  const [editingClient,     setEditingClient]     = useState(null);
+  const [clientForm,        setClientForm]        = useState({ name: '', email: '' });
+  const [savingClient,      setSavingClient]      = useState(false);
+  const [showAddClient,     setShowAddClient]     = useState(false);
+  const [addClientForm,     setAddClientForm]     = useState({ name: '', email: '', loyalty_card_id: '' });
+  const [addingClient,      setAddingClient]      = useState(false);
 
   function notify(msg, type = 'success') {
     const id = Date.now();
@@ -259,6 +262,32 @@ export default function AdminDashboard() {
     } finally {
       setSavingClient(false);
     }
+  }
+
+  async function createClient(e) {
+    e.preventDefault();
+    setAddingClient(true);
+    try {
+      const r = await api.createClient({
+        name: addClientForm.name || undefined,
+        email: addClientForm.email || undefined,
+        loyalty_card_id: addClientForm.loyalty_card_id || undefined,
+      });
+      setClients(prev => [r.customer, ...prev]);
+      setAddClientForm({ name: '', email: '', loyalty_card_id: '' });
+      setShowAddClient(false);
+      notify('Cliente agregado');
+    } catch (err) { notify(err.message, 'error'); }
+    finally { setAddingClient(false); }
+  }
+
+  async function deleteClient(id) {
+    if (!confirm('¿Eliminar este cliente y todas sus tarjetas en tu negocio?')) return;
+    try {
+      await api.deleteClient(id);
+      setClients(prev => prev.filter(c => c.id !== id));
+      notify('Cliente eliminado');
+    } catch (err) { notify(err.message, 'error'); }
   }
 
   function handleNav(key) {
@@ -455,6 +484,13 @@ export default function AdminDashboard() {
                 className="flex items-center gap-2 bg-brand hover:bg-brand-600 text-white text-sm md:text-[14.5px] font-bold px-4 md:px-[22px] py-2.5 md:py-[13px] rounded-full shadow-sm transition">
                 <UserPlus size={16} strokeWidth={2.75} />
                 <span className="hidden sm:inline">Nuevo empleado</span>
+              </button>
+            )}
+            {tab === 'clients' && (
+              <button onClick={() => setShowAddClient(true)}
+                className="flex items-center gap-2 bg-brand hover:bg-brand-600 text-white text-sm md:text-[14.5px] font-bold px-4 md:px-[22px] py-2.5 md:py-[13px] rounded-full shadow-sm transition">
+                <Plus size={16} strokeWidth={2.75} />
+                <span className="hidden sm:inline">Agregar cliente</span>
               </button>
             )}
             <button onClick={logout} title="Cerrar sesión"
@@ -744,11 +780,18 @@ export default function AdminDashboard() {
                                 )}
                               </div>
                             </div>
-                            <button
-                              onClick={() => { setEditingClient(cl); setClientForm({ name: cl.name || '', email: cl.email || '' }); }}
-                              className="w-9 h-9 rounded-full bg-neutral-200 grid place-items-center text-neutral-600 hover:bg-neutral-300 transition shrink-0">
-                              <Pencil size={14} strokeWidth={2.75} />
-                            </button>
+                            <div className="flex gap-2 shrink-0">
+                              <button
+                                onClick={() => { setEditingClient(cl); setClientForm({ name: cl.name || '', email: cl.email || '' }); }}
+                                className="w-9 h-9 rounded-full bg-neutral-200 grid place-items-center text-neutral-600 hover:bg-neutral-300 transition">
+                                <Pencil size={14} strokeWidth={2.75} />
+                              </button>
+                              <button
+                                onClick={() => deleteClient(cl.id)}
+                                className="w-9 h-9 rounded-full bg-red-100 grid place-items-center text-red-600 hover:bg-red-200 transition">
+                                <Trash2 size={14} strokeWidth={2.75} />
+                              </button>
+                            </div>
                           </div>
 
                           {/* tarjetas del cliente */}
@@ -1172,6 +1215,58 @@ export default function AdminDashboard() {
                   className="flex-1 border border-neutral-300 text-neutral-700 rounded-full py-3 font-medium hover:bg-neutral-100 transition">Cancelar</button>
                 <button type="submit"
                   className="flex-1 bg-brand-600 text-white font-bold rounded-full py-3 hover:bg-brand-700 transition">Crear tarjeta</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ── MODAL agregar cliente ── */}
+      {showAddClient && (
+        <div className="fixed inset-0 z-50 bg-ink/[.42] flex items-center justify-center p-4">
+          <div className="w-full max-w-[440px] bg-bg rounded-xl shadow-xl overflow-hidden">
+            <div className="px-[28px] pt-[24px] pb-4 flex items-start justify-between border-b border-neutral-300">
+              <div>
+                <h4 className="font-display font-normal text-[24px] text-ink leading-[1.05] m-0">Agregar cliente</h4>
+                <div className="text-[13px] text-neutral-600 mt-1">Se le asignará la tarjeta seleccionada</div>
+              </div>
+              <button onClick={() => setShowAddClient(false)}
+                className="w-9 h-9 rounded-full bg-neutral-200 grid place-items-center text-neutral-800 hover:bg-neutral-300 transition shrink-0">
+                <X size={17} strokeWidth={2.75} />
+              </button>
+            </div>
+            <form onSubmit={createClient} className="px-[28px] py-[20px] flex flex-col gap-4">
+              <div className="flex flex-col gap-[7px]">
+                <label className="text-[13px] font-extrabold text-ink">Nombre</label>
+                <input className={INP} placeholder="Ana García" value={addClientForm.name}
+                  onChange={e => setAddClientForm(f => ({ ...f, name: e.target.value }))} />
+              </div>
+              <div className="flex flex-col gap-[7px]">
+                <label className="text-[13px] font-extrabold text-ink">Correo electrónico</label>
+                <input type="email" className={INP} placeholder="cliente@ejemplo.com" value={addClientForm.email}
+                  onChange={e => setAddClientForm(f => ({ ...f, email: e.target.value }))} />
+              </div>
+              {cards.length > 0 && (
+                <div className="flex flex-col gap-[7px]">
+                  <label className="text-[13px] font-extrabold text-ink">Asignar tarjeta (opcional)</label>
+                  <select className={INP} value={addClientForm.loyalty_card_id}
+                    onChange={e => setAddClientForm(f => ({ ...f, loyalty_card_id: e.target.value }))}>
+                    <option value="">Sin tarjeta por ahora</option>
+                    {cards.map(c => (
+                      <option key={c.id} value={c.id}>{c.name}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
+              <div className="flex gap-3 pt-2">
+                <button type="button" onClick={() => setShowAddClient(false)}
+                  className="flex-1 border border-neutral-400 text-neutral-800 font-bold text-[14px] py-[13px] rounded-full hover:bg-neutral-100 transition">
+                  Cancelar
+                </button>
+                <button type="submit" disabled={addingClient || (!addClientForm.name && !addClientForm.email)}
+                  className="flex-[2] bg-brand text-white font-extrabold text-[14px] py-[13px] rounded-full shadow-sm hover:bg-brand-600 transition disabled:opacity-50">
+                  {addingClient ? 'Agregando…' : 'Agregar cliente'}
+                </button>
               </div>
             </form>
           </div>

@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { randomUUID } from 'crypto';
 import { supabase } from '../config/db.js';
 import { requireAuth, requireAdmin } from '../middleware/auth.js';
 import { ApiError, asyncHandler } from '../utils/errors.js';
@@ -100,6 +101,64 @@ router.get(
       total_claims: rw ?? 0,
       active_cards: cc ?? 0,
     });
+  })
+);
+
+// POST /api/clients  -> crear cliente manualmente y asignarle una tarjeta
+router.post(
+  '/',
+  asyncHandler(async (req, res) => {
+    const bizId = await getBusinessIdForAdmin(req.user.id);
+    if (!bizId) throw new ApiError(404, 'Crea tu negocio primero', 'NO_BUSINESS');
+
+    const { name, email, loyalty_card_id } = req.body || {};
+    if (!name && !email) throw new ApiError(400, 'Nombre o correo requerido', 'VALIDATION');
+
+    const { data: cust, error: custErr } = await supabase
+      .from('customers')
+      .insert({ name: name || 'Cliente', email: email || null })
+      .select('id, name, email, phone, created_at')
+      .single();
+    if (custErr) {
+      if (custErr.code === '23505') throw new ApiError(409, 'Ya existe un cliente con ese correo', 'EMAIL_TAKEN');
+      throw custErr;
+    }
+
+    let cardInfo = null;
+    if (loyalty_card_id) {
+      const { data: lc } = await supabase
+        .from('loyalty_cards').select('id')
+        .eq('id', loyalty_card_id).eq('business_id', bizId).eq('is_active', true).maybeSingle();
+      if (lc) {
+        const { data: cc } = await supabase
+          .from('customer_cards')
+          .insert({ loyalty_card_id, customer_id: cust.id, qr_token: randomUUID() })
+          .select('stamps, status').single();
+        if (cc) cardInfo = { card_id: loyalty_card_id, stamps: cc.stamps, status: cc.status };
+      }
+    }
+
+    res.status(201).json({ customer: { ...cust, cards: cardInfo ? [cardInfo] : [] } });
+  })
+);
+
+// DELETE /api/clients/:id  -> eliminar cliente del negocio
+router.delete(
+  '/:id',
+  asyncHandler(async (req, res) => {
+    const bizId = await getBusinessIdForAdmin(req.user.id);
+    if (!bizId) throw new ApiError(403, 'Sin negocio', 'FORBIDDEN');
+
+    const { data: exists } = await supabase
+      .from('customer_cards').select('id')
+      .eq('customer_id', req.params.id)
+      .eq('loyalty_card.business_id', bizId)
+      .limit(1).maybeSingle();
+    if (!exists) throw new ApiError(404, 'Cliente no encontrado en tu negocio', 'NOT_FOUND');
+
+    const { error } = await supabase.from('customers').delete().eq('id', req.params.id);
+    if (error) throw error;
+    res.json({ deleted: true });
   })
 );
 

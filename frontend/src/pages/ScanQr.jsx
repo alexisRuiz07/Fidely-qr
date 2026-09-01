@@ -69,10 +69,16 @@ export default function ScanQr() {
     }
   }
 
-  async function validate(value) {
-    if (!value) return;
+  async function validate(rawValue) {
+    if (!rawValue) return;
     setBusy(true);
     setError('');
+    // Normaliza a UUID con guiones — el QR ya envía UUID completo; la entrada manual
+    // puede llegar como "305A E094 3991 4B85 918C B00D A232 AC15" (32 hex + espacios).
+    const clean = rawValue.replace(/[\s-]/g, '').toLowerCase();
+    const value = /^[0-9a-f]{32}$/.test(clean)
+      ? [clean.slice(0,8), clean.slice(8,12), clean.slice(12,16), clean.slice(16,20), clean.slice(20)].join('-')
+      : rawValue.trim();
     try {
       const data = await api.validateToken(value);
       setToken(value);

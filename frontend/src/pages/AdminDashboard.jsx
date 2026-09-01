@@ -4,7 +4,7 @@ import {
   QrCode, LayoutDashboard, CreditCard, Users, IdCard, Store,
   Stamp, Gift, TrendingUp, Plus, Pencil, Trash2, Eye,
   LogOut, X, Download, Menu, UserPlus, ShieldCheck, Power, Share2,
-  Mail, Search, Phone,
+  Mail, Search, Phone, CheckCircle2, AlertCircle,
 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import LogoUploader from '../components/LogoUploader.jsx';
@@ -182,7 +182,8 @@ export default function AdminDashboard() {
   const [stats,     setStats]     = useState(null);
   const [history,   setHistory]   = useState([]);
 
-  const [toast,        setToast]        = useState(null);
+  const [toast,        setToast]        = useState(null);  // { msg, type, id }
+  const toastKey = toast?.id ?? 0;
   const [editingCard,  setEditingCard]  = useState(null);
   const [qrCard,       setQrCard]       = useState(null);
   const [showCardForm, setShowCardForm] = useState(false);
@@ -210,8 +211,9 @@ export default function AdminDashboard() {
   const [savingClient,   setSavingClient]   = useState(false);
 
   function notify(msg, type = 'success') {
-    setToast({ msg, type });
-    setTimeout(() => setToast(null), 3000);
+    const id = Date.now();
+    setToast({ msg, type, id });
+    setTimeout(() => setToast(t => t?.id === id ? null : t), 3500);
   }
 
   useEffect(() => { load(); }, []);
@@ -278,7 +280,7 @@ export default function AdminDashboard() {
         ? await api.patch(`/api/businesses/${business.id}`, bizForm)
         : await api.post('/api/businesses', bizForm);
       setBusiness(r.business);
-      notify(business ? 'Negocio actualizado' : 'Negocio creado');
+      notify(business ? 'Negocio actualizado correctamente' : '¡Negocio creado con éxito!');
     } catch (e2) { notify(e2.message, 'error'); }
   }
 
@@ -1056,9 +1058,15 @@ export default function AdminDashboard() {
 
       {/* ── TOAST ── */}
       {toast && (
-        <div className={`fixed top-4 right-4 z-50 px-5 py-3 rounded-full shadow-md text-sm font-semibold pointer-events-none ${
-          toast.type === 'success' ? 'bg-sage-200 text-sage-800' : 'bg-red-100 text-red-700'
-        }`}>{toast.msg}</div>
+        <div key={toastKey}
+          className={`toast-enter fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3
+            px-6 py-[14px] rounded-full shadow-lg text-[15px] font-bold pointer-events-none whitespace-nowrap
+            ${toast.type === 'success' ? 'bg-sage-700 text-white' : 'bg-red-600 text-white'}`}>
+          {toast.type === 'success'
+            ? <CheckCircle2 size={18} strokeWidth={2.75} className="shrink-0" />
+            : <AlertCircle  size={18} strokeWidth={2.75} className="shrink-0" />}
+          {toast.msg}
+        </div>
       )}
 
       {/* modales */}

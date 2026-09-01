@@ -2,21 +2,21 @@ import { Router } from 'express';
 import { supabase } from '../config/db.js';
 import { requireAuth, requireEmployee } from '../middleware/auth.js';
 import { ApiError, asyncHandler } from '../utils/errors.js';
+import { applyTokenFilter } from '../utils/token.js';
 
 const router = Router();
 
 // ---------- Helpers de seguridad (aislamiento por tenant) ----------
 
-async function resolveCardByToken(qrToken) {
-  const { data, error } = await supabase
+async function resolveCardByToken(rawToken) {
+  const base = supabase
     .from('customer_cards')
     .select(`
       id, stamps, status, qr_token,
       customer:customers(id, name, email, phone),
       loyalty_card:loyalty_cards(id, name, total_stamps, reward, business_id, logo_url, primary_color, secondary_color)
-    `)
-    .eq('qr_token', qrToken)
-    .maybeSingle();
+    `);
+  const { data, error } = await applyTokenFilter(base, rawToken).maybeSingle();
   if (error) throw error;
   return data;
 }

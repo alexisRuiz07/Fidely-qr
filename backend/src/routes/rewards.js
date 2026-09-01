@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { supabase } from '../config/db.js';
 import { requireAuth, requireEmployee } from '../middleware/auth.js';
 import { ApiError, asyncHandler } from '../utils/errors.js';
+import { applyTokenFilter } from '../utils/token.js';
 
 const router = Router();
 
@@ -16,14 +17,13 @@ router.post(
     const { token } = req.body || {};
     if (!token) throw new ApiError(400, 'token es requerido', 'VALIDATION');
 
-    const { data: card, error: cardErr } = await supabase
+    const base = supabase
       .from('customer_cards')
       .select(`
         id, stamps, status,
         loyalty_card:loyalty_cards(id, name, total_stamps, reward, business_id)
-      `)
-      .eq('qr_token', token)
-      .maybeSingle();
+      `);
+    const { data: card, error: cardErr } = await applyTokenFilter(base, token).maybeSingle();
     if (cardErr) throw cardErr;
     if (!card) throw new ApiError(404, 'Tarjeta no encontrada', 'NOT_FOUND');
 

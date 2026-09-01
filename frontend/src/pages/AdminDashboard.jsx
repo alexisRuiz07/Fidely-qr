@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   QrCode, LayoutDashboard, CreditCard, Users, IdCard, Store,
-  Stamp, Gift, TrendingUp, Plus, Pencil, Trash2, Eye,
+  Stamp, Gift, TrendingUp, Plus, Pencil, Trash2,
   LogOut, X, Download, Menu, UserPlus, ShieldCheck, Power, Share2,
   Mail, Search, Phone, CheckCircle2, AlertCircle,
 } from 'lucide-react';
@@ -465,6 +465,27 @@ export default function AdminDashboard() {
           {/* ── RESUMEN ── */}
           {tab === 'dashboard' && (
             <div className="flex flex-col gap-4 md:gap-5">
+
+              {/* banner primeros pasos — solo si no hay tarjetas */}
+              {cards.length === 0 && (
+                <div className="bg-brand-100 border border-brand-300 rounded-lg p-5 flex items-start gap-4">
+                  <div className="w-11 h-11 rounded-full bg-brand grid place-items-center shrink-0">
+                    <QrCode size={20} strokeWidth={2.75} className="text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-[15px] text-brand-900">Crea tu primera tarjeta para generar el QR</p>
+                    <p className="text-[13px] text-brand-800 mt-1 leading-snug">
+                      Cada tarjeta de fidelización tiene su propio QR de bienvenida que los clientes escanean para unirse.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleNav('cards')}
+                    className="shrink-0 bg-brand hover:bg-brand-600 text-white font-bold text-[13px] px-4 py-[9px] rounded-full transition">
+                    Crear tarjeta
+                  </button>
+                </div>
+              )}
+
               <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 md:gap-4">
                 <StatCard label="Sellos registrados"    value={stats?.total_stamps ?? '—'} Icon={Stamp}       />
                 <StatCard label="Tarjetas activas"      value={stats?.total_cards  ?? cards.length} Icon={CreditCard}  />
@@ -548,7 +569,7 @@ export default function AdminDashboard() {
                           </div>
                         </div>
                         <div className="flex gap-2">
-                          <button onClick={() => setQrCard(c)} className="flex-1 flex items-center justify-center gap-1 text-xs font-bold py-2 rounded-full bg-brand-100 text-brand-700"><Eye size={13} strokeWidth={2.75} />QR</button>
+                          <button onClick={() => setQrCard(c)} className="flex-1 flex items-center justify-center gap-1 text-xs font-bold py-2 rounded-full bg-brand-100 text-brand-700"><QrCode size={13} strokeWidth={2.75} />Ver QR</button>
                           <button onClick={() => setEditingCard(c)} className="flex-1 flex items-center justify-center gap-1 text-xs font-bold py-2 rounded-full bg-neutral-200 text-neutral-700"><Pencil size={13} strokeWidth={2.75} />Editar</button>
                           <button onClick={() => deleteCard(c.id)} className="flex-1 flex items-center justify-center gap-1 text-xs font-bold py-2 rounded-full bg-red-100 text-red-600"><Trash2 size={13} strokeWidth={2.75} />Eliminar</button>
                         </div>
@@ -579,7 +600,7 @@ export default function AdminDashboard() {
                         <span className="text-[14px] font-bold text-ink">{c.total_stamps}</span>
                         <span className="text-[13px] text-neutral-700 truncate">{c.reward}</span>
                         <div className="flex gap-1.5">
-                          <button onClick={() => setQrCard(c)} className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 grid place-items-center hover:bg-brand-200 transition" title="Ver QR"><Eye size={14} strokeWidth={2.75} /></button>
+                          <button onClick={() => setQrCard(c)} className="flex items-center gap-[6px] px-3 h-8 rounded-full bg-brand-100 text-brand-700 hover:bg-brand-200 transition text-[12.5px] font-bold" title="Ver QR"><QrCode size={13} strokeWidth={2.75} />QR</button>
                           <button onClick={() => setEditingCard(c)} className="w-8 h-8 rounded-full bg-neutral-200 text-neutral-700 grid place-items-center hover:bg-neutral-300 transition" title="Editar"><Pencil size={14} strokeWidth={2.75} /></button>
                           <button onClick={() => deleteCard(c.id)} className="w-8 h-8 rounded-full bg-red-100 text-red-600 grid place-items-center hover:bg-red-200 transition" title="Eliminar"><Trash2 size={14} strokeWidth={2.75} /></button>
                         </div>

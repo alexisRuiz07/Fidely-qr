@@ -219,7 +219,7 @@ export default function ScanQr() {
               <input
                 value={tokenInput}
                 onChange={e => setTokenInput(e.target.value)}
-                placeholder="Token del QR..."
+                placeholder="Código del QR (ej: A1B2 C3D4 ...)"
                 className="flex-1 rounded-full px-4 py-[11px] text-[14px] outline-none"
                 style={{ background: 'rgba(255,255,255,.12)', color: '#fff' }}
               />

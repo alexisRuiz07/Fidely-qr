@@ -83,6 +83,7 @@ router.patch(
       'instagram_url',
       'contact_email',
       'footer_text',
+      'branches',
     ];
     const updates = {};
     for (const key of allowed) {

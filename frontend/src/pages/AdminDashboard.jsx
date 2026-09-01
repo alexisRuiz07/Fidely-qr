@@ -4,7 +4,7 @@ import {
   QrCode, LayoutDashboard, CreditCard, Users, IdCard, Store,
   Stamp, Gift, TrendingUp, Plus, Pencil, Trash2,
   LogOut, X, Download, Menu, UserPlus, ShieldCheck, Power, Share2,
-  Mail, Search, Phone, CheckCircle2, AlertCircle, Eye, EyeOff,
+  Mail, Search, Phone, CheckCircle2, AlertCircle, Eye, EyeOff, Building2, MapPin,
 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import LogoUploader from '../components/LogoUploader.jsx';
@@ -190,6 +190,7 @@ export default function AdminDashboard() {
 
   const [bizForm, setBizForm] = useState({
     name: '', description: '', logo_url: '', primary_color: '#c67139', secondary_color: '#f5ead8',
+    branches: [],
   });
   const [socialForm, setSocialForm] = useState({
     facebook_url: '', instagram_url: '', contact_email: '', footer_text: '© 2025 Todos los derechos reservados',
@@ -198,10 +199,9 @@ export default function AdminDashboard() {
     name: '', description: '', logo_url: '', total_stamps: 6, reward: '',
     primary_color: '#c67139', secondary_color: '#f5ead8',
   });
-  const [empForm, setEmpForm] = useState({ email: '', full_name: '', password: '' });
+  const [empForm, setEmpForm] = useState({ email: '', full_name: '', password: '', branch: '' });
   const [showEmpModal,  setShowEmpModal]  = useState(false);
   const [empCanRedeem,  setEmpCanRedeem]  = useState(true);
-  const [empBranch,     setEmpBranch]     = useState('Centro');
   const [showEmpPw,     setShowEmpPw]     = useState(false);
 
   // clientes
@@ -228,7 +228,7 @@ export default function AdminDashboard() {
       setEmployees(em.employees || []);
       if (bs.business) {
         const biz = bs.business;
-        setBizForm({ name: biz.name, description: biz.description || '', logo_url: biz.logo_url || '', primary_color: biz.primary_color || '#c67139', secondary_color: biz.secondary_color || '#f5ead8' });
+        setBizForm({ name: biz.name, description: biz.description || '', logo_url: biz.logo_url || '', primary_color: biz.primary_color || '#c67139', secondary_color: biz.secondary_color || '#f5ead8', branches: biz.branches || [] });
         setSocialForm({ facebook_url: biz.facebook_url || '', instagram_url: biz.instagram_url || '', contact_email: biz.contact_email || '', footer_text: biz.footer_text || '© 2025 Todos los derechos reservados' });
       }
     } catch (e) {
@@ -331,10 +331,10 @@ export default function AdminDashboard() {
         email: empForm.email,
         full_name: empForm.full_name,
         password: empForm.password,
+        branch: empForm.branch || null,
       });
       setEmployees(em => [r.employee, ...em]);
-      setEmpForm({ email: '', full_name: '', password: '' });
-      setEmpBranch('Centro');
+      setEmpForm({ email: '', full_name: '', password: '', branch: '' });
       setEmpCanRedeem(true);
       setShowEmpModal(false);
       setShowEmpPw(false);
@@ -839,7 +839,10 @@ export default function AdminDashboard() {
 
                         {/* footer */}
                         <div className="flex items-center justify-between pt-3 border-t border-neutral-300">
-                          <span className="text-[12.5px] text-neutral-700">Sucursal Centro</span>
+                          <span className="text-[12.5px] text-neutral-700 flex items-center gap-1">
+                            <MapPin size={11} strokeWidth={2.75} />
+                            {emp.branch ? emp.branch : 'Sin sucursal'}
+                          </span>
                           <div className="flex gap-[7px]">
                             <button title="Editar"
                               className="w-[30px] h-[30px] rounded-full border border-neutral-300 grid place-items-center text-neutral-700 hover:bg-neutral-200 transition">
@@ -888,6 +891,65 @@ export default function AdminDashboard() {
                   <input type="color" className="w-full h-12 mt-[7px] rounded-md cursor-pointer" value={bizForm.secondary_color} onChange={e => setBizForm({ ...bizForm, secondary_color: e.target.value })} />
                 </Field>
               </div>
+              {/* ── Sucursales ── */}
+              <div className="border border-neutral-300 rounded-xl p-4 space-y-3">
+                <label className="flex items-center gap-3 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={bizForm.branches.length > 0}
+                    onChange={e => setBizForm(f => ({
+                      ...f,
+                      branches: e.target.checked ? ['', ''] : [],
+                    }))}
+                    className="w-[18px] h-[18px] rounded accent-brand-600 cursor-pointer"
+                  />
+                  <div className="flex items-center gap-2">
+                    <Building2 size={16} strokeWidth={2.75} className="text-neutral-600" />
+                    <span className="font-bold text-[14px] text-ink">¿Tu negocio tiene varias sucursales?</span>
+                  </div>
+                </label>
+
+                {bizForm.branches.length > 0 && (
+                  <div className="space-y-3 pt-1 pl-1">
+                    <Field label="Cantidad de sucursales">
+                      <input
+                        type="number"
+                        min={1}
+                        max={20}
+                        className={INP}
+                        value={bizForm.branches.length}
+                        onChange={e => {
+                          const n = Math.max(1, Math.min(20, parseInt(e.target.value) || 1));
+                          setBizForm(f => {
+                            const arr = [...f.branches];
+                            while (arr.length < n) arr.push('');
+                            return { ...f, branches: arr.slice(0, n) };
+                          });
+                        }}
+                      />
+                    </Field>
+                    <div className="space-y-2">
+                      <span className="text-[13px] font-bold text-ink block">Nombres de sucursales</span>
+                      {bizForm.branches.map((b, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <span className="text-[13px] font-bold text-neutral-500 w-6 text-right shrink-0">{i + 1}.</span>
+                          <input
+                            className={INP}
+                            placeholder={`Sucursal ${i + 1} (ej: Centro, Norte…)`}
+                            value={b}
+                            onChange={e => {
+                              const arr = [...bizForm.branches];
+                              arr[i] = e.target.value;
+                              setBizForm(f => ({ ...f, branches: arr }));
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
               <button className="w-full bg-brand-600 text-white font-bold py-3 rounded-full hover:bg-brand-700 transition">
                 {business ? 'Actualizar negocio' : 'Crear negocio'}
               </button>
@@ -1000,22 +1062,45 @@ export default function AdminDashboard() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-[9px]">
-                <label className="text-[13px] font-extrabold text-ink">Sucursal</label>
-                <div className="flex gap-2">
-                  {['Centro', 'Norte'].map(b => (
-                    <button key={b} type="button"
-                      onClick={() => setEmpBranch(b)}
-                      className={`flex-1 text-center text-[14px] font-bold py-3 rounded-full transition ${
-                        empBranch === b
-                          ? 'bg-brand-600 text-white'
-                          : 'border border-neutral-300 text-neutral-700 hover:bg-neutral-100'
-                      }`}>
-                      {b}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              {(() => {
+                const branches = (business?.branches || []).filter(b => b.trim());
+                return (
+                  <div className="flex flex-col gap-[9px]">
+                    <label className="text-[13px] font-extrabold text-ink flex items-center gap-2">
+                      <MapPin size={14} strokeWidth={2.75} className="text-neutral-500" />
+                      Sucursal
+                    </label>
+                    {branches.length === 0 ? (
+                      <p className="text-[12px] text-neutral-500 bg-neutral-100 px-4 py-3 rounded-xl">
+                        No hay sucursales configuradas. Agrégalas en la pestaña <strong>Negocio</strong> primero.
+                      </p>
+                    ) : (
+                      <div className="flex gap-2 flex-wrap">
+                        <button type="button"
+                          onClick={() => setEmpForm(f => ({ ...f, branch: '' }))}
+                          className={`px-4 py-[10px] rounded-full text-[13px] font-bold transition ${
+                            !empForm.branch
+                              ? 'bg-neutral-700 text-white'
+                              : 'border border-neutral-300 text-neutral-600 hover:bg-neutral-100'
+                          }`}>
+                          Sin asignar
+                        </button>
+                        {branches.map(b => (
+                          <button key={b} type="button"
+                            onClick={() => setEmpForm(f => ({ ...f, branch: b }))}
+                            className={`px-4 py-[10px] rounded-full text-[13px] font-bold transition ${
+                              empForm.branch === b
+                                ? 'bg-brand-600 text-white'
+                                : 'border border-neutral-300 text-neutral-700 hover:bg-neutral-100'
+                            }`}>
+                            {b}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
 
               <div className="flex items-center justify-between bg-neutral-100 rounded-lg px-[18px] py-[14px]">
                 <div>

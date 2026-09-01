@@ -21,7 +21,7 @@ router.get(
 
     const { data, error } = await supabase
       .from('employees')
-      .select('id, email, full_name, is_active, created_at')
+      .select('id, email, full_name, is_active, branch, created_at')
       .eq('business_id', biz.id)
       .order('created_at', { ascending: false });
     if (error) throw error;
@@ -46,8 +46,8 @@ router.post(
     const passwordHash = await bcrypt.hash(password, 10);
     const { data, error } = await supabase
       .from('employees')
-      .insert({ business_id: biz.id, email, password_hash: passwordHash, full_name })
-      .select('id, email, full_name, is_active, created_at')
+      .insert({ business_id: biz.id, email, password_hash: passwordHash, full_name, branch: req.body.branch || null })
+      .select('id, email, full_name, is_active, branch, created_at')
       .single();
 
     if (error) {
@@ -73,13 +73,14 @@ router.patch(
     if (req.body.full_name !== undefined) patch.full_name = req.body.full_name;
     if (req.body.password) patch.password_hash = await bcrypt.hash(req.body.password, 10);
     if (req.body.is_active !== undefined) patch.is_active = Boolean(req.body.is_active);
+    if (req.body.branch !== undefined) patch.branch = req.body.branch || null;
 
     const { data, error } = await supabase
       .from('employees')
       .update(patch)
       .eq('id', req.params.id)
       .eq('business_id', biz.id)
-      .select('id, email, full_name, is_active, created_at')
+      .select('id, email, full_name, is_active, branch, created_at')
       .single();
     if (error) throw error;
     if (!data) throw new ApiError(404, 'Empleado no encontrado', 'NOT_FOUND');

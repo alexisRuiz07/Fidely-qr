@@ -120,7 +120,7 @@ export default function WatchQr() {
             level="M"
           />
           <div className="font-mono text-[11px] text-neutral-600 tracking-[.12em] uppercase">
-            Token válido · {token.slice(-8).toUpperCase()}
+            Token único · válido ahora
           </div>
         </div>
 
@@ -143,7 +143,7 @@ export default function WatchQr() {
   );
 
   // ── SCREEN 03: detalle y QR normal ────────────────────────────────────
-  const fmtToken  = token ? token.slice(-12).toUpperCase().replace(/(.{4})/g, '$1 ').trim() : '—';
+  const fmtToken  = token ? token.replace(/-/g, '').toUpperCase().replace(/(.{4})/g, '$1 ').trim() : '—';
   const histItems = Array.from({ length: Math.min(stamps, 5) }, (_, i) => ({
     n:    stamps - i,
     time: i === 0 ? 'Hoy' : i === 1 ? 'Ayer' : `Hace ${i + 1} días`,

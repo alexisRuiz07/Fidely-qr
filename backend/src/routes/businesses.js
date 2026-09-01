@@ -43,7 +43,7 @@ router.post(
   '/',
   requireAdmin,
   asyncHandler(async (req, res) => {
-    const { name, description, logo_url, primary_color, secondary_color } = req.body || {};
+    const { name, description, logo_url, primary_color, secondary_color, branches } = req.body || {};
     if (!name) throw new ApiError(400, 'El nombre del negocio es requerido', 'VALIDATION');
 
     const slug = (name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')) +
@@ -59,6 +59,7 @@ router.post(
         primary_color: primary_color || '#1f2937',
         secondary_color: secondary_color || '#f59e0b',
         slug,
+        branches: branches || [],
       })
       .select('*')
       .single();

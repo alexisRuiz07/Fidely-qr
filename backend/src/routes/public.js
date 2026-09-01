@@ -92,12 +92,15 @@ router.post(
       await supabase.from('customers').update(updates).eq('id', customerId);
     }
 
-    // Si ya existe, devolver 200 con already_owned=true (no es un error)
+    // Si ya tiene una tarjeta activa o en progreso, devolver 200 con already_owned=true.
+    // Si la única tarjeta existente fue canjeada (reward_claimed), se permite crear una nueva.
     const { data: dup } = await supabase
       .from('customer_cards')
       .select('id, stamps, status, qr_token, created_at, loyalty_card_id')
       .eq('loyalty_card_id', loyalty_card_id)
       .eq('customer_id', customerId)
+      .neq('status', 'reward_claimed')
+      .limit(1)
       .maybeSingle();
     if (dup) {
       return res.status(200).json({

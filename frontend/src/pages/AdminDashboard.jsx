@@ -790,24 +790,6 @@ export default function AdminDashboard() {
           {tab === 'employees' && (
             <div className="flex flex-col gap-[18px]">
 
-              {/* contraseña temporal generada */}
-              {empTempPw && (
-                <div className="bg-sage-100 border border-sage-300 rounded-lg px-5 py-4 flex items-start gap-3">
-                  <ShieldCheck size={20} strokeWidth={2.75} className="text-sage-700 shrink-0 mt-0.5" />
-                  <div className="flex-1 min-w-0">
-                    <p className="font-bold text-sage-900 text-[14px]">Empleado creado correctamente</p>
-                    <p className="text-[13px] text-sage-800 mt-0.5">
-                      Contraseña temporal: <span className="font-mono font-bold">{empTempPw}</span>
-                      &nbsp;— compártela de forma segura.
-                    </p>
-                  </div>
-                  <button onClick={() => setEmpTempPw('')}
-                    className="w-7 h-7 rounded-full bg-sage-200 grid place-items-center text-sage-700 hover:bg-sage-300 shrink-0">
-                    <X size={14} strokeWidth={2.75} />
-                  </button>
-                </div>
-              )}
-
               {/* grid de tarjetas */}
               {employees.length === 0 ? (
                 <div className="bg-neutral-100 rounded-lg p-12 text-center text-neutral-500 shadow-sm">

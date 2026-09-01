@@ -203,6 +203,10 @@ export default function AdminDashboard() {
   const [showEmpModal,  setShowEmpModal]  = useState(false);
   const [empCanRedeem,  setEmpCanRedeem]  = useState(true);
   const [showEmpPw,     setShowEmpPw]     = useState(false);
+  const [editingEmp,    setEditingEmp]    = useState(null);
+  const [empEditForm,   setEmpEditForm]   = useState({ full_name: '', password: '', branch: '' });
+  const [showEditEmpPw, setShowEditEmpPw] = useState(false);
+  const [savingEmp,     setSavingEmp]     = useState(false);
 
   // clientes
   const [clientSearch,      setClientSearch]      = useState('');
@@ -386,6 +390,22 @@ export default function AdminDashboard() {
       setEmployees(em => em.filter(x => x.id !== id));
       notify('Empleado eliminado');
     } catch (e2) { notify(e2.message, 'error'); }
+  }
+
+  async function updateEmployee(e) {
+    e.preventDefault();
+    setSavingEmp(true);
+    try {
+      const patch = { full_name: empEditForm.full_name };
+      if (empEditForm.password) patch.password = empEditForm.password;
+      patch.branch = empEditForm.branch || null;
+      const r = await api.patch(`/api/employees/${editingEmp.id}`, patch);
+      setEmployees(em => em.map(x => x.id === editingEmp.id ? r.employee : x));
+      setEditingEmp(null);
+      setShowEditEmpPw(false);
+      notify('Empleado actualizado');
+    } catch (e2) { notify(e2.message, 'error'); }
+    finally { setSavingEmp(false); }
   }
 
   const currentNav = NAV.find(n => n.key === tab);
@@ -888,6 +908,7 @@ export default function AdminDashboard() {
                           </span>
                           <div className="flex gap-[7px]">
                             <button title="Editar"
+                              onClick={() => { setEditingEmp(emp); setEmpEditForm({ full_name: emp.full_name, password: '', branch: emp.branch || '' }); setShowEditEmpPw(false); }}
                               className="w-[30px] h-[30px] rounded-full border border-neutral-300 grid place-items-center text-neutral-700 hover:bg-neutral-200 transition">
                               <Pencil size={14} strokeWidth={2.75} />
                             </button>
@@ -895,6 +916,11 @@ export default function AdminDashboard() {
                               onClick={() => toggleEmployee(emp)}
                               className="w-[30px] h-[30px] rounded-full border border-neutral-300 grid place-items-center text-neutral-700 hover:bg-neutral-200 transition">
                               <Power size={14} strokeWidth={2.75} />
+                            </button>
+                            <button title="Eliminar"
+                              onClick={() => deleteEmployee(emp.id)}
+                              className="w-[30px] h-[30px] rounded-full border border-red-200 grid place-items-center text-red-500 hover:bg-red-100 transition">
+                              <Trash2 size={14} strokeWidth={2.75} />
                             </button>
                           </div>
                         </div>
@@ -1269,6 +1295,97 @@ export default function AdminDashboard() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* ── MODAL editar empleado ── */}
+      {editingEmp && (
+        <div className="fixed inset-0 z-50 bg-ink/[.42] flex items-center justify-center p-4">
+          <div className="w-full max-w-[480px] bg-bg rounded-xl shadow-xl overflow-hidden">
+            <div className="px-[30px] pt-[26px] pb-4 flex items-start justify-between border-b border-neutral-300">
+              <div>
+                <h4 className="font-display font-normal text-[26px] text-ink leading-[1.05] m-0">Editar empleado</h4>
+                <div className="text-[13px] text-neutral-600 mt-1">{editingEmp.email}</div>
+              </div>
+              <button onClick={() => { setEditingEmp(null); setShowEditEmpPw(false); }}
+                className="w-9 h-9 rounded-full bg-neutral-200 grid place-items-center text-neutral-800 hover:bg-neutral-300 transition shrink-0">
+                <X size={17} strokeWidth={2.75} />
+              </button>
+            </div>
+            <form id="emp-edit-form" onSubmit={updateEmployee} className="px-[30px] py-[22px] flex flex-col gap-[15px]">
+              <div className="flex flex-col gap-[7px]">
+                <label className="text-[13px] font-extrabold text-ink">Nombre completo</label>
+                <input
+                  className={`${INP} border-2 border-brand-500 focus:border-brand-500`}
+                  required
+                  value={empEditForm.full_name}
+                  onChange={e => setEmpEditForm(f => ({ ...f, full_name: e.target.value }))}
+                />
+              </div>
+              <div className="flex flex-col gap-[7px]">
+                <label className="text-[13px] font-extrabold text-ink">Nueva contraseña <span className="font-normal text-neutral-500">(dejar vacío para no cambiar)</span></label>
+                <div className="relative">
+                  <input
+                    type={showEditEmpPw ? 'text' : 'password'}
+                    className={`${INP} pr-[48px]`}
+                    placeholder="Mínimo 6 caracteres"
+                    minLength={6}
+                    value={empEditForm.password}
+                    onChange={e => setEmpEditForm(f => ({ ...f, password: e.target.value }))}
+                  />
+                  <button type="button" onClick={() => setShowEditEmpPw(v => !v)}
+                    className="absolute right-[18px] top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 transition">
+                    {showEditEmpPw ? <EyeOff size={17} strokeWidth={2.75} /> : <Eye size={17} strokeWidth={2.75} />}
+                  </button>
+                </div>
+              </div>
+              {(() => {
+                const branches = (business?.branches || []).filter(b => b.trim());
+                return (
+                  <div className="flex flex-col gap-[9px]">
+                    <label className="text-[13px] font-extrabold text-ink flex items-center gap-2">
+                      <MapPin size={14} strokeWidth={2.75} className="text-neutral-500" />
+                      Sucursal
+                    </label>
+                    {branches.length === 0 ? (
+                      <p className="text-[12px] text-neutral-500 bg-neutral-100 px-4 py-3 rounded-xl">
+                        No hay sucursales configuradas. Agrégalas en <strong>Negocio</strong> primero.
+                      </p>
+                    ) : (
+                      <div className="flex gap-2 flex-wrap">
+                        <button type="button"
+                          onClick={() => setEmpEditForm(f => ({ ...f, branch: '' }))}
+                          className={`px-4 py-[10px] rounded-full text-[13px] font-bold transition ${
+                            !empEditForm.branch ? 'bg-neutral-700 text-white' : 'border border-neutral-300 text-neutral-600 hover:bg-neutral-100'
+                          }`}>
+                          Sin asignar
+                        </button>
+                        {branches.map(b => (
+                          <button key={b} type="button"
+                            onClick={() => setEmpEditForm(f => ({ ...f, branch: b }))}
+                            className={`px-4 py-[10px] rounded-full text-[13px] font-bold transition ${
+                              empEditForm.branch === b ? 'bg-brand-600 text-white' : 'border border-neutral-300 text-neutral-700 hover:bg-neutral-100'
+                            }`}>
+                            {b}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
+            </form>
+            <div className="px-[30px] pb-[26px] pt-4 border-t border-neutral-300 flex gap-3">
+              <button type="button" onClick={() => { setEditingEmp(null); setShowEditEmpPw(false); }}
+                className="flex-1 border border-neutral-400 text-neutral-800 font-bold text-[15px] py-[14px] rounded-full hover:bg-neutral-100 transition">
+                Cancelar
+              </button>
+              <button type="submit" form="emp-edit-form" disabled={savingEmp}
+                className="flex-[2] bg-brand text-white font-extrabold text-[15px] py-[14px] rounded-full shadow-sm hover:bg-brand-600 transition disabled:opacity-45">
+                {savingEmp ? 'Guardando…' : 'Guardar cambios'}
+              </button>
+            </div>
           </div>
         </div>
       )}

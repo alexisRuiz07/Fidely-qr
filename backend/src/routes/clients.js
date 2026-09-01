@@ -149,10 +149,14 @@ router.delete(
     const bizId = await getBusinessIdForAdmin(req.user.id);
     if (!bizId) throw new ApiError(403, 'Sin negocio', 'FORBIDDEN');
 
+    const { data: lcards } = await supabase
+      .from('loyalty_cards').select('id').eq('business_id', bizId);
+    const lcardIds = (lcards || []).map(l => l.id);
+
     const { data: exists } = await supabase
       .from('customer_cards').select('id')
       .eq('customer_id', req.params.id)
-      .eq('loyalty_card.business_id', bizId)
+      .in('loyalty_card_id', lcardIds.length ? lcardIds : ['00000000-0000-0000-0000-000000000000'])
       .limit(1).maybeSingle();
     if (!exists) throw new ApiError(404, 'Cliente no encontrado en tu negocio', 'NOT_FOUND');
 
@@ -169,12 +173,15 @@ router.patch(
     const bizId = await getBusinessIdForAdmin(req.user.id);
     if (!bizId) throw new ApiError(403, 'Sin negocio', 'FORBIDDEN');
 
-    // Verificar que el cliente pertenece a este negocio
+    const { data: lcards2 } = await supabase
+      .from('loyalty_cards').select('id').eq('business_id', bizId);
+    const lcardIds2 = (lcards2 || []).map(l => l.id);
+
     const { data: exists } = await supabase
       .from('customer_cards')
       .select('id')
       .eq('customer_id', req.params.id)
-      .eq('loyalty_card.business_id', bizId)
+      .in('loyalty_card_id', lcardIds2.length ? lcardIds2 : ['00000000-0000-0000-0000-000000000000'])
       .limit(1)
       .maybeSingle();
     if (!exists) throw new ApiError(404, 'Cliente no encontrado', 'NOT_FOUND');

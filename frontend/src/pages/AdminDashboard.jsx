@@ -4,7 +4,7 @@ import {
   QrCode, LayoutDashboard, CreditCard, Users, IdCard, Store,
   Stamp, Gift, TrendingUp, Plus, Pencil, Trash2,
   LogOut, X, Download, Menu, UserPlus, ShieldCheck, Power, Share2,
-  Mail, Search, Phone, CheckCircle2, AlertCircle,
+  Mail, Search, Phone, CheckCircle2, AlertCircle, Eye, EyeOff,
 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import LogoUploader from '../components/LogoUploader.jsx';
@@ -198,11 +198,11 @@ export default function AdminDashboard() {
     name: '', description: '', logo_url: '', total_stamps: 6, reward: '',
     primary_color: '#c67139', secondary_color: '#f5ead8',
   });
-  const [empForm, setEmpForm] = useState({ email: '', full_name: '' });
+  const [empForm, setEmpForm] = useState({ email: '', full_name: '', password: '' });
   const [showEmpModal,  setShowEmpModal]  = useState(false);
   const [empCanRedeem,  setEmpCanRedeem]  = useState(true);
   const [empBranch,     setEmpBranch]     = useState('Centro');
-  const [empTempPw,     setEmpTempPw]     = useState('');
+  const [showEmpPw,     setShowEmpPw]     = useState(false);
 
   // clientes
   const [clientSearch,   setClientSearch]   = useState('');
@@ -322,15 +322,23 @@ export default function AdminDashboard() {
 
   async function createEmployee(e) {
     e.preventDefault();
-    const tempPw = 'Tmp_' + Math.random().toString(36).slice(2, 10);
+    if (empForm.password.length < 6) {
+      notify('La contraseña debe tener al menos 6 caracteres', 'error');
+      return;
+    }
     try {
-      const r = await api.post('/api/employees', { ...empForm, password: tempPw });
+      const r = await api.post('/api/employees', {
+        email: empForm.email,
+        full_name: empForm.full_name,
+        password: empForm.password,
+      });
       setEmployees(em => [r.employee, ...em]);
-      setEmpForm({ email: '', full_name: '' });
+      setEmpForm({ email: '', full_name: '', password: '' });
       setEmpBranch('Centro');
       setEmpCanRedeem(true);
       setShowEmpModal(false);
-      setEmpTempPw(tempPw);
+      setShowEmpPw(false);
+      notify('Empleado creado correctamente');
     } catch (e2) { notify(e2.message, 'error'); }
   }
 
@@ -952,7 +960,7 @@ export default function AdminDashboard() {
                 <h4 className="font-display font-normal text-[26px] text-ink leading-[1.05] m-0">Nuevo empleado</h4>
                 <div className="text-[13px] text-neutral-600 mt-1">Recibirá sus credenciales para acceder</div>
               </div>
-              <button onClick={() => setShowEmpModal(false)}
+              <button onClick={() => { setShowEmpModal(false); setShowEmpPw(false); }}
                 className="w-9 h-9 rounded-full bg-neutral-200 grid place-items-center text-neutral-800 hover:bg-neutral-300 transition shrink-0">
                 <X size={17} strokeWidth={2.75} />
               </button>
@@ -982,6 +990,32 @@ export default function AdminDashboard() {
                   value={empForm.email}
                   onChange={e => setEmpForm({ ...empForm, email: e.target.value })}
                 />
+              </div>
+
+              <div className="flex flex-col gap-[7px]">
+                <label className="text-[13px] font-extrabold text-ink">Contraseña</label>
+                <div className="relative">
+                  <input
+                    type={showEmpPw ? 'text' : 'password'}
+                    className={`${INP} pr-[48px]`}
+                    placeholder="Mínimo 6 caracteres"
+                    required
+                    minLength={6}
+                    value={empForm.password}
+                    onChange={e => setEmpForm({ ...empForm, password: e.target.value })}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowEmpPw(v => !v)}
+                    className="absolute right-[18px] top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 transition">
+                    {showEmpPw
+                      ? <EyeOff size={17} strokeWidth={2.75} />
+                      : <Eye    size={17} strokeWidth={2.75} />}
+                  </button>
+                </div>
+                <p className="text-[12px] text-neutral-500 px-1">
+                  Comparte esta contraseña con el empleado para que pueda iniciar sesión.
+                </p>
               </div>
 
               <div className="flex flex-col gap-[9px]">
@@ -1015,7 +1049,7 @@ export default function AdminDashboard() {
 
             {/* footer */}
             <div className="px-[30px] pb-[26px] pt-4 border-t border-neutral-300 flex gap-3">
-              <button type="button" onClick={() => setShowEmpModal(false)}
+              <button type="button" onClick={() => { setShowEmpModal(false); setShowEmpPw(false); }}
                 className="flex-1 border border-neutral-400 text-neutral-800 font-bold text-[15px] py-[14px] rounded-full hover:bg-neutral-100 transition">
                 Cancelar
               </button>
